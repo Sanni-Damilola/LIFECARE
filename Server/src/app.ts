@@ -4,6 +4,8 @@ import express, { Application, NextFunction, Request, Response } from "express";
 import cors from "cors";
 import morgan from "morgan";
 import { AppError, HttpCode } from "./error/errorSpellOut";
+import route from "../Routes/route";
+import specialistRoutes from "../Routes/specialistRoute";
 
 export const ApplicationCofig = (app: Application) => {
   app.use(express.json()).use(cors()).use(morgan("dev")); // middleware Configuration
@@ -13,6 +15,12 @@ export const ApplicationCofig = (app: Application) => {
       message: "Server is up an Runing 😊😊❗✔🚴‍♀️🚴‍♀️",
     }); // landing route
   });
+
+  // user route 👇
+  app.use("/api", route);
+  // specialistRoutes route 👇
+  app.use("/api", specialistRoutes);
+
   app.all("*", (req: Request, res: Response, next: NextFunction) => {
     next(
       new AppError({
