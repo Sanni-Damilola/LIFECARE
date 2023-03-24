@@ -46,7 +46,7 @@ const Signin = () => {
   const Submit = handleSubmit(async (data) => {
     posting.mutate(data);
     reset();
-    navigate("/dashboardhome");
+    navigate("/");
   });
 
   return (
