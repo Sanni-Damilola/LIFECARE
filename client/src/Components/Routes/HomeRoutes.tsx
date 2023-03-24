@@ -14,6 +14,7 @@ const HomeRoutes = () => {
       path: "/signup",
       element: <SignUp />
     },
+
    
   ])
   return element
