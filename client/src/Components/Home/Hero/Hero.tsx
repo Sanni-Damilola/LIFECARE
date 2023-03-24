@@ -132,17 +132,20 @@ const ButtonHold = styled.div`
   }
 `;
 const Button = styled.button`
-  padding: 7px 10px;
+  /* padding: 7px 10px; */
+  padding:10px;
     display: block;
     justify-content: center;
-    /* align-items: center; */
+    :hover {
+      transform: scale(0.94);
+    }
     font-family: poppins;
     background-color: #a8ff37;
     border: none;
     outline: none;
     color: black;
     font-weight: 600;
-    border-radius: 20px;
+    border-radius: 15px;
   @media (max-width: 510px) {
     margin: 0 5px;
     width: 120px;

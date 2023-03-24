@@ -135,19 +135,25 @@ const Holder = styled.div`
   margin-top: 40px;
 `;
 const Button = styled.div`
-  padding: 7px 10px;
-  display: block;
-  margin-left: 15px;
-  justify-content: center;
-  /* align-items: center; */
-  font-family: poppins;
-  background-color: #a8ff37;
-  border: none;
-  outline: none;
-  color: black;
-  font-weight: 600;
-  border-radius: 20px;
-`;
+     /* padding: 7px 10px; */
+     padding: 15px;
+    display: block;
+    margin-left: 15px;
+    justify-content: center;
+    :hover {
+      transform: scale(0.94);
+    }
+    /* align-items: center; */
+    font-family: poppins;
+    background-color: #a8ff37;
+    border: none;
+    outline: none;
+    color: black;
+    font-weight: 600;
+    border-radius: 20px;
+`
+
+
 
 const Container = styled.div`
   height: 80px;

@@ -13,7 +13,7 @@ const AboutUs = () => {
         </Image>
 
         <Text>
-          <small style={{color: "#a7fd37"}}>About Us</small>
+          <small style={{color: "#64a70d"}}>About Us</small>
 
           <Title>We Give The Best Of Services</Title>
           
@@ -31,8 +31,8 @@ const AboutUs = () => {
           </Content>
 
           <Visit to="/signup">
-            <span style =  {{color: "#a7fd37"}}>Click here to register </span>
-            <HiArrowNarrowRight size="20px" style = {{color:"#a7fd37"}} />
+            <span style =  {{color: "#64a70d"}}>Click here to register </span>
+            <HiArrowNarrowRight size="20px" style = {{color:"#64a70d"}} />
           </Visit>
         </Text>
       </Wrapper>
