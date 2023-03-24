@@ -1,9 +1,27 @@
-import React from 'react'
+/** @format */
 
-const ReduxState = () => {
-  return (
-    <div>ReduxState</div>
-  )
-}
+import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction } from "@reduxjs/toolkit/dist/createAction";
+import { UserData } from "../interface/interface";
 
-export default ReduxState
+const initialState = {
+  currentUser: {} as UserData | null,
+};
+
+const ReduxState = createSlice({
+  name: "lifeCare",
+  initialState,
+  reducers: {
+    User: (state, { payload }: PayloadAction<UserData>) => {
+      state.currentUser = payload;
+    },
+
+    logout: (state) => {
+      state.currentUser = null;
+    },
+  },
+});
+
+export const { User, logout } = ReduxState.actions;
+
+export default ReduxState.reducer;
