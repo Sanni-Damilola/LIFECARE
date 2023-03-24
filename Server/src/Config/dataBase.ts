@@ -6,7 +6,7 @@ import environmentVarabiles from "../environments/env";
 const dbConfig = async () => {
   try {
     const connectUrl = await mongoose.connect(
-      environmentVarabiles.mongodbLifeUrl,
+      environmentVarabiles.mongodbLocalUrl,
     );
     console.log("Connected To DataBase");
     console.log("");
