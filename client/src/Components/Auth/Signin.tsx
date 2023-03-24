@@ -77,7 +77,7 @@ const Signin = () => {
 
               <Button type="submit">Sign in</Button>
 
-              <Link style={{ textDecoration: "none" }} to={"/"}>
+              <Link style={{ textDecoration: "none" }} to={"/signup"}>
                 <Already>Already have an account? Sign up</Already>
               </Link>
             </Form>
