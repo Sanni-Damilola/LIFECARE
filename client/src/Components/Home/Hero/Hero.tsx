@@ -22,7 +22,7 @@ const Hero = () => {
             
             <ButtonHold>
               <NavLink
-                to="/order"
+                to="/signup"
                 style={{
                   textDecoration: "none",
                 }}
