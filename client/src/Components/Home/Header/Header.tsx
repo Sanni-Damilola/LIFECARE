@@ -3,23 +3,20 @@ import styled from "styled-components";
 import { RiHomeSmileFill } from "react-icons/ri";
 import { IoMdPricetags, IoMdContact } from "react-icons/io";
 import { NavLink } from "react-router-dom";
-import {GiHamburgerMenu } from 'react-icons/gi'
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const Header = () => {
-  
-  const [show, setShow] = useState (false);
-  const toggle = ( ) =>{
-      setShow(!show)
-  }
+  const [show, setShow] = useState(false);
+  const toggle = () => {
+    setShow(!show);
+  };
 
   return (
     <>
       <Container>
         <Wrapper>
-          <NavLink style={{textDecoration:"none", color: "black"}} to="/">
-            <Logo>
-              LIFECARE.
-            </Logo>
+          <NavLink style={{ textDecoration: "none", color: "black" }} to="/">
+            <Logo>LIFECARE.</Logo>
           </NavLink>
 
           <Navigations>
@@ -37,39 +34,36 @@ const Header = () => {
             </Navs>
 
             <Navs to="/contact">
-            <IoMdPricetags />
+              <IoMdPricetags />
               <span>Donate Blood</span>
             </Navs>
 
             <Navs to="/signup">
-              <Button>
-                Sign Up
-              </Button>
-
-              <Button>
-                Sign In
-              </Button>
+              <Button>Sign Up</Button>
+            </Navs>
+            <Navs to="/signin">
+              <Button>Sign In</Button>
             </Navs>
           </Navigations>
 
           <BurgerMenu onClick={toggle}>
-                <GiHamburgerMenu />
-         </BurgerMenu>
+            <GiHamburgerMenu />
+          </BurgerMenu>
 
-         {show?(<DropDown>
-            <Holder>
-                <SideNavs to = "/">Home</SideNavs>
-                <SideNavs to = "/services">Book a Session</SideNavs>
-                <SideNavs to = "/about">About</SideNavs>
-                <SideNavs to = "/contacts">Contact us</SideNavs>
-                <SideNavs to = "/signup">Sign Up</SideNavs>
-                <SideNavs to = "/signIn">Sign In</SideNavs>
-            </Holder>
-         </DropDown>):null}
-
+          {show ? (
+            <DropDown>
+              <Holder>
+                <SideNavs to="/">Home</SideNavs>
+                <SideNavs to="/services">Book a Session</SideNavs>
+                <SideNavs to="/about">About</SideNavs>
+                <SideNavs to="/contacts">Contact us</SideNavs>
+                <SideNavs to="/signup">Sign Up</SideNavs>
+                <SideNavs to="/signIn">Sign In</SideNavs>
+              </Holder>
+            </DropDown>
+          ) : null}
         </Wrapper>
       </Container>
-      
     </>
   );
 };
@@ -85,11 +79,11 @@ const SideNavs = styled(NavLink)`
   justify-content: center;
   align-items: center;
 
-  :hover{
+  :hover {
     cursor: pointer;
     transition: all 350ms;
-    transform: scale(0.9)
-};
+    transform: scale(0.9);
+  }
 
   button {
     height: 30px;
@@ -123,7 +117,7 @@ const SideNavs = styled(NavLink)`
   }
 `;
 const DropDown = styled.div`
-height: 100vh;
+  height: 100vh;
   width: 100%;
   background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(10px);
@@ -134,12 +128,12 @@ height: 100vh;
   font-weight: 600;
   z-index: 10;
   position: absolute;
-  top: 16%
-`
+  top: 16%;
+`;
 
 const Holder = styled.div`
-margin-top: 40px;
-`
+  margin-top: 40px;
+`;
 const Button = styled.div`
      /* padding: 7px 10px; */
      padding: 15px;
@@ -159,6 +153,8 @@ const Button = styled.div`
     border-radius: 20px;
 `
 
+
+
 const Container = styled.div`
   height: 80px;
   width: 100%;
@@ -176,8 +172,8 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 const Logo = styled.div`
-color: black;
-/* color: #a8ff37; */
+  color: black;
+  /* color: #a8ff37; */
   width: 60px;
   font-weight: bold;
   img {
@@ -212,10 +208,8 @@ const Navs = styled(NavLink)`
 `;
 
 const BurgerMenu = styled.div`
-
-display: none;
+  display: none;
   @media (max-width: 768px) {
     display: block;
   }
 `;
-
