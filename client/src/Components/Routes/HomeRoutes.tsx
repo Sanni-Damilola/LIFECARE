@@ -1,22 +1,20 @@
-import React from 'react'
-import { useRoutes } from 'react-router-dom'
-import SignUp from '../Auth/SignUp'
-import LandingPage from '../Home/LandingPage'
+import React from "react";
+import { useRoutes } from "react-router-dom";
+import SignUp from "../Auth/SignUp";
+import LandingPage from "../Home/LandingPage";
 
 const HomeRoutes = () => {
-
   const element = useRoutes([
     {
       path: "/",
-      element: <LandingPage />
+      element: <LandingPage />,
     },
     {
       path: "/signup",
-      element: <SignUp />
+      element: <SignUp />,
     },
-   
-  ])
-  return element
-}
+  ]);
+  return element;
+};
 
-export default HomeRoutes
+export default HomeRoutes;

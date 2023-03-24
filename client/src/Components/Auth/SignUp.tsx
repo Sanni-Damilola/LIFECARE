@@ -4,7 +4,6 @@ import React from "react";
 import styled from "styled-components";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-
 import { useNavigate } from "react-router-dom";
 import accidentSignup from "../Assets/accidentSignup.png";
 import { useForm } from "react-hook-form";
@@ -15,7 +14,7 @@ import { User } from "../Global/ReduxState";
 import { signup } from "../Api/Api";
 import { Link } from "react-router-dom";
 
-const Signup = () => {
+const SignUp = () => {
   const dispatch = UseAppDispach();
   const navigate = useNavigate();
   const schema = yup
@@ -104,7 +103,7 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SignUp;
 
 const RightImg = styled.img`
   width: 500px;
