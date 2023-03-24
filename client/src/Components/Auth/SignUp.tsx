@@ -4,7 +4,6 @@ import React from "react";
 import styled from "styled-components";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-
 import { useNavigate } from "react-router-dom";
 import accidentSignup from "../Assets/accidentSignup.png";
 import { useForm } from "react-hook-form";
