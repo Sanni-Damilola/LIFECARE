@@ -20,7 +20,8 @@ route.route("/transfer/:senderId/:senderWalletId").patch(sendToAnotherWallet); /
 route
   .route("/sendtospecialist/:senderId/:senderWalletId")
   .patch(sendToAnotherSpecialistWallet); // sendToAnotherSpecialistWallet
-route.route("/fundWallet/:userId/:walletId").post(fundWalletFromBank); // funding wallet
+// route.route("/fundWallet/:userId/:walletId").post(fundWalletFromBank); // funding wallet
+route.route("/fundWallet/:userId").post(fundWalletFromBank); // funding wallet
 route.route("/login").post(SignIn); // login User
 route.route("/getoneuser/:id").get(getOneUser); // geting one user
 route.route("/getalluser").get(getAllUser); // geting All user
