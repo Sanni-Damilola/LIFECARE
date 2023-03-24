@@ -7,9 +7,13 @@ import { GoPerson } from "react-icons/go";
 import { FiUsers } from "react-icons/fi";
 import { MdHealthAndSafety } from "react-icons/md";
 import  { NavLink } from "react-router-dom";
+import { UseAppDispach } from "../Global/Store";
+import { logout } from "../Global/ReduxState";
 
 
 const SideBar = () => {
+
+    const dispatch = UseAppDispach()
 
     return (
 
@@ -97,7 +101,12 @@ const SideBar = () => {
                             <AiOutlineLogout />
                         </Icon>
 
-                        <HomeText>Logout</HomeText>
+
+                        <HomeText
+                        onClick={() =>{
+                            dispatch(logout())
+                        }}
+                        >Logout</HomeText>
                     </Home>
                 </Bottom>
 

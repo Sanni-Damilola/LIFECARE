@@ -1,8 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import pics from "../Assets/Medical-logo.png";
+import { useAppSelector } from "../Global/Store";
 
 const DashHeader = () => {
+
+  const user = useAppSelector((state) => state?.currentUser)
+
   return (
     <div>
       <Head>
@@ -14,9 +18,17 @@ const DashHeader = () => {
             {/* < /> */}
           </Icon>
 
-          <UserLetter>F</UserLetter>
+          <UserLetter>
+            {
+              user?.name.charAt(0).toUpperCase()
+            }
+          </UserLetter>
 
-          <Username>Favour Yusuf</Username>
+          <Username>
+            {
+              user?.name
+            }
+          </Username>
 
         </User>
       </Head>
