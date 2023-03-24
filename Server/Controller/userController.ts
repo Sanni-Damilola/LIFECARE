@@ -1,15 +1,17 @@
 /** @format */
 
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import bcrypt from "bcrypt";
 import userModel from "../Model/userModel";
 import walletModel from "../Model/walletModel";
 import mongoose from "mongoose";
 import historyModel from "../Model/historyModel";
 import specialistModel from "../Model/specialistModel";
+import { asyncHandler } from "../src/error/asyncHander";
+import { AppError, HttpCode } from "../src/error/errorSpellOut";
 
-export const registerUser = async (req: Request, res: Response) => {
-  try {
+export const registerUser = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
     const { name, email, password, userName, phoneNumber } = req.body;
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
@@ -36,22 +38,26 @@ export const registerUser = async (req: Request, res: Response) => {
       debit: 0,
     }); // creating a wallet
     register?.wallet.push(new mongoose.Types.ObjectId(createWallet?._id));
-    register.save(); //.
+    register.save();
+
+    if (!register) {
+      next(
+        new AppError({
+          message: "User Not Created",
+          httpCode: HttpCode.CREATED,
+        }),
+      );
+    }
 
     return res.status(201).json({
       message: "created",
       data: register,
-    });
-  } catch (error) {
-    return res.status(400).json({
-      message: "An Error Occured in registerUser",
-      error: error,
-    });
-  }
-}; //Creating User
+    }); // Creating User
+  },
+);
 
-export const sendToAnotherWallet = async (req: Request, res: Response) => {
-  try {
+export const sendToAnotherWallet = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
     const { accountNumber, amount } = req.body;
     const generateReferenceNumber = Math.floor(Math.random() * 34567767) + 234; // generate Refefrence Number
     const getReceiver = await userModel.findOne({
@@ -63,6 +69,15 @@ export const sendToAnotherWallet = async (req: Request, res: Response) => {
     const getSenderWallet = await walletModel.findById(
       req.params.senderWalletId,
     ); // geting Sender Wallet {so a sender(user) can debit from it}
+
+    if (!getSender && getReceiver) {
+      next(
+        new AppError({
+          message: "an error occured in sendToAnotherWallet",
+          httpCode: HttpCode.BAD_REQUEST,
+        }),
+      );
+    }
 
     if (getSender && getReceiver) {
       if (amount > getSenderWallet?.balance!) {
@@ -116,19 +131,11 @@ export const sendToAnotherWallet = async (req: Request, res: Response) => {
         message: "Account not found",
       });
     }
-  } catch (error) {
-    return res.status(400).json({
-      message: "An Error Occured in sendToAnotherWallet",
-      error: error,
-    });
-  }
-}; // {wallet transaction} ... Sending to another Wallet
+  }, // {wallet transaction} ... Sending to another Wallet
+);
 
-export const sendToAnotherSpecialistWallet = async (
-  req: Request,
-  res: Response,
-) => {
-  try {
+export const sendToAnotherSpecialistWallet = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
     const { accountNumber, amount } = req.body;
     const generateReferenceNumber = Math.floor(Math.random() * 34567767) + 234; // generate Refefrence Number
     const getSpecialist = await specialistModel.findOne({
@@ -140,6 +147,15 @@ export const sendToAnotherSpecialistWallet = async (
     const getSenderWallet = await walletModel.findById(
       req.params.senderWalletId,
     ); // geting Sender Wallet {so a sender(user) can debit from it}
+
+    if (!getSender && getSpecialist) {
+      next(
+        new AppError({
+          message: "bad request in sendToAnotherWallet",
+          httpCode: HttpCode.BAD_REQUEST,
+        }),
+      );
+    }
 
     if (getSender && getSpecialist) {
       if (amount > getSenderWallet?.balance!) {
@@ -193,17 +209,12 @@ export const sendToAnotherSpecialistWallet = async (
         message: "Account not found",
       });
     }
-  } catch (error) {
-    return res.status(400).json({
-      message: "An Error Occured in sendToAnotherWallet",
-      error: error,
-    });
-  }
-}; // {wallet transaction} ... Sending to another Wallet
+  }, // {wallet transaction} ... Sending to specialist Wallet
+);
 
 //fund wallet from bank
-export const fundWalletFromBank = async (req: Request, res: Response) => {
-  try {
+export const fundWalletFromBank = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
     const getUser = await userModel.findById(req.params.userId);
     const getWallet = await walletModel.findById(req.params.walletId);
 
@@ -211,6 +222,17 @@ export const fundWalletFromBank = async (req: Request, res: Response) => {
     await walletModel.findByIdAndUpdate(getWallet?._id, {
       balance: getWallet?.balance + amount,
     });
+
+    
+
+    if (!amount && !transactinRef) {
+      next(
+        new AppError({
+          message: "bad request in fundWalletFromBank",
+          httpCode: HttpCode.BAD_REQUEST,
+        }),
+      );
+    }
 
     const createHisorySender = await historyModel.create({
       message: `an amount of ${amount} has been credited to your wallet`,
@@ -225,68 +247,56 @@ export const fundWalletFromBank = async (req: Request, res: Response) => {
     res.status(200).json({
       message: "Wallet updated successfully",
     });
-  } catch (err) {
-    console.log(err);
-    return res.status(404).json({
-      message: "an error occurred in fundWalletFromBank",
-      err,
-    });
-  }
-};
+  },
+);
 
-export const SignIn = async (req: Request, res: Response) => {
-  try {
+export const SignIn = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
     const { email } = req.body;
     const login = await userModel.findOne({ email });
 
     if (!login) {
-      return res.status(200).json({
-        message: "User Not Found",
-      });
+      next(
+        new AppError({
+          message: "buser not found",
+          httpCode: HttpCode.NOT_FOUND,
+        }),
+      );
     }
 
     return res.status(200).json({
       message: "Successfully Login",
       data: login,
     });
-  } catch (error) {
-    return res.status(404).json({
-      message: "an error occurred SignIn",
-      error: error,
-    });
-  }
-}; // signin
+  }, // signin
+);
 
-export const getOneUser = async (req: Request, res: Response) => {
-  try {
+export const getOneUser = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
     const getUser = await userModel.findById(req.params.id).populate({
       path: "wallet",
     });
 
+    if (!getUser) {
+      next(
+        new AppError({
+          message: "user nof found",
+          httpCode: HttpCode.BAD_REQUEST,
+        }),
+      );
+    }
+
     return res.status(200).json({
       message: "successfully gotten one user",
       data: getUser,
-    });
-  } catch (error) {
-    return res.status(404).json({
-      message: "an error occurred getOneUser",
-      error: error,
-    });
-  }
-}; // get one User
+    }); // get one User
+  },
+);
 
 export const getAllUser = async (req: Request, res: Response) => {
-  try {
-    const getUser = await userModel.find();
-
-    return res.status(200).json({
-      message: "Wallet updated successfully",
-      data: getUser,
-    });
-  } catch (error) {
-    return res.status(404).json({
-      message: "an error occurred getAllUser",
-      error: error,
-    });
-  }
+  const getUser = await userModel.find();
+  return res.status(200).json({
+    message: "Wallet updated successfully",
+    data: getUser,
+  });
 }; // get all User
