@@ -9,6 +9,8 @@ import historyModel from "../Model/historyModel";
 import specialistModel from "../Model/specialistModel";
 import { asyncHandler } from "../src/error/asyncHander";
 import { AppError, HttpCode } from "../src/error/errorSpellOut";
+import axios from "axios";
+import crypto from "crypto";
 
 export const registerUser = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -135,6 +137,7 @@ export const sendToAnotherWallet = asyncHandler(
 );
 
 export const sendToAnotherSpecialistWallet = asyncHandler(
+  
   async (req: Request, res: Response, next: NextFunction) => {
     const { accountNumber, amount } = req.body;
     const generateReferenceNumber = Math.floor(Math.random() * 34567767) + 234; // generate Refefrence Number
@@ -213,42 +216,172 @@ export const sendToAnotherSpecialistWallet = asyncHandler(
 );
 
 //fund wallet from bank
-export const fundWalletFromBank = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const getUser = await userModel.findById(req.params.userId);
-    const getWallet = await walletModel.findById(req.params.walletId);
+// export const fundWalletFromBank = asyncHandler(
+//   async (req: Request, res: Response, next: NextFunction) => {
+//     const getUser = await userModel.findById(req.params.userId);
+//     const getWallet = await walletModel.findById(req.params.walletId);
 
-    const { amount, transactinRef } = req.body;
+//     const { amount, transactinRef } = req.body;
+//     await walletModel.findByIdAndUpdate(getWallet?._id, {
+//       balance: getWallet?.balance + amount,
+//     });
+
+//     if (!amount && !transactinRef) {
+//       next(
+//         new AppError({
+//           message: "bad request in fundWalletFromBank",
+//           httpCode: HttpCode.BAD_REQUEST,
+//         }),
+//       );
+//     }
+
+//     const createHisorySender = await historyModel.create({
+//       message: `an amount of ${amount} has been credited to your wallet`,
+//       transactionType: "credit",
+//       transactionReference: transactinRef,
+//     });
+
+//     getUser?.history?.push(
+//       new mongoose.Types.ObjectId(createHisorySender?._id),
+//     );
+
+//     res.status(200).json({
+//       message: "Wallet updated successfully",
+//     });
+//   },
+// );
+
+const secret = "sk_test_kAfJyQXUS8WXLFurAs2iavxDqUtXTas591u9VzH6";
+const urlData = "https://api.korapay.com/merchant/api/v1/charges/card";
+const encrypt = "pXj3cj8zUtut9ifqS4GskkJVauCFMm7Q";
+
+function encryptAES256(encryptionKey: string, paymentData: any) {
+  const iv = crypto.randomBytes(16);
+
+  const cipher = crypto.createCipheriv("aes-256-gcm", encryptionKey, iv);
+  const encrypted = cipher.update(paymentData);
+
+  const ivToHex = iv.toString("hex");
+  const encryptedToHex = Buffer.concat([encrypted, cipher.final()]).toString(
+    "hex",
+  );
+
+  return `${ivToHex}:${encryptedToHex}:${cipher.getAuthTag().toString("hex")}`;
+}
+
+export const fundWalletFromBank = async (req: Request, res: Response) => {
+  try {
+    // name: "Test Cards",
+    // number: "5188513618552975",
+    // cvv: "123",
+    // expiry_month: "09",
+    // expiry_year: "30",
+    // pin: "1234",
+    // const user: any = await userModel.findById(req.params.id);
+    // console.log(getWallet);
+    const getUser = await userModel.findById(req.params.userId);
+    // const getWallet = await walletModel.findById(req.params.walletId);
+    const getWallet = await walletModel.findById(getUser?._id);
+
+    const wallet = await walletModel.findById(req.params.id);
+    // console.log(wallet)
+    interface IData {
+      amount: number;
+    }
+
+    const {
+      amount,
+      // transactinRef,
+      name,
+      number,
+      cvv,
+      pin,
+      expiry_year,
+      expiry_month,
+    } = req.body;
+
+    // const { amount, transactinRef } = req.body;
     await walletModel.findByIdAndUpdate(getWallet?._id, {
       balance: getWallet?.balance + amount,
     });
-
-    
-
-    if (!amount && !transactinRef) {
-      next(
-        new AppError({
-          message: "bad request in fundWalletFromBank",
-          httpCode: HttpCode.BAD_REQUEST,
-        }),
-      );
-    }
-
     const createHisorySender = await historyModel.create({
       message: `an amount of ${amount} has been credited to your wallet`,
       transactionType: "credit",
-      transactionReference: transactinRef,
+      // transactionReference: transactinRef,
     });
 
     getUser?.history?.push(
       new mongoose.Types.ObjectId(createHisorySender?._id),
     );
 
-    res.status(200).json({
-      message: "Wallet updated successfully",
-    });
-  },
-);
+    const paymentData = {
+      reference: Math.random() * 100000, // must be at least 8 chara
+      card: {
+        name: "Test Cards",
+        number: "5188513618552975",
+        cvv: "123",
+        expiry_month: "09",
+        expiry_year: "30",
+        pin: "1234",
+      },
+      amount,
+      currency: "NGN",
+      redirect_url: "https://merchant-redirect-url.com",
+      customer: {
+        name: "John Doe",
+        email: "johndoe@korapay.com",
+      },
+      metadata: {
+        internalRef: "JD-12-67",
+        age: 15,
+        fixed: true,
+      },
+    };
+
+    const stringData = JSON.stringify(paymentData);
+    const bufData = Buffer.from(stringData, "utf-8");
+    const encryptedData = encryptAES256(encrypt, bufData);
+
+    var config = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: urlData,
+      headers: {
+        Authorization: `Bearer ${secret}`,
+      },
+      data: {
+        charge_data: `${encryptedData}`,
+      },
+    };
+
+    await axios(config)
+      .then(async function (response) {
+        console.log(response);
+
+        if (response?.data?.status === true) {
+          await walletModel.findByIdAndUpdate(getWallet?._id, {
+            balance: Number(amount + getWallet?.balance),
+          });
+          return res.status(200).json({
+            message: `an amount of ${amount} has been added`,
+            data: {
+              paymentInfo: amount,
+              paymentData: JSON.parse(JSON.stringify(response.data)),
+            },
+          });
+        } else {
+          return res.status(404).json({
+            message: "failed transaction",
+          });
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const SignIn = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
