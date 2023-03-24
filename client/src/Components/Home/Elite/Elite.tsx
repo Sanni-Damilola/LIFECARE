@@ -103,6 +103,10 @@ const Visit = styled(NavLink)`
   margin-top: 40px;
   cursor: pointer;
   color: #409efb;
+  :hover {
+      transform: scale(0.94);
+    }
+
   span {
     margin-right: 20px;
   }

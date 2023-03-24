@@ -94,7 +94,7 @@ const Title = styled.div`
 const Sub = styled.div`
   font-size: 13px;
   margin-bottom: 20px;
-  color: #a8ff37;
+  color: #64a70d;
   font-weight: bold;
 `;
 const CardHold = styled.div`
@@ -105,6 +105,12 @@ const CardHold = styled.div`
 `;
 const Card = styled.div`
   margin: 10px;
+  cursor: pointer;
+
+    :hover {
+      transform: scale(0.94);
+    }
+
   @media (max-width: 500px) {
     margin: 10px 0;
   }

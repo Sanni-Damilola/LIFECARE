@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import {AiOutlinePhone} from 'react-icons/ai'
+import {AiOutlineMail} from 'react-icons/ai'
 
 const Footer = () => {
   return (
@@ -10,8 +12,20 @@ const Footer = () => {
           <Text>
             LIFECARE is founded with the passion to safe lives, eliminating the excuse of no money in the case of health emergency
           </Text>
+          <Icn>
+            <AiOutlinePhone />
+            <Number>+2347015961501, +2349029903813 </Number>
+          </Icn>
+
+          <Icn>
+            <AiOutlineMail />
+            <Number>lifecare428@gmail.com</Number>
+          </Icn>
+
           <button style={{color: "black"}}>Get Started</button>
         </AbtBag>
+
+
         <OtherNav>
           <Holder>
             <Title>Menu</Title>
@@ -39,6 +53,14 @@ const Footer = () => {
 };
 
 export default Footer;
+
+
+const Icn = styled.div`
+display: flex
+`
+const Number = styled.div`
+margin-left: 10px;
+`
 
 const Container = styled.div`
   width: 100%;
