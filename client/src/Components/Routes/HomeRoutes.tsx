@@ -19,6 +19,11 @@ const HomeRoutes = () => {
       path: "/signin",
       element: <Signin />,
     },
+
+    {
+      path: "/dashboard",
+      element: <Signin />,
+    },
   ]);
   return element;
 };

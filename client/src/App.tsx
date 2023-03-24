@@ -1,17 +1,16 @@
 /** @format */
 
 import React from "react";
-import Header from "./Components/Home/Header/Header";
-import Hero from "./Components/Home/Hero/Hero";
+import DashBoardRoute from "./Components/Routes/DashBoardRoute";
+
 import HomeRoutes from "./Components/Routes/HomeRoutes";
 // import logo from "./logo.svg";
 // import "./App.css";
 
 function App() {
   return <div>
-    {/* <Header />
-    <Hero /> */}
-    <HomeRoutes />
+    {/* <HomeRoutes /> */}
+    <DashBoardRoute />
   </div>;
 }
 
