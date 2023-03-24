@@ -30,7 +30,7 @@ const AboutUs = () => {
             </p>
           </Content>
 
-          <Visit to="/contact">
+          <Visit to="/signup">
             <span style =  {{color: "#a7fd37"}}>Click here to register </span>
             <HiArrowNarrowRight size="20px" style = {{color:"#a7fd37"}} />
           </Visit>

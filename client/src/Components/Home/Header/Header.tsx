@@ -41,7 +41,7 @@ const Header = () => {
               <span>Donate Blood</span>
             </Navs>
 
-            <Navs to="/order">
+            <Navs to="/signup">
               <Button>
                 Sign Up
               </Button>

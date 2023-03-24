@@ -22,7 +22,7 @@ const Elite = () => {
                 You can either make a quick save, weekly or monthly save....All you have to do is to click.
             </p>
           </Content>
-          <Visit to="/pricing">
+          <Visit to="/signup">
             <span style =  {{color: "#a8ff37"}} >Sign up today </span>
             <HiArrowNarrowRight size="20px"  style =  {{color: "#a8ff37"}} />
           </Visit>
