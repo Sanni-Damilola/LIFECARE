@@ -137,7 +137,6 @@ export const sendToAnotherWallet = asyncHandler(
 );
 
 export const sendToAnotherSpecialistWallet = asyncHandler(
-  
   async (req: Request, res: Response, next: NextFunction) => {
     const { accountNumber, amount } = req.body;
     const generateReferenceNumber = Math.floor(Math.random() * 34567767) + 234; // generate Refefrence Number
@@ -374,6 +373,115 @@ export const fundWalletFromBank = async (req: Request, res: Response) => {
             message: "failed transaction",
           });
         }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const checkPayment = async (req: Request, res: Response) => {
+  try {
+    // name: "Test Cards",
+    // number: "5188513618552975",
+    // cvv: "123",
+    // expiry_month: "09",
+    // expiry_year: "30",
+    // pin: "1234",
+    const user: any = await userModel.findById(req.params.userId);
+    // console.log(getWallet);
+    const wallet = await walletModel.findById(user?._id);
+    // console.log(wallet)
+    interface IData {
+      amount: number;
+    }
+
+    const {
+      amount,
+      description,
+      name,
+      number,
+      cvv,
+      pin,
+      expiry_year,
+      expiry_month,
+    } = req.body;
+
+    const paymentData = {
+      reference: Math.random() * 10000, // must be at least 8 chara
+      card: {
+        name: "Test Cards",
+        number: "5188513618552975",
+        cvv: "123",
+        expiry_month: "09",
+        expiry_year: "30",
+        pin: "1234",
+      },
+      amount,
+      currency: "NGN",
+      redirect_url: "https://merchant-redirect-url.com",
+      customer: {
+        name: "John Doe",
+        email: "johndoe@korapay.com",
+      },
+      metadata: {
+        internalRef: "JD-12-67",
+        age: 15,
+        fixed: true,
+      },
+    };
+
+    const stringData = JSON.stringify(paymentData);
+    const bufData = Buffer.from(stringData, "utf-8");
+    const encryptedData = encryptAES256(encrypt, bufData);
+
+    var config = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: urlData,
+      headers: {
+        Authorization: `Bearer ${secret}`,
+      },
+      data: {
+        charge_data: `${encryptedData}`,
+      },
+    };
+
+    axios(config)
+      .then(async function (response) {
+        console.log(response);
+
+        if (response?.data?.status === true) {
+          await walletModel.findByIdAndUpdate(wallet?._id, {
+            balance: Number(amount + wallet?.balance),
+          });
+          const getHistory = await historyModel.create({
+            message: `Dear ${user?.name} your account has been credited by ${amount}`,
+            transactionRefrence: response?.data?.reference,
+            Date: new Date().toLocaleDateString(),
+            description,
+          });
+          user?.history?.push(new mongoose.Types.ObjectId(getHistory?._id));
+          user?.save();
+          return res.status(200).json({
+            message: `an amount of ${amount} has been added`,
+            data: {
+              paymentInfo: amount,
+              paymentData: JSON.parse(JSON.stringify(response.data)),
+            },
+          });
+        } else {
+          return res.status(404).json({
+            message: "failed transaction",
+          });
+        }
+
+        // return res.status(201).json({
+        //   message: "done",
+        //   data: JSON.parse(JSON.stringify(response.data)),
+        // });
       })
       .catch(function (error) {
         console.log(error);
