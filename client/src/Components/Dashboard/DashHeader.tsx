@@ -10,7 +10,7 @@ const DashHeader = () => {
   return (
     <div>
       <Head>
-        <Logo>LIFE CARE.</Logo>
+        <Logo>LIFECARE.</Logo>
 
         <User>
 

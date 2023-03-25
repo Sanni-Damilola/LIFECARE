@@ -43,16 +43,16 @@ const DashSettings: React.FC = () => {
               <select>
                 {/* <option>Blood-group</option> */}
                 <option disabled>select blood group</option>
-                <option value="">AA</option>
-                <option value="">B</option>
-                <option value="">AB</option>
-                <option value="">O</option>
+                <option value="">A +</option>
+                <option value="">A -</option>
+                <option value="">B +</option>
+                <option value="">B -</option>
+                <option value="">AB +</option>
+                <option value="">AB -</option>
+                <option value="">O +</option>
+                <option value="">O -</option>
               </select>
-              <select>
-                <option disabled>select Rhesus Factor</option>
-                <option value="">Positive</option>
-                <option value="">Negative</option>
-              </select>
+              
               <select>
                 <option disabled>Select blood genotype</option>
                 <option value="">AA</option>
