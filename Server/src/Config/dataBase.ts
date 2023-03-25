@@ -10,7 +10,10 @@ const dbConfig = async () => {
     );
     console.log("Connected To DataBase");
     console.log("");
-    console.log("You're Connected To Your", mongoose.connection.host);
+    if (mongoose.connection.host === "local host") {
+      console.log("You're Connected to LocalHost");
+    }
+    console.log("You're Connected To Cloud Host");
   } catch (error) {
     console.log("An Error Occured In DataBase", error);
   }
