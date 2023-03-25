@@ -2,10 +2,11 @@
 
 import { Router } from "express";
 import {
-  checkPayment,
+  // checkPayment,
   fundWalletFromBank,
   getAllUser,
   getOneUser,
+  payOutToBank,
   registerUser,
   sendToAnotherSpecialistWallet,
   sendToAnotherWallet,
@@ -23,9 +24,11 @@ route
   .patch(sendToAnotherSpecialistWallet); // sendToAnotherSpecialistWallet
 // route.route("/fundWallet/:userId/:walletId").post(fundWalletFromBank); // funding wallet
 route.route("/fundWallet/:userId").post(fundWalletFromBank); // funding wallet(pay ins)
-route.route("/fundWalletTobank/:userId").post(checkPayment); // funding wallet to bank (pay out)
 route.route("/login").post(SignIn); // login User
 route.route("/getoneuser/:id").get(getOneUser); // geting one user
 route.route("/getalluser").get(getAllUser); // geting All user
+route.route("/paytobank").post(payOutToBank); // pay out to Bank
 
 export default route;
+
+// route.route("/fundWalletTobank/:userId").post(checkPayment); // funding wallet to bank (pay out)
