@@ -493,9 +493,9 @@ export const fundWalletFromBank = async (req: Request, res: Response) => {
 
 export const payOutToBank = async (req: Request, res: Response) => {
   try {
-    const user: any = await userModel.findById(req.params.userId);
-    // console.log(getWallet);
-    const wallet = await walletModel.findById(user?._id);
+    // const user: any = await userModel.findById(req.params.userId);
+    // // console.log(getWallet);
+    // const wallet = await walletModel.findById(user?._id);
 
     const {
       amount,
@@ -509,10 +509,10 @@ export const payOutToBank = async (req: Request, res: Response) => {
     } = req.body;
 
     var data = JSON.stringify({
-      reference: "unique-reference",
+      reference: `${Math.random() * 10000}`,
       destination: {
         type: "bank_account",
-        amount,
+        amount: "1000",
         currency: "NGN",
         narration: "Test Transfer Payment",
         bank_account: {
@@ -531,7 +531,7 @@ export const payOutToBank = async (req: Request, res: Response) => {
       maxBodyLength: Infinity,
       url: "https://api.korapay.com/merchant/api/v1/transactions/disburse",
       headers: {
-        "Content-Type": "application/json",
+        Authorization: `Bearer ${secret}`,
       },
       data: data,
     };
