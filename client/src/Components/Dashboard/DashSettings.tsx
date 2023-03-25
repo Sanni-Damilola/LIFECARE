@@ -1,12 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { FaUserAlt } from "react-icons/fa";
+import { useAppSelector } from "../Global/Store";
 
 const DashSettings: React.FC = () => {
+
+  const user = useAppSelector ((state)=>state?.currentUser)
   return (
     <Container>
         
-
       <Right>
         <Head></Head>
         <Identity>
@@ -14,8 +16,16 @@ const DashSettings: React.FC = () => {
             <FaUserAlt />
           </Image>
           <Hold>
-            <Name>Favour Yusuf</Name>
-            <Email>favouryusuf45@gmail.com</Email>
+            <Name>{
+              user?.name.toUpperCase()
+              }</Name>
+
+            <Email>
+              {
+                user?.email
+              }
+
+            </Email>
           </Hold>
         </Identity>
         <Content>
@@ -150,7 +160,7 @@ const Profile = styled.div`
 `;
 
 const Right = styled.div`
-  width: 95%';
+  width: 95%;
   min-height: 100vh;
 `;
 
