@@ -8,16 +8,9 @@ import HomeRoutes from "./Components/Routes/HomeRoutes";
 // import logo from "./logo.svg";
 // import "./App.css";
 
-
 function App() {
-  const getUser = useAppSelector((state) => state?.currentUser)
-  return <div>
-    {
-      getUser?.name ?
-      <DashBoardRoute /> :
-       <HomeRoutes /> 
-    }
-  </div>;
+  const getUser = useAppSelector((state) => state?.currentUser);
+  return <div>{getUser?.name ? <DashBoardRoute /> : <HomeRoutes />}</div>; // route 
 }
 
 export default App;
