@@ -173,7 +173,7 @@ const Body = styled.div`
 width: 250px;
 height: calc(100vh - 65px);
 display: flex;
-justify: content;
+/* justify: content; */
 align-items: center;
 position: fixed;
 background-color: #1f1f1f;
