@@ -11,15 +11,8 @@ export const ApplicationCofig = (app: Application) => {
   app.use(express.json()).use(cors()).use(morgan("dev")); // middleware Configuration
 
   app.get("/", (req: Request, res: Response) => {
-    const currentTime: Date = new Date();
-    const time = currentTime.toTimeString();
-    // let getHour = currentTime.getHours();
-    // let getMinutes = currentTime.getMinutes();
-    // const combined = `${getHour}:${getMinutes}`;
-
     return res.status(200).json({
       message: "Server is up an Runing 😊😊❗✔🚴‍♀️🚴‍♀️",
-      data: time,
     }); // landing route
   });
 
