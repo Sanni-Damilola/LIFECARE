@@ -13,6 +13,8 @@ export interface IHistory {
   message: string;
   transactionRefrence: string;
   transactionType: string;
+  time: string;
+  date: string;
 } // setting the Object Type for History
 
 export interface IWallet {
