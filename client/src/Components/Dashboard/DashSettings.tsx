@@ -1,12 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { FaUserAlt } from "react-icons/fa";
+import { useAppSelector } from "../Global/Store";
 
 const DashSettings: React.FC = () => {
+
+  const user = useAppSelector ((state)=>state?.currentUser)
   return (
     <Container>
         
-
       <Right>
         <Head></Head>
         <Identity>
@@ -14,8 +16,16 @@ const DashSettings: React.FC = () => {
             <FaUserAlt />
           </Image>
           <Hold>
-            <Name>Favour Yusuf</Name>
-            <Email>favouryusuf45@gmail.com</Email>
+            <Name>{
+              user?.name.toUpperCase()
+              }</Name>
+
+            <Email>
+              {
+                user?.email
+              }
+
+            </Email>
           </Hold>
         </Identity>
         <Content>
@@ -33,16 +43,16 @@ const DashSettings: React.FC = () => {
               <select>
                 {/* <option>Blood-group</option> */}
                 <option disabled>select blood group</option>
-                <option value="">AA</option>
-                <option value="">B</option>
-                <option value="">AB</option>
-                <option value="">O</option>
+                <option value="">A +</option>
+                <option value="">A -</option>
+                <option value="">B +</option>
+                <option value="">B -</option>
+                <option value="">AB +</option>
+                <option value="">AB -</option>
+                <option value="">O +</option>
+                <option value="">O -</option>
               </select>
-              <select>
-                <option disabled>select Rhesus Factor</option>
-                <option value="">Positive</option>
-                <option value="">Negative</option>
-              </select>
+              
               <select>
                 <option disabled>Select blood genotype</option>
                 <option value="">AA</option>
@@ -150,7 +160,7 @@ const Profile = styled.div`
 `;
 
 const Right = styled.div`
-  width: 95%';
+  width: 95%;
   min-height: 100vh;
 `;
 
