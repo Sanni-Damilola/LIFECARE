@@ -4,6 +4,8 @@ export interface Iuser {
   name: string;
   email: string;
   password: string;
+  bloodGroup: string;
+  genotype: string;
   accountNumber: number;
   history: {}[];
   wallet: {}[];

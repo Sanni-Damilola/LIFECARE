@@ -26,6 +26,14 @@ const userModel = new mongoose.Schema<Iuser>(
       type: String,
       required: true,
     },
+    bloodGroup: {
+      type: String,
+      required: true,
+    },
+    genotype: {
+      type: String,
+      required: true,
+    },
     accountNumber: {
       type: Number,
       min: 10,
