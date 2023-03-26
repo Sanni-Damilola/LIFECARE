@@ -7,6 +7,7 @@ import bcrypt from "bcrypt";
 import walletModel from "../Model/walletModel";
 import { asyncHandler } from "../src/error/asyncHander";
 import { AppError, HttpCode } from "../src/error/errorSpellOut";
+import appointment from "../Model/appointment";
 
 export const createSpecialist = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -98,3 +99,10 @@ export const getOneSpecialist = asyncHandler(
     });
   }, // get one User
 );
+
+
+// const acceptOrDeclineAppointment = asyncHandler(
+//   async(req: Request, res: Response, next: NextFunction) => {
+//     const updateAppointment = await appointmen
+//   }
+// )
