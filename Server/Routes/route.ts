@@ -19,7 +19,7 @@ import {
 const route = Router();
 
 route.route("/postUser").post(registerUser); // register User
-route.route("/transfer/:senderId/:senderWalletId").patch(sendToAnotherWallet); // sendToAnotherSpecialistWallet
+route.route("/transfer/:senderId").patch(sendToAnotherWallet); // sendToAnotherSpecialistWallet
 route
   .route("/sendtospecialist/:senderId/:senderWalletId")
   .patch(sendToAnotherSpecialistWallet); // sendToAnotherSpecialistWallet
