@@ -11,11 +11,10 @@ import mongoose from "mongoose";
 export const bookAppointment = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { date, complaintBrief, specialist } = req.body;
-    const getUser = await userModel.findById(req.params.userId);
+    const getUser = await userModel.findById(req.params.userId); // getting user
     const getSpecialist = await specialistModel.findById(
       req.params.specialistId,
-    );
-    // req.params.userId
+    ); // getting speciallist
 
     const bookAppointment = await appointment.create({
       email: getUser?.email,

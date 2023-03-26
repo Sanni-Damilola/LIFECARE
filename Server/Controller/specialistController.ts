@@ -100,7 +100,6 @@ export const getOneSpecialist = asyncHandler(
   }, // get one User
 );
 
-
 // const acceptOrDeclineAppointment = asyncHandler(
 //   async(req: Request, res: Response, next: NextFunction) => {
 //     const updateAppointment = await appointmen
