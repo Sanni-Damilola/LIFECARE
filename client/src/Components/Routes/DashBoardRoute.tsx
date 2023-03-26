@@ -49,35 +49,35 @@ const DashBoardRoute = () => {
 
             
 
-                            <Body>
+        <Body>
 
-                    {/* {
-                        agentSelector?.role === "Agent" ? */}
-                        <Head>
-                         <DashHeader />
-                        </Head>
-                        {/* :
+         {/* {
+                 agentSelector?.role === "Agent" ? */}
+                     <Head>
+                     <DashHeader />
+                     </Head>
+                    {/* :
                         null
-                    } */}
+                } */}
 
-                    <Bottom>
+                <Bottom>
 
-                        {/* {
-                            agentSelector?.role === "Agent" ? */}
-                            <Side>
-                                <DashSiderBar />
-                            </Side>
-                            {/* : 
-                            null
-                        } */}
+                {/* {
+                     agentSelector?.role === "Agent" ? */}
+                     <Side>
+                     <DashSiderBar />
+                     </Side>
+                     {/* : 
+                       null
+                     } */}
 
-                        <DashRoute>
-                            {element}
-                        </DashRoute>
+                    <DashRoute>
+                      {element}
+                     </DashRoute>
 
-                    </Bottom>
+                </Bottom>
 
-                    </Body>
+         </Body>
 
         </>
     )
