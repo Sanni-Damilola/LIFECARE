@@ -114,10 +114,10 @@ export const sendToAnotherWallet = asyncHandler(
 
         const createSenderHistory = await historyModel.create({
           message: `You Have Succefully sent ${amount} to ${getReceiver?.name}`,
-          transactionRefrence: "debit",
+          transactionRefrence: `${generateReferenceNumber}`, // generateReferenceNumber {from line 65 👆👆}
+          transactionType: "debit",
           date: `${date}`,
           time: `${time}`,
-          transactionType: generateReferenceNumber, // generateReferenceNumber {from line 65 👆👆}
         }); // Sender History
         getSender?.history?.push(
           new mongoose.Types.ObjectId(createSenderHistory?._id),
@@ -132,10 +132,10 @@ export const sendToAnotherWallet = asyncHandler(
         }); // updating Receiver Wallet
         const createRecevierHistory = await historyModel.create({
           message: `Your Account has been credited with ${amount} from ${getReceiver?.name}`,
-          transactionRefrence: "debit",
+          transactionType: "credit",
           date: `${date}`,
           time: `${time}`,
-          transactionType: generateReferenceNumber, // generateReferenceNumber {from line 65 👆👆}
+          transactionRefrence: `${generateReferenceNumber}`, // generateReferenceNumber {from line 65 👆👆}
         });
         getReceiver?.history?.push(
           new mongoose.Types.ObjectId(createRecevierHistory?._id),
@@ -199,10 +199,10 @@ export const sendToAnotherSpecialistWallet = asyncHandler(
 
         const createSenderHistory = await historyModel.create({
           message: `You Have Succefully sent ${amount} to ${getSpecialist?.name}`,
-          transactionRefrence: "debit",
           time: `${time}`,
           date: `${date}`,
-          transactionType: generateReferenceNumber, // generateReferenceNumber {from line 65 👆👆}
+          transactionRefrence: `${generateReferenceNumber}`, // generateReferenceNumber {from line 65 👆👆}
+          transactionType: "debit",
         }); // Sender History
         getSender?.history?.push(
           new mongoose.Types.ObjectId(createSenderHistory?._id),
@@ -217,10 +217,10 @@ export const sendToAnotherSpecialistWallet = asyncHandler(
         }); // updating Receiver Wallet
         const createRecevierHistory = await historyModel.create({
           message: `Your Account has been credited with ${amount} from ${getSpecialist?.name}`,
-          transactionRefrence: "debit",
           date: `${date}`,
           time: `${time}`,
-          transactionType: generateReferenceNumber, // generateReferenceNumber {from line 65 👆👆}
+          transactionRefrence: `${generateReferenceNumber}`, // generateReferenceNumber {from line 65 👆👆}
+          transactionType: "credit",
         });
         getSpecialist?.history?.push(
           new mongoose.Types.ObjectId(createRecevierHistory?._id),
