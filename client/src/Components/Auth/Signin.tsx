@@ -17,11 +17,7 @@ import { signin } from "../Api/Api";
 const Signin = () => {
   const dispatch = UseAppDispach();
   const navigate = useNavigate();
-  const schema = yup
-    .object({
-      email: yup.string().required(),
-    })
-    .required();
+  const schema = yup.object({email: yup.string().required(),}).required();
 
   type formData = yup.InferType<typeof schema>;
 
