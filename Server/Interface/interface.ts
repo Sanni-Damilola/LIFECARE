@@ -9,6 +9,9 @@ export interface Iuser {
   accountNumber: number;
   history: {}[];
   wallet: {}[];
+  appointment: {}[];
+
+  // bookAppointment: {}[];
 } // setting the Object Type for User
 
 export interface IHistory {
@@ -35,4 +38,14 @@ export interface ISpecialist {
   accountNumber: number;
   history: {}[];
   wallet: {}[];
+  appointment: {}[];  
+} // setting the Object Type for Specialist
+
+export interface bookAppointment {
+  email: string;
+  date: string;
+  confirm: boolean;
+  specialist: string;
+  complaintBrief: string;
+  specialistEmail: string;
 } // setting the Object Type for Specialist
