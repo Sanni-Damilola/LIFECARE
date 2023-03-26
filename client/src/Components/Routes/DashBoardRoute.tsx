@@ -19,7 +19,7 @@ const DashBoardRoute = () => {
 
     const element = useRoutes([
         {
-            path: "/",
+            path: "/dashboardhome",
             element: <DashHomeComp />,
         },
         {

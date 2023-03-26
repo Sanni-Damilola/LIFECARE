@@ -8,12 +8,14 @@ import { AiFillMessage, AiOutlineLogout, AiOutlineFund } from "react-icons/ai";
 import { GoPerson } from "react-icons/go";
 import { FiUsers } from "react-icons/fi";
 import { MdHealthAndSafety } from "react-icons/md";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { UseAppDispach } from "../Global/Store";
 import { logout } from "../Global/ReduxState";
 
 const SideBar = () => {
   const dispatch = UseAppDispach();
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -23,7 +25,7 @@ const SideBar = () => {
             <Admin>USER</Admin>
 
             <NavLink
-              to="/"
+              to="/dashboardhome"
               style={({ isActive }) => {
                 return {
                   textDecoration: isActive ? "none" : "none",
@@ -134,6 +136,7 @@ const SideBar = () => {
               <HomeText
                 onClick={() => {
                   dispatch(logout());
+                  navigate("/");
                 }}>
                 Logout
               </HomeText>
