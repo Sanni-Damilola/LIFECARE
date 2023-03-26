@@ -10,9 +10,8 @@ import mongoose from "mongoose";
 
 export const bookAppointment = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { email, date, complaintBrief, specialist } = req.body;
-
-    const getUser = await userModel.findOne({ email });
+    const { date, complaintBrief, specialist } = req.body;
+    const getUser = await userModel.findById(req.params.userId);
     const getSpecialist = await specialistModel.findById(
       req.params.specialistId,
     );
