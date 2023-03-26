@@ -600,9 +600,14 @@ export const SignIn = asyncHandler(
 
 export const getOneUser = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const getUser1 = await userModel.findById(req.params.id).populate({
-      path: "history",
-    });
+    const getUser1 = await userModel
+      .findById(req.params.id)
+      .populate("wallet")
+      .populate("history");
+
+    // const getUser1 = await userModel.findById(req.params.id).populate({
+    //   path: "history",
+    // });
 
     if (!getUser1) {
       next(
