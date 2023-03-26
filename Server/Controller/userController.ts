@@ -11,6 +11,7 @@ import { asyncHandler } from "../src/error/asyncHander";
 import { AppError, HttpCode } from "../src/error/errorSpellOut";
 import axios from "axios";
 import crypto from "crypto";
+import appointment from "../Model/appointment";
 
 export const registerUser = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -611,7 +612,8 @@ export const getOneUser = asyncHandler(
     const getUser1 = await userModel
       .findById(req.params.id)
       .populate("wallet")
-      .populate("history");
+      .populate("history")
+      .populate("appointment");
 
     // const getUser1 = await userModel.findById(req.params.id).populate({
     //   path: "history",
@@ -645,6 +647,8 @@ export const deleteAllModels = async (req: Request, res: Response) => {
   const deleteAllUsers = await userModel.deleteMany();
   const deleteAllWallet = await walletModel.deleteMany();
   const deleteAllHistorys = await historyModel.deleteMany();
+  const deleteAllAppointments = await appointment.deleteMany();
+  const deleteAllSpecialist= await specialistModel.deleteMany();
   return res.status(200).json({
     message: "successfully deleted all Models",
   });

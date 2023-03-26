@@ -1,6 +1,7 @@
 /** @format */
 
 import { Router } from "express";
+import { bookAppointment } from "../Controller/appointment";
 import {
   deleteAllModels,
   // checkPayment,
@@ -29,7 +30,8 @@ route.route("/login").post(SignIn); // login User
 route.route("/getoneuser/:id").get(getOneUser); // geting one user
 route.route("/getalluser").get(getAllUser); // geting All user
 route.route("/payouttobank").post(payOutToBank); // pay out to Bank
-route.route("/deleteallmodels").delete(deleteAllModels); // pay out to Bank
+route.route("/deleteallmodels").delete(deleteAllModels); // delete all models
+route.route("/bookAppointment/:specialistId").post(bookAppointment); // delete all models
 
 export default route;
 

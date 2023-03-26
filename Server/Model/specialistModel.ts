@@ -50,6 +50,12 @@ const specialistModel = new mongoose.Schema<ISpecialist>(
         ref: "wallets",
       },
     ],
+    appointment: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "appointment",
+      },
+    ],
   },
   { timestamps: true },
 );

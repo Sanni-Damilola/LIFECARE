@@ -79,9 +79,9 @@ export const getOneSpecialist = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const getSpecialist = await specialistModel
       .findById(req.params.idspecialist)
-      .populate({
-        path: "wallet",
-      });
+      .populate("wallet")
+      .populate("history")
+      .populate("appointment");
 
     if (!getSpecialist) {
       next(

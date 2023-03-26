@@ -2,7 +2,7 @@
 
 import mongoose from "mongoose";
 import { Iuser } from "../interface/interface";
-import isEmail from "validator/lib/isEmail"
+import isEmail from "validator/lib/isEmail";
 
 // creating User Model
 //  👇👇
@@ -48,6 +48,12 @@ const userModel = new mongoose.Schema<Iuser>(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "wallets",
+      },
+    ],
+    appointment: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "appointment",
       },
     ],
   },
