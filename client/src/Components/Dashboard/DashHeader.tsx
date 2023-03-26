@@ -11,9 +11,7 @@ const DashHeader = () => {
   return (
     <div>
       <Head>
-        <NavLink to = "/">
           <Logo>LIFECARE.</Logo>
-        </NavLink>
         <User>
 
           <Icon>

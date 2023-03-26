@@ -72,6 +72,10 @@ export const sendToAnotherWallet = asyncHandler(
       req.params.senderWalletId,
     ); // geting Sender Wallet {so a sender(user) can debit from it}
 
+    const currentDate: Date = new Date();
+    const time = currentDate.toLocaleTimeString(); // getting current time
+    const date = currentDate.toDateString(); // getting current time
+
     if (!getSender && getReceiver) {
       next(
         new AppError({
@@ -118,6 +122,8 @@ export const sendToAnotherWallet = asyncHandler(
         const createRecevierHistory = await historyModel.create({
           message: `Your Account has been credited with ${amount} from ${getReceiver?.name}`,
           transactionRefrence: "debit",
+          date: date,
+          time: time,
           transactionType: generateReferenceNumber, // generateReferenceNumber {from line 65 👆👆}
         });
         getReceiver?.history?.push(
@@ -149,6 +155,9 @@ export const sendToAnotherSpecialistWallet = asyncHandler(
     const getSenderWallet = await walletModel.findById(
       req.params.senderWalletId,
     ); // geting Sender Wallet {so a sender(user) can debit from it}
+    const currentDate: Date = new Date();
+    const time = currentDate.toLocaleTimeString(); // getting current time
+    const date = currentDate.toDateString(); // getting current time
 
     if (!getSender && getSpecialist) {
       next(
@@ -196,6 +205,8 @@ export const sendToAnotherSpecialistWallet = asyncHandler(
         const createRecevierHistory = await historyModel.create({
           message: `Your Account has been credited with ${amount} from ${getSpecialist?.name}`,
           transactionRefrence: "debit",
+          date: date,
+          time: time,
           transactionType: generateReferenceNumber, // generateReferenceNumber {from line 65 👆👆}
         });
         getSpecialist?.history?.push(
@@ -214,13 +225,16 @@ export const sendToAnotherSpecialistWallet = asyncHandler(
   }, // {wallet transaction} ... Sending to specialist Wallet
 );
 
-//fund wallet from bank
+// fund wallet from bank
 // export const fundWalletFromBank = asyncHandler(
 //   async (req: Request, res: Response, next: NextFunction) => {
 //     const getUser = await userModel.findById(req.params.userId);
 //     const getWallet = await walletModel.findById(req.params.walletId);
 
 //     const { amount, transactinRef } = req.body;
+//     const currentDate: Date = new Date();
+//     const time = currentDate.toLocaleTimeString(); // getting current time
+//     const date = currentDate.toDateString(); // getting current time
 //     await walletModel.findByIdAndUpdate(getWallet?._id, {
 //       balance: getWallet?.balance + amount,
 //     });
@@ -237,6 +251,8 @@ export const sendToAnotherSpecialistWallet = asyncHandler(
 //     const createHisorySender = await historyModel.create({
 //       message: `an amount of ${amount} has been credited to your wallet`,
 //       transactionType: "credit",
+//       date: date,
+//       time: time,
 //       transactionReference: transactinRef,
 //     });
 

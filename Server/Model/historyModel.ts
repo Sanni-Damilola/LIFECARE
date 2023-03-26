@@ -18,6 +18,12 @@ const historySchema = new mongoose.Schema<IHistory>(
     transactionType: {
       type: String,
     },
+    date: {
+      type: String,
+    },
+    time: {
+      type: String,
+    },
   },
   { timestamps: true },
 );
