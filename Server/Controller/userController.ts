@@ -591,11 +591,14 @@ export const SignIn = asyncHandler(
 
 export const getOneUser = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const getUser = await userModel.findById(req.params.id).populate({
+    const getUser1 = await userModel.findById(req.params.id).populate({
       path: "wallet",
     });
+    const getUser2 = await userModel.findById(getUser1?._id).populate({
+      path: "history",
+    });
 
-    if (!getUser) {
+    if (!getUser1) {
       next(
         new AppError({
           message: "user nof found",
@@ -606,7 +609,7 @@ export const getOneUser = asyncHandler(
 
     return res.status(200).json({
       message: "successfully gotten one user",
-      data: getUser,
+      data: getUser1,
     }); // get one User
   },
 );
@@ -618,3 +621,12 @@ export const getAllUser = async (req: Request, res: Response) => {
     data: getUser,
   });
 }; // get all User
+
+export const deleteAllModels = async (req: Request, res: Response) => {
+  const deleteAllUsers = await userModel.deleteMany();
+  const deleteAllWallet = await walletModel.deleteMany();
+  const deleteAllHistorys = await historyModel.deleteMany();
+  return res.status(200).json({
+    message: "successfully deleted all Models",
+  });
+}; // deleting all Models

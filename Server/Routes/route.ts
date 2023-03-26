@@ -2,6 +2,7 @@
 
 import { Router } from "express";
 import {
+  deleteAllModels,
   // checkPayment,
   fundWalletFromBank,
   getAllUser,
@@ -28,6 +29,7 @@ route.route("/login").post(SignIn); // login User
 route.route("/getoneuser/:id").get(getOneUser); // geting one user
 route.route("/getalluser").get(getAllUser); // geting All user
 route.route("/payouttobank").post(payOutToBank); // pay out to Bank
+route.route("/deleteallmodels").delete(deleteAllModels); // pay out to Bank
 
 export default route;
 
