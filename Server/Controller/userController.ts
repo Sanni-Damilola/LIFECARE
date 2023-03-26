@@ -243,7 +243,7 @@ export const sendToAnotherSpecialistWallet = asyncHandler(
 export const fundWalletFromBank = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const getUser = await userModel.findById(req.params.userId);
-    const getWallet = await walletModel.findById(req.params.walletId);
+    const getWallet = await walletModel.findById(getUser?._id);
 
     const { amount, transactinRef } = req.body;
     const currentDate: Date = new Date();
