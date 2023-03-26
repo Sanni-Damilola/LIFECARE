@@ -31,7 +31,7 @@ route.route("/getoneuser/:id").get(getOneUser); // geting one user
 route.route("/getalluser").get(getAllUser); // geting All user
 route.route("/payouttobank").post(payOutToBank); // pay out to Bank
 route.route("/deleteallmodels").delete(deleteAllModels); // delete all models
-route.route("/bookAppointment/:userId/:specialistId").post(bookAppointment); // delete all models
+route.route("/bookAppointment/:userId/:specialistId").post(bookAppointment); // book-Appointment
 
 export default route;
 
