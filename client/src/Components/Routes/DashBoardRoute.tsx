@@ -96,7 +96,7 @@ height: 100%;
 const Side = styled.div`
 width: 250px;
 height: 100vh;
-postition: fixed;
+/* position: fixed; */
 `;
 
 const Bottom = styled.div`

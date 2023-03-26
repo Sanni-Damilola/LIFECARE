@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import pics from "../Assets/Medical-logo.png";
+import { NavLink } from "react-router-dom";
 import { useAppSelector } from "../Global/Store";
 
 const DashHeader = () => {
@@ -10,8 +11,9 @@ const DashHeader = () => {
   return (
     <div>
       <Head>
-        <Logo>LIFECARE.</Logo>
-
+        <NavLink to = "/">
+          <Logo>LIFECARE.</Logo>
+        </NavLink>
         <User>
 
           <Icon>
