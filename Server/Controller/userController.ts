@@ -78,9 +78,7 @@ export const sendToAnotherWallet = asyncHandler(
 
     const getReceiverWallet = await walletModel.findById(getReceiver?._id); // geting Recevier Wallet {so a Recevier(user) can creidt it}
     const getSender = await userModel.findById(req.params.senderId); // getting sender
-    const getSenderWallet = await walletModel.findById(
-      req.params.senderWalletId,
-    ); // geting Sender Wallet {so a sender(user) can debit from it}
+    const getSenderWallet = await walletModel.findById(getSender?._id); // geting Sender Wallet {so a sender(user) can debit from it}
 
     const currentDate: Date = new Date();
     const time = currentDate.toLocaleTimeString(); // getting current time
