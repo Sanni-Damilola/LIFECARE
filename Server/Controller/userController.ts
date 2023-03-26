@@ -106,6 +106,8 @@ export const sendToAnotherWallet = asyncHandler(
         const createSenderHistory = await historyModel.create({
           message: `You Have Succefully sent ${amount} to ${getReceiver?.name}`,
           transactionRefrence: "debit",
+          date: `${date}`,
+          time: `${time}`,
           transactionType: generateReferenceNumber, // generateReferenceNumber {from line 65 👆👆}
         }); // Sender History
         getSender?.history?.push(
@@ -122,8 +124,8 @@ export const sendToAnotherWallet = asyncHandler(
         const createRecevierHistory = await historyModel.create({
           message: `Your Account has been credited with ${amount} from ${getReceiver?.name}`,
           transactionRefrence: "debit",
-          date: date,
-          time: time,
+          date: `${date}`,
+          time: `${time}`,
           transactionType: generateReferenceNumber, // generateReferenceNumber {from line 65 👆👆}
         });
         getReceiver?.history?.push(
@@ -189,6 +191,8 @@ export const sendToAnotherSpecialistWallet = asyncHandler(
         const createSenderHistory = await historyModel.create({
           message: `You Have Succefully sent ${amount} to ${getSpecialist?.name}`,
           transactionRefrence: "debit",
+          time: `${time}`,
+          date: `${date}`,
           transactionType: generateReferenceNumber, // generateReferenceNumber {from line 65 👆👆}
         }); // Sender History
         getSender?.history?.push(
@@ -205,8 +209,8 @@ export const sendToAnotherSpecialistWallet = asyncHandler(
         const createRecevierHistory = await historyModel.create({
           message: `Your Account has been credited with ${amount} from ${getSpecialist?.name}`,
           transactionRefrence: "debit",
-          date: date,
-          time: time,
+          date: `${date}`,
+          time: `${time}`,
           transactionType: generateReferenceNumber, // generateReferenceNumber {from line 65 👆👆}
         });
         getSpecialist?.history?.push(
@@ -297,6 +301,9 @@ export const fundWalletFromBank = async (req: Request, res: Response) => {
     const getUser = await userModel.findById(req.params.userId);
     // const getWallet = await walletModel.findById(req.params.walletId);
     const getWallet = await walletModel.findById(getUser?._id);
+    const currentDate: Date = new Date();
+    const time = currentDate.toLocaleTimeString(); // getting current time
+    const date = currentDate.toDateString(); // getting current time
 
     const wallet = await walletModel.findById(req.params.id);
     // console.log(wallet)
@@ -322,6 +329,8 @@ export const fundWalletFromBank = async (req: Request, res: Response) => {
     const createHisorySender = await historyModel.create({
       message: `an amount of ${amount} has been credited to your wallet`,
       transactionType: "credit",
+      date: `${date}`,
+      time: `${time}`,
       // transactionReference: transactinRef,
     });
 
@@ -371,7 +380,7 @@ export const fundWalletFromBank = async (req: Request, res: Response) => {
 
     await axios(config)
       .then(async function (response) {
-        console.log(response);
+        // console.log(response);
 
         if (response?.data?.status === true) {
           await walletModel.findByIdAndUpdate(getWallet?._id, {
@@ -592,9 +601,6 @@ export const SignIn = asyncHandler(
 export const getOneUser = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const getUser1 = await userModel.findById(req.params.id).populate({
-      path: "wallet",
-    });
-    const getUser2 = await userModel.findById(getUser1?._id).populate({
       path: "history",
     });
 
