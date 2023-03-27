@@ -52,7 +52,53 @@ const dispatch = UseAppDispach();
   });
     
   return (
-    <div>ConsultantSignUp</div>
+    <>
+    <Body>
+        <Hold>
+          <Left>
+            <Form onSubmit={Submit}>
+              <div
+                style={{
+                  fontSize: "20px",
+                  color: "#039EE6",
+                  fontWeight: "700",
+                  marginBottom: "20px",
+                  textAlign: "center",
+                }}>
+                User Sign Up
+              </div>
+
+              <Input
+                type="text"
+                placeholder="Full Name"
+                {...register("name")}
+              />
+              <p>{errors?.name && errors?.name?.message}</p>
+
+              <Input type="text" placeholder="Email" {...register("email")} />
+              <p>{errors?.email && errors?.email?.message}</p>
+
+              <Input
+                type="password"
+                placeholder="Password"
+                {...register("password")}
+              />
+              <p>{errors?.password && errors?.password?.message}</p>
+
+              <Button type="submit">Sign Up</Button>
+
+              <Link style={{ textDecoration: "none" }} to={"/signin"}>
+                <Already>Already have an account? Sign in</Already>
+              </Link>
+            </Form>
+          </Left>
+
+          <Right>
+            <RightImg src="/images/accidentSignin.svg" />
+          </Right>
+        </Hold>
+      </Body>
+    </>
   )
 }
 
