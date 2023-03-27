@@ -33,7 +33,7 @@ const Header = () => {
               <span>Contact us</span>
             </Navs>
 
-            <Navs to="/contact">
+            <Navs to="/donateblood">
               <IoMdPricetags />
               <span>Donate Blood</span>
             </Navs>
@@ -57,6 +57,7 @@ const Header = () => {
                 <SideNavs to="/services">Book a Session</SideNavs>
                 <SideNavs to="/about">About</SideNavs>
                 <SideNavs to="/contacts">Contact us</SideNavs>
+                <SideNavs to="/donateblood">Donate Blood</SideNavs>
                 <SideNavs to="/signup">Sign Up</SideNavs>
                 <SideNavs to="/signIn">Sign In</SideNavs>
               </Holder>
@@ -135,25 +136,23 @@ const Holder = styled.div`
   margin-top: 40px;
 `;
 const Button = styled.div`
-     /* padding: 7px 10px; */
-     padding: 15px;
-    display: block;
-    margin-left: 15px;
-    justify-content: center;
-    :hover {
-      transform: scale(0.94);
-    }
-    /* align-items: center; */
-    font-family: poppins;
-    background-color: #a8ff37;
-    border: none;
-    outline: none;
-    color: black;
-    font-weight: 600;
-    border-radius: 20px;
-`
-
-
+  /* padding: 7px 10px; */
+  padding: 15px;
+  display: block;
+  margin-left: 15px;
+  justify-content: center;
+  :hover {
+    transform: scale(0.94);
+  }
+  /* align-items: center; */
+  font-family: poppins;
+  background-color: #a8ff37;
+  border: none;
+  outline: none;
+  color: black;
+  font-weight: 600;
+  border-radius: 20px;
+`;
 
 const Container = styled.div`
   height: 80px;
