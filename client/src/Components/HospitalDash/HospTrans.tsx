@@ -19,7 +19,6 @@ const HospTrans = () => {
                         <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Amount</Names>
                         <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Trans ID</Names>
                         <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Patient</Names>
-                        <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Scenario</Names>
                         <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Time</Names>
                         <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Date</Names>
                     </Top>
