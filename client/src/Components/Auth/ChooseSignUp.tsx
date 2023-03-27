@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import pic from "../Images/medical-care.svg";
+import pic from "../Images/undraw_medical_care_movn.svg";
 import { NavLink } from "react-router-dom";
 
 const ChooseSignUp = () => {
