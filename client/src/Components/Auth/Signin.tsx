@@ -13,6 +13,7 @@ import { useMutation } from "@tanstack/react-query";
 import { UseAppDispach } from "../Global/Store";
 import { User } from "../Global/ReduxState";
 import { signin } from "../Api/Api";
+import { AnyAction } from "@reduxjs/toolkit";
 
 const Signin = () => {
   const dispatch = UseAppDispach();
@@ -25,7 +26,7 @@ const Signin = () => {
     mutationKey: ["lifecareUser"],
     mutationFn: signin,
 
-    onSuccess: (myData) => {
+    onSuccess: (myData:any) => {
       dispatch(User(myData.data));
     },
   });

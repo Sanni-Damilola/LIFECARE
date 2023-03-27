@@ -20,14 +20,14 @@ const ConsultHome1 = () =>{
                         <Up>
                             <Bal>
                                 <Acct>Balance
-                                    <Icn>
+                                    {/* <Icn>
                                         <AiFillEyeInvisible />
                                     </Icn>
 
                                     
                                     <Icn>
                                         <AiFillEye />
-                                    </Icn>
+                                    </Icn> */}
                                 </Acct>
 
                                 <Acct1>N300,000.00</Acct1>

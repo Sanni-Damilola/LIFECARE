@@ -32,7 +32,7 @@ const SignUp = () => {
     mutationKey: ["lifecareUser"],
     mutationFn: signup,
 
-    onSuccess: (myData) => {
+    onSuccess: (myData:any) => {
       dispatch(User(myData.data));
     },
   });
