@@ -317,7 +317,7 @@ font-size: 12px;
 font-weight: 700;
 color: rgba(123, 126, 126, 0.992);
 width: 12%;
-height 40px;
+height: 40px;
 display: flex;
 justify-content: center;
 align-items: center;
