@@ -51,7 +51,61 @@ const HospitalSignUp = () => {
     navigate("/dashboardhome");
   });
 
-  return <div>HospitalSignUp</div>;
+  return (
+    <>
+      <Body>
+        <Hold>
+          <Left>
+            <Form onSubmit={Submit}>
+              <div
+                style={{
+                  fontSize: "20px",
+                  color: "#039EE6",
+                  fontWeight: "700",
+                  marginBottom: "20px",
+                  textAlign: "center",
+                }}>
+                User Sign Up
+              </div>
+
+              <Input
+                type="text"
+                placeholder="Full Name"
+                {...register("name")}
+              />
+              <p style={{ fontSize: "10px" }}>
+                {errors?.name && errors?.name?.message}
+              </p>
+
+              <Input type="text" placeholder="Email" {...register("email")} />
+              <p style={{ fontSize: "10px" }}>
+                {errors?.email && errors?.email?.message}
+              </p>
+
+              <Input
+                type="password"
+                placeholder="Password"
+                {...register("password")}
+              />
+              <p style={{ fontSize: "10px" }}>
+                {errors?.password && errors?.password?.message}
+              </p>
+
+              <Button type="submit">Sign Up</Button>
+
+              <Link style={{ textDecoration: "none" }} to={"/signin"}>
+                <Already>Already have an account? Sign in</Already>
+              </Link>
+            </Form>
+          </Left>
+
+          <Right>
+            <RightImg src="/images/accidentSignin.svg" />
+          </Right>
+        </Hold>
+      </Body>
+    </>
+  );
 };
 
 export default HospitalSignUp;
