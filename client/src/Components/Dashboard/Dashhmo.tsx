@@ -51,77 +51,113 @@ export default DashHMO;
 // const Fund = styled.div``;
 
 const Plan2 = styled.div`
-  font-size: 17px;
-  font-weight: 700;
-  margin-top: 20px;
-  // margin-left: 30px;
-  color: #f4511e;
+font-size: 17px;
+font-weight: 700;
+margin-top: 20px;
+// margin-left: 30px;
+color: #F4511E;
+
+@media screen and (max-width: 425px) {
+    font-size: 14px;
+}
+
+@media screen and (max-width: 360px) {
+    font-size: 12px;
+}
 `;
 
 const Text = styled.div`
-  font-size: 14px;
-  font-weight: 700;
-  color: white;
-  // color: #000000;
-  position: absolute;
-  top: 20px;
-  left: 15px;
+font-size: 14px;
+font-weight: 700;
+color: white;
+// color: #000000;
+position: absolute;
+top: 20px;
+left: 15px;
 
-  :hover {
+:hover{
     color: #000000;
-  }
+}
 `;
 
 const CardImg = styled.img`
-  width: 100%;
-  height: 100%;
+width: 100%;
+height: 100%;
 `;
 
 const Plan = styled.div`
-  font-size: 14px;
-  font-weight: 700;
-  text-align: center;
-  width: 50%;
-  margin-top: 40px;
+font-size: 14px;
+font-weight: 700;
+text-align: center;
+width: 50%;
+margin-top: 40px;
+
+@media screen and (max-width: 425px) {
+    width: 70%;
+    font-size: 13px;
+}
+
+@media screen and (max-width: 375px) {
+    width: 80%;
+}
 `;
 
 const Card = styled.div`
-  // width: 260px;
-  width: 31%;
-  height: 260px;
-  border-radius: 10px 10px 10px 0;
-  box-shadow: 0 0 3px gray;
-  overflow: hidden;
-  position: relative;
-  cursor: pointer;
+// width: 260px;
+width: 31%;
+height: 260px;
+border-radius: 10px 10px 10px 0;
+box-shadow: 0 0 3px gray;
+overflow: hidden;
+position: relative;
+cursor: pointer;
+
+@media screen and (max-width: 768px) {
+    height: 210px;
+}
+
+@media screen and (max-width: 425px) {
+    height: 260px;
+    width: 85%;
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 320px) {
+    height: 240px;
+}
 `;
 
 const Cards = styled.div`
-  width: 93%;
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 20px;
-  // margin-left: 20px;
-  justify-content: space-between;
-  // gap: 2rem;
+width: 93%;
+display: flex;
+flex-wrap: wrap;
+margin-top: 20px;
+// margin-left: 20px;
+justify-content: space-between;
+// gap: 2rem;
+
+@media screen and (max-width: 425px) {
+    justify-content: center;
+}
 `;
 
 const Contain = styled.div`
-  width: 95%;
-  height: 100%;
-  background-color: white;
-  border-radius: 10px 0 10px 0;
-  display: flex;
-  gap: 1rem;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-  padding-bottom: 30px;
+width: 95%;
+height: 100%;
+background-color: white;
+border-radius: 10px 0 10px 0;
+display: flex;
+gap: 1rem;
+flex-direction: column;
+align-items: center;
+margin-top: 20px;
+padding-bottom: 30px; 
 `;
 
 const Body = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  // align-items: center;
+width: 100%;
+display: flex;
+justify-content: center;
+// align-items: center;
 `;
+

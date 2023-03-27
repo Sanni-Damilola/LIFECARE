@@ -75,71 +75,139 @@ const ConsultAppointment = () => {
 
             <Body>
 
-                <Contain>
+<Contain>
 
-                    {/* <Fund>
-                        <div></div>
+    {/* <Fund>
+        <div></div>
 
-                        <Button>
-                            <Pay onClick={toggle2}>Book Appointment</Pay>
-                        </Button>
-                    </Fund> */}
+        <Button>
+            <Pay onClick={toggle2}>Book Appointment</Pay>
+        </Button>
+    </Fund> */}
 
-                    <div style={{fontSize:"18px", fontWeight:"700", marginTop:"30px", marginLeft:"30px"}}>Appointments</div>
+    <div style={{fontSize:"18px", fontWeight:"700", marginTop:"30px", marginLeft:"20px"}}>Appointments</div>
 
-                    <Top>
-                        <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>S/N</Names>
-                        <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Patient</Names>
-                        <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Patient's Name</Names>
-                        <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Diagnosis</Names>
-                        <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Date & Time</Names>
-                        <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Accept</Names>
-                        <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Decline</Names>
-                        <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Re-Schedule</Names>
-                    </Top>
+    <Top>
+        <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000", width:"5%"}}>S/N</Names>
+        <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Patient</Names>
+        <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Patient's Name</Names>
+        <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Diagnosis</Names>
+        <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Date & Time</Names>
+        <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Accept</Names>
+        <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Decline</Names>
+        <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Re-Schedule</Names>
+    </Top>
 
-                    <Top>
-                        <Names>1</Names>
-                        <Names>
-                            <Name src="/images/avatar.png" />
-                        </Names>
-                        <Names>Allison Jordan</Names>
-                        <Names>Eyes Issues</Names>
-                        <Names>03-13/01:00am</Names>
-                        <Names>
-                            <Namees >Accept</Namees>
-                        </Names>
-                        <Names>
-                            <Namees style={{backgroundColor:"rgba(123, 126, 126, 0.992)"}}>Decline</Namees>
-                        </Names>
-                        <Names>
-                            <Namees style={{backgroundColor:"#000000"}} onClick={toggle2
-                            }>Re-Schedule</Namees>
-                        </Names>
-                    </Top>
+    <Top>
+        <Names style={{ width:"5%"}}>1</Names>
+        <Names>
+            <Name src="/images/avatar.png" />
+        </Names>
+        <Names>Allison Jordan</Names>
+        <Names>Eyes Issues</Names>
+        <Names>03-13/01:00am</Names>
 
-                    <Top>
-                        <Names>2</Names>
-                        <Names>
-                            <Name src="/images/avatar.png" />
-                        </Names>
-                        <Names>Obi Shola</Names>
-                        <Names>Lens Request</Names>
-                        <Names>03-10/11:00am</Names>
-                        <Names>
-                            <Namees >Accept</Namees>
-                        </Names>
-                        <Names>
-                            <Namees style={{backgroundColor:"rgba(123, 126, 126, 0.992)"}} >Decline</Namees>
-                        </Names>
-                        <Names>
-                            <Namees style={{backgroundColor:"#000000"}} onClick={toggle2
-                            }>Re-Schedule</Namees>
-                        </Names>
-                    </Top>
+        <Names style={{ }}>
+            <Namees >Accept</Namees>
+        </Names>
+
+        <Names style={{ }}>
+            <Namees style={{backgroundColor:"rgba(123, 126, 126, 0.992)"}}>Decline</Namees>
+        </Names>
+
+         <Names style={{ }}>
+            <Namees style={{backgroundColor:"#000000"}} onClick={toggle2}>Re-Schedule</Namees>
+        </Names>
+    </Top>
+
+<Top>
+    <Names style={{ width:"5%"}}>1</Names>
+    <Names>
+        <Name src="/images/avatar.png" />
+    </Names>
+    <Names>Obi Shola</Names>
+    <Names>Lens Request</Names>
+    <Names>03-13/02:00pm</Names>
+
+    <Names style={{ }}>
+        <Namees >Accept</Namees>
+    </Names>
+
+    <Names style={{ }}>
+        <Namees style={{backgroundColor:"rgba(123, 126, 126, 0.992)"}}>Decline</Namees>
+    </Names>
+
+    <Names style={{ }}>
+        <Namees style={{backgroundColor:"#000000"}} onClick={toggle2}>Re-Schedule</Namees>
+    </Names>
+</Top>
+    
+    <MobTop 
+    // style={{backgroundColor:"#a8ff37"}}
+    >
+        <Amount>
+            <Trans>
+                <Name src="/images/avatar.png" />
+            </Trans>
+            <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}>Eyes Issues</Trans>
+        </Amount>
+
+        <Amount>
+            <Trans>Dr. Allison Jordan</Trans>
+            <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}>03-13/01:00am</Trans>
+        </Amount>
+
+        <Amount style={{marginTop:"6px"}}>
+
+            <Names style={{ }}>
+                <Namees style={{width:"100%"}}>Accept</Namees>
+            </Names>
+
+            <Names>
+                <Namees style={{backgroundColor:"rgba(123, 126, 126, 0.992)", width:"100%"}}>Decline</Namees>
+            </Names>
+
+           <Names style={{}}>
+                <Namees style={{backgroundColor:"#000000", width:"100%"}} onClick={toggle2}>Re-Schedule</Namees>
+            </Names>
+
+        </Amount>
+    </MobTop>
+    
+    <MobTop 
+    // style={{backgroundColor:"#a8ff37"}}
+    >
+        <Amount>
+            <Trans>
+                <Name src="/images/avatar.png" />
+            </Trans>
+            <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}>Lens Request</Trans>
+        </Amount>
+
+        <Amount>
+            <Trans>Dr. Obi Shola</Trans>
+            <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}>03-10/11:00am</Trans>
+        </Amount>
+
+        <Amount style={{marginTop:"6px"}}>
+
+            <Names style={{}}>
+                <Namees style={{width:"100%"}}>Accept</Namees>
+            </Names>
+
+           <Names style={{}}>
+                <Namees style={{backgroundColor:"rgba(123, 126, 126, 0.992)", width:"100%"}}>Decline</Namees>
+            </Names>
+
+            <Names style={{}}>
+                <Namees style={{backgroundColor:"#000000", width:"100%"}} onClick={toggle2}>Re-Schedule</Namees>
+            </Names>
+
+        </Amount>
+    </MobTop>
 
 
-                </Contain>
+</Contain>
 
             </Body>
 
@@ -159,8 +227,44 @@ export default ConsultAppointment;
 
 // const Fund = styled.div``;
 
+const Trans = styled.h5`
+font-size: 13px;
+font-weight: 700;
+`;
+
+const Amount = styled.div`
+width: 90%;
+display: flex;
+height: 35px;
+justify-content: space-between;
+align-items: center;
+margin-left: 20px;
+
+@media screen and (max-width: 320px) {
+    margin-left: 15px;
+}
+`;
+
+const MobTop = styled.div`
+display: none;
+
+@media screen and (max-width: 425px) {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    // border-radius: 12px;
+    // border-bottom: 2px solid #a8ff37;
+    border-bottom: 1px solid rgba(123, 126, 126, 0.992);
+    // border-top: 1px solid #000000;
+    margin-top: 20px;
+    padding-bottom: 15px;
+}
+`;
+
 const Namees = styled.button`
-padding: 10px 10px;
+// padding: 10px 10px;
+padding-top: 10px;
+padding-bottom: 10px;
 border: none;
 background-color: #F4511E;
 // background-color: rgba(123, 126, 126, 0.992);
@@ -173,6 +277,18 @@ font-weight: 700;
     // border: 1px solid #000000;
     background-color: #000000;
     // color: #000000;
+}
+
+@media screen and (max-width: 768px) {
+    font-size: 12px;
+}
+
+@media screen and (max-width: 375px) {
+    font-size: 11px;
+}
+
+@media screen and (max-width: 320px) {
+    font-size: 10px;
 }
 `;
 
@@ -256,6 +372,10 @@ z-index: 100;
 display: flex;
 flex-direction: column;
 justify-content: space-between;
+
+@media screen and (max-width: 768px) {
+    width: 260px;
+}
 `;
 
 const Black = styled.div`
@@ -278,6 +398,10 @@ justify-content: space-between;
 background-color: #00000095;
 z-index: 300;
 transition: all 350ms ease-in-out;
+
+@media screen and (max-width: 768px) {
+    width: 100%;
+}
 `;
 
 const Pay = styled.button`
@@ -308,7 +432,7 @@ font-weight: 700;
 // color: rgba(123, 126, 126, 0.992);
 // color: white;
 cursor: pointer;
-margin-left: 30px;
+margin-left: 20px;
 margin-top: 20px;
 `;
 
@@ -319,17 +443,28 @@ color: rgba(123, 126, 126, 0.992);
 width: 12%;
 height: 40px;
 display: flex;
-justify-content: center;
+// justify-content: center;
 align-items: center;
+
+@media screen and (max-width: 425px) {
+    width: 30%;
+}
 `;
 
 const Top = styled.div`
 width: 95%;
-margin-top: 15px;
+margin-top: 10px;
 margin-left: 20px;
 display: flex;
 justify-content: space-around;
 align-items: flex-start;
+background-color: #eaeaea;
+padding-top: 10px;
+padding-bottom: 10px;
+ 
+@media screen and (max-width: 425px) {
+    display: none;
+}
 `;
 
 const Contain = styled.div`
@@ -343,6 +478,10 @@ flex-direction: column;
 // justify-content: center;
 margin-top: 20px;
 padding-bottom: 30px; 
+ 
+@media screen and (max-width: 425px) {
+    width: 85%;
+}
 `;
 
 const Body = styled.div`

@@ -71,6 +71,9 @@ const Signin = () => {
               <Input type="text" placeholder="Email" {...register("email")} />
               <p>{errors?.email && errors?.email?.message}</p>
 
+              {/* <Input type="password" placeholder="Password" {...register("email")} /> */}
+              {/* <p>{errors?.password && errors?.password?.message}</p> */}
+
               <Button type="submit">Sign in</Button>
 
               <Link style={{ textDecoration: "none" }} to={"/signup"}>
