@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import pic from "../Images/medical-care.svg";
+import { NavLink } from "react-router-dom";
 
 const ChooseSignUp = () => {
   return (
@@ -10,9 +11,9 @@ const ChooseSignUp = () => {
         <Right>
           <Box>
             <p>A platform for All</p>
-            <Input>Sign Up as a Patient</Input>
-            <Input>Sign up as a Consultant</Input>
-            <Input>Sign up as a Hospital</Input>
+            <Input to="/signuser">Sign Up as a User</Input>
+            <Input to="/signconsultant">Sign up as a Consultant</Input>
+            <Input to="/signhospital">Sign up as a Hospital</Input>
           </Box>
         </Right>
         <Left>
@@ -25,8 +26,8 @@ const ChooseSignUp = () => {
 
 export default ChooseSignUp;
 
-const Input = styled.div`
-  height: 30px;
+const Input = styled(NavLink)`
+  height: 40px;
   width: 250px;
   border: 1px light gray;
   border-radius: 5px;
@@ -38,6 +39,13 @@ const Input = styled.div`
   justify-content: center;
   color: #7bb136;
   cursor: pointer;
+  text-decoration: none;
+
+  :hover {
+    cursor: pointer;
+    transition: all 350ms;
+    transform: scale(0.9);
+  }
 `;
 const Box = styled.div`
   height: 300px;
@@ -82,7 +90,7 @@ const Wrapper = styled.div`
 const Head = styled.div`
   height: 30vh;
   width: 100%;
-  background-color: #9fdf4c;
+  background-color: #518f00;
   display: flex;
   justify-content: center;
   align-items: center;
