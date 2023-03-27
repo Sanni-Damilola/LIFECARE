@@ -14,7 +14,7 @@ const DashFundWallet = () => {
                 <Here type="" placeholder='Tap here and enter .. (e.g 5000)'/>
             </Tap>
 
-            <Proceed>Fund Now</Proceed>
+            <Proceed>Quick Save</Proceed>
 
         </Side>
 
@@ -44,7 +44,7 @@ const DashFundWallet = () => {
                 <Here type="time" placeholder=''/>
             </Tap> */}
 
-            <Start>Quick Save</Start>
+            <Start>Fund Now</Start>
 
         </Save>
 
