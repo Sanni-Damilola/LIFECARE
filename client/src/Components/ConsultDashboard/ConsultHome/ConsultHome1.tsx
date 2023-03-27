@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { AiOutlineDollar }  from "react-icons/ai";
+import { AiOutlineDollar, AiFillEyeInvisible, AiFillEye }  from "react-icons/ai";
 import { MdBloodtype, MdOutlineBloodtype } from "react-icons/md";
 import {GrUserExpert } from "react-icons/gr";
 import { RiPsychotherapyLine } from "react-icons/ri";
@@ -19,7 +19,16 @@ const ConsultHome1 = () =>{
 
                         <Up>
                             <Bal>
-                                <Acct>Balance</Acct>
+                                <Acct>Balance
+                                    <Icn>
+                                        <AiFillEyeInvisible />
+                                    </Icn>
+
+                                    
+                                    <Icn>
+                                        <AiFillEye />
+                                    </Icn>
+                                </Acct>
 
                                 <Acct1>N300,000.00</Acct1>
                             </Bal>
@@ -49,7 +58,7 @@ const ConsultHome1 = () =>{
                             </Wall>
 
                             <Wall1>
-                                <Acct2>Bank: Eco Bank 
+                                <Acct2>Eco Bank 
                                     <Ico style={{backgroundColor:"#a8ff37"}}>
                                         <AiOutlineDollar />
                                     </Ico>
@@ -63,7 +72,7 @@ const ConsultHome1 = () =>{
                         <Top>
                             <Wall2>
                                 <Blood>
-                                    <Blood1 style={{color:"#a8ff37", fontSize:"16px"}}>Specialist</Blood1>
+                                    <Blood1 style={{}}>Specialist</Blood1>
 
                                     <Ico style={{backgroundColor:"#a8ff37"}}>
                                         <GrUserExpert />
@@ -75,7 +84,7 @@ const ConsultHome1 = () =>{
 
                             <Wall3>
                                 <Blood>
-                                    <Blood1 style={{color:"#a8ff37", fontSize:"16px"}}>Other Expertise</Blood1>
+                                    <Blood1 style={{}}>Other Expertise</Blood1>
 
                                     <Ico style={{backgroundColor:"#a8ff37"}}>
                                         <RiPsychotherapyLine />
@@ -100,7 +109,7 @@ export default ConsultHome1;
 
 // const Body = styled.div``;
 
-// const Body = styled.div``;
+const Icn = styled.div``;
 
 const DownImg = styled.img`
 width: 70%;
@@ -120,10 +129,25 @@ justify-content: space-between;
 const Blood2 = styled.div`
 margin-left: 20px;
 font-weight: 700;
+
+@media screen and (max-width: 768px) {
+    margin-left: 15px;
+}
+
+@media screen and (max-width: 320px) {
+    font-size: 13px;
+    margin-top: 6px;
+}
 `;
 
 const Blood1 = styled.div`
 font-weight: 700;
+color: #a8ff37;
+font-size: 16px;
+
+@media screen and (max-width: 425px) {
+  font-size: 13px;
+}
 `;
 
 const Blood = styled.div`
@@ -134,6 +158,15 @@ width: 90%;
 display: flex;
 justify-content: space-between;
 align-items: center;
+
+@media screen and (max-width: 768px) {
+    margin-left: 15px;
+    margin-right: 10px;
+}
+
+@media screen and (max-width: 375px) {
+    width: 85%;
+}
 `;
 
 const Ico = styled.div`
@@ -146,6 +179,12 @@ font-size: 25px;
 display: flex;
 justify-content: center;
 align-items: center;
+
+@media screen and (max-width: 375px) {
+font-size: 20px;
+width: 30px;
+height: 30px;
+}
 `;
 
 const Acct3 = styled.div`
@@ -154,6 +193,10 @@ margin-left: 15px;
 margin-top: 20px;
 font-weight: 700;
 font-size: 25px;
+
+@media screen and (max-width: 375px) {
+  font-size: 17px;
+}
 `;
 
 const Acct2 = styled.div`
@@ -164,6 +207,11 @@ margin-top: 15px;
 font-weight: 700;
 display: flex;
 justify-content: space-between;
+
+@media screen and (max-width: 375px) {
+  font-size: 13px;
+  margin-right: 10px;
+}
 `;
 
 const Wall3 = styled.div`
@@ -195,6 +243,10 @@ background-color: white;
 border-radius: 10px 0 10px 0;
 display: flex;
 flex-direction: column;
+
+@media screen and (max-width: 375px) {
+  height: 120px;
+}
 `;
 
 const Wall = styled.div`
@@ -204,6 +256,10 @@ background-color: #a8ff37;
 // background-color: cyan;
 // background-color: rgb(0, 33, 37);
 border-radius: 10px 0 10px 0;
+
+@media screen and (max-width: 375px) {
+  height: 120px;
+}
 `;
 
 const Top = styled.div`
@@ -216,6 +272,10 @@ const Right = styled.div`
 width: 58%;
 display: flex;
 flex-direction: column;
+
+@media screen and (max-width: 425px) {
+    width: 90%;
+}
 `;
 
 // const Body = styled.div``;
@@ -241,6 +301,10 @@ const Acct1 = styled.div`
 font-size: 35px;
 font-weight: 700;
 color: rgb(0, 33, 37);
+
+@media screen and (max-width: 375px) {
+    font-size: 30px;
+}
 `;
 
 const Acct = styled.div`
@@ -267,6 +331,11 @@ display: flex;
 flex-direction: column;
 justify-content: space-between;
 // align-items: center;
+
+@media screen and (max-width: 425px) {
+    width: 85%;
+    margin-bottom: 15px;
+}
 `;
 
 const Contain = styled.div`
@@ -274,6 +343,11 @@ width: 95%;
 display: flex;
 justify-content: space-between;
 align-items: center;
+flex-wrap: wrap;
+
+@media screen and (max-width: 425px) {
+    justify-content: center;
+}
 `;
 
 const Body = styled.div`

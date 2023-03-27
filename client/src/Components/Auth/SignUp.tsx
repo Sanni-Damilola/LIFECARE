@@ -74,17 +74,17 @@ const SignUp = () => {
                 placeholder="Full Name"
                 {...register("name")}
               />
-              <p>{errors?.name && errors?.name?.message}</p>
+              <p style={{fontSize:"10px"}}>{errors?.name && errors?.name?.message}</p>
 
               <Input type="text" placeholder="Email" {...register("email")} />
-              <p>{errors?.email && errors?.email?.message}</p>
+              <p style={{fontSize:"10px"}}>{errors?.email && errors?.email?.message}</p>
 
               <Input
                 type="password"
                 placeholder="Password"
                 {...register("password")}
               />
-              <p>{errors?.password && errors?.password?.message}</p>
+              <p style={{fontSize:"10px"}}>{errors?.password && errors?.password?.message}</p>
 
               <Button type="submit">Sign Up</Button>
 
@@ -151,6 +151,11 @@ const Input = styled.input` // <{ props: string }>
   margin-bottom: 20px;
   border-radius: 7px;
   padding-left: 10px;
+
+  p{
+    font-size: 10px;
+  }
+
   @media screen and (max-width: 425px) {
     box-shadow: none;
     border-bottom: 1px solid #6c63ff;

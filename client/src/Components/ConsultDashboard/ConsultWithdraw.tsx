@@ -74,7 +74,7 @@ const ConsultWithdraw = () => {
                         </Button>
                     </Fund>
 
-                    <div style={{fontSize:"18px", fontWeight:"700", marginTop:"20px", marginLeft:"20px"}}>History</div>
+                    <div style={{fontSize:"18px", fontWeight:"700", marginTop:"20px", marginLeft:"20px"}}>Withdrawal History</div>
 
                     <Top>
                         <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>S/N</Names>
@@ -115,6 +115,34 @@ const ConsultWithdraw = () => {
                         <Names>12:30am</Names>
                         <Names>Mar. 10, 2023</Names>
                     </Top>
+                
+                <MobTop 
+                // style={{backgroundColor:"#a8ff37"}}
+                >
+                    <Amount style={{marginBottom:"7px"}}>
+                        <Trans style={{color:"white", padding:"5px", backgroundColor:"black", borderRadius:"5px"}}><span style={{color:"#a8ff37"}}>Amount:</span> 20,000.00</Trans>
+                        <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}>Mar. 10, 2023</Trans>
+                    </Amount>
+
+                    <Amount>
+                        <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}><span style={{}}>Trans ID:</span> 234rg567yhfxx1235</Trans>
+                        <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}>12:30am</Trans>
+                    </Amount>
+                </MobTop>
+                
+                <MobTop 
+                // style={{backgroundColor:"#a8ff37"}}
+                >
+                    <Amount style={{marginBottom:"7px"}}>
+                        <Trans style={{color:"white", padding:"5px", backgroundColor:"black", borderRadius:"5px"}}><span style={{color:"#a8ff37"}}>Amount:</span> 20,000.00</Trans>
+                        <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}>Mar. 10, 2023</Trans>
+                    </Amount>
+
+                    <Amount>
+                        <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}><span style={{}}>Trans ID:</span> 234rg567yhfxx1235</Trans>
+                        <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}>12:30am</Trans>
+                    </Amount>
+                </MobTop>
 
 
                 </Contain>
@@ -141,6 +169,43 @@ export default ConsultWithdraw;
 
 // const Fund = styled.div``;
 
+const Trans = styled.h5`
+font-size: 13px;
+font-weight: 700;
+
+@media screen and (max-width: 320px) {
+    font-size: 12px;
+}
+`;
+
+const Amount = styled.div`
+width: 90%;
+display: flex;
+height: 19px;
+justify-content: space-between;
+align-items: center;
+margin-left: 20px;
+
+@media screen and (max-width: 320px) {
+    margin-left: 15px;
+}
+`;
+
+const MobTop = styled.div`
+display: none;
+
+@media screen and (max-width: 425px) {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    // border-radius: 12px;
+    // border-bottom: 2px solid #a8ff37;
+    border-bottom: 1px solid rgba(123, 126, 126, 0.992);
+    // border-top: 1px solid #000000;
+    // margin-top: 20px;
+    padding-bottom: 10px;
+}
+`;
 
 const Select = styled.select`
 width: 100%;
@@ -208,6 +273,10 @@ z-index: 100;
 display: flex;
 flex-direction: column;
 justify-content: space-between;
+
+@media screen and (max-width: 768px) {
+    width: 260px;
+}
 `;
 
 const Black = styled.div`
@@ -230,6 +299,10 @@ justify-content: space-between;
 background-color: #00000095;
 z-index: 300;
 transition: all 350ms ease-in-out;
+
+@media screen and (max-width: 768px) {
+    width: 100%;
+}
 `;
 
 const Pay = styled.button`
@@ -275,11 +348,18 @@ width: 12%;
 
 const Top = styled.div`
 width: 95%;
-margin-top: 15px;
+margin-top: 10px;
 margin-left: 20px;
 display: flex;
 justify-content: space-around;
 align-items: flex-start;
+background-color: #eaeaea;
+padding-top: 10px;
+padding-bottom: 10px;
+ 
+@media screen and (max-width: 425px) {
+    display: none;
+}
 `;
 
 const Contain = styled.div`
