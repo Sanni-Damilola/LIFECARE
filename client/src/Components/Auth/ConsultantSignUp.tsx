@@ -13,6 +13,7 @@ import { UseAppDispach } from "../Global/Store";
 import { User } from "../Global/ReduxState";
 import { signup } from "../Api/Api";
 import { Link } from "react-router-dom";
+import { AnyMxRecord } from 'dns';
 
 const ConsultantSignUp = () => {
 const dispatch = UseAppDispach();
@@ -31,7 +32,7 @@ const dispatch = UseAppDispach();
     mutationKey: ["lifecareUser"],
     mutationFn: signup,
 
-    onSuccess: (myData) => {
+    onSuccess: (myData:any) => {
       dispatch(User(myData.data));
     },
   });

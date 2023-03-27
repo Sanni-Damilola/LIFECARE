@@ -5,4 +5,5 @@ export interface UserData {
   email: string;
   password: string;
   _id: string;
+  accountNumber: number;
 } // setting the Object Type for User
