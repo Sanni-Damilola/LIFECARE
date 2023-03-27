@@ -13,6 +13,7 @@ import { UseAppDispach } from "../Global/Store";
 import { User } from "../Global/ReduxState";
 import { signup } from "../Api/Api";
 import { Link } from "react-router-dom";
+import pic from "../Images/sign-up.svg";
 
 const HospitalSignUp = () => {
   const dispatch = UseAppDispach();
@@ -100,7 +101,7 @@ const HospitalSignUp = () => {
           </Left>
 
           <Right>
-            <RightImg src="../Images/sign-up.svg" />
+            <RightImg src={pic} />
           </Right>
         </Hold>
       </Body>
