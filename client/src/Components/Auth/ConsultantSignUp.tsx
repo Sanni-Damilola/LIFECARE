@@ -103,3 +103,120 @@ const dispatch = UseAppDispach();
 }
 
 export default ConsultantSignUp
+
+const RightImg = styled.img`
+  width: 500px;
+`;
+
+const Right = styled.div`
+  width: 50%;
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`;
+
+// const Body = styled.div``;
+
+const Already = styled.div`
+  font-size: 13px;
+  cursor: pointer;
+  color: #6c63ff;
+  margin-top: 15px;
+  text-align: center;
+  @media screen and (max-width: 425px) {
+    font-size: 10px;
+  }
+`;
+
+const Button = styled.button`
+  width: 105%;
+  height: 40px;
+  background: #6c63ff;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 350ms;
+  :hover {
+    background-color: #039ee6c7;
+  }
+`;
+
+const Input = styled.input` // <{ props: string }>
+  width: 100%;
+  height: 40px;
+  border: none;
+  box-shadow: 0 0 2px #6c63ff;
+  margin-bottom: 20px;
+  border-radius: 7px;
+  padding-left: 10px;
+  @media screen and (max-width: 425px) {
+    box-shadow: none;
+    border-bottom: 1px solid #6c63ff;
+  }
+  @media screen and (max-width: 768px) {
+    height: 35px;
+  }
+`;
+
+const Form = styled.form`
+  width: 270px;
+  height: 400px;
+  box-shadow: 0 0 3px #6c63ff;
+  border-radius: 10px 0 10px 0;
+  padding: 30px;
+  padding-right: 40px;
+  @media screen and (max-width: 425px) {
+    width: 310px;
+    padding: 20px;
+    padding-right: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: none;
+  }
+  @media screen and (max-width: 320px) {
+    width: 310px;
+    padding: 10px;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  @media screen and (max-width: 768px) {
+    height: 400px;
+  }
+`;
+
+const Left = styled.div`
+  width: 40%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media screen and (max-width: 768px) {
+    width: 85%;
+  }
+  @media screen and (max-width: 425px) {
+    width: 95%;
+  }
+`;
+
+const Hold = styled.div`
+  width: 80%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @media screen and (max-width: 768px) {
+    justify-content: center;
+  }
+`;
+
+const Body = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
