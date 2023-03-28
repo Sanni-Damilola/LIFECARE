@@ -1,7 +1,7 @@
 /** @format */
 
 import mongoose from "mongoose";
-import { IWallet } from "../interface/interface";
+import { IWallet } from "../Interface/interface";
 
 // creating Wallet Model
 //  👇👇

@@ -4,9 +4,9 @@ import { Request, Response, NextFunction } from "express";
 import appointment from "../Model/appointment";
 import specialistModel from "../Model/specialistModel";
 import userModel from "../Model/userModel";
-import { AppError, HttpCode } from "../src/error/errorSpellOut";
-import { asyncHandler } from "../src/error/asyncHander";
+import { asyncHandler } from "../error/asyncHander";
 import mongoose from "mongoose";
+import { AppError, HttpCode } from "../error/errorSpellOut";
 
 export const bookAppointment = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -25,10 +25,10 @@ export const bookAppointment = asyncHandler(
       specialistEmail: getSpecialist?.email,
     });
 
-    if (!getUser && !getSpecialist) {
+    if (!getUser && !getSpecialist ) {
       next(
         new AppError({
-          message: "Unser Not Found",
+          message: "User Not Found",
           httpCode: HttpCode.BAD_REQUEST,
         }),
       );

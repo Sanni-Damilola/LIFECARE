@@ -19,6 +19,7 @@ export interface IHistory {
   transactionRefrence: string;
   transactionType: string;
   time: string;
+  amount: number;
   date: string;
 } // setting the Object Type for History
 
@@ -34,14 +35,24 @@ export interface ISpecialist {
   email: string;
   password: string;
   profession: string;
-  lience: boolean;
+  lience: string;
   accountNumber: number;
   history: {}[];
   wallet: {}[];
-  appointment: {}[];  
+  appointment: {}[];
 } // setting the Object Type for Specialist
 
-export interface bookAppointment {
+export interface IHospital {
+  name: string;
+  email: string;
+
+  password: string;
+  accountNumber: number;
+  history: {}[];
+  wallet: {}[];
+} // setting the Object Type for Specialist
+
+export interface Iappointment {
   email: string;
   date: string;
   confirm: boolean;
