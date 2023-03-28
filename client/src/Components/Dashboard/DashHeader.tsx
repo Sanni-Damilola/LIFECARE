@@ -4,15 +4,20 @@ import pics from "../Assets/Medical-logo.png";
 import { useAppSelector } from "../Global/Store";
 import { FiMenu } from "react-icons/fi";
 import { AiOutlineMail } from "react-icons/ai";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FaHome, FaCloudUploadAlt }  from "react-icons/fa";
 import { MdPointOfSale  } from "react-icons/md";
 import { AiFillMessage, AiOutlineLogout, AiOutlineFund } from "react-icons/ai";
 import { GoPerson } from "react-icons/go";
 import { FiUsers } from "react-icons/fi";
 import { MdHealthAndSafety } from "react-icons/md";
+import { UseAppDispach } from "../Global/Store";
+import { logout } from "../Global/ReduxState";
 
 const DashHeader = () => {
+  const dispatch = UseAppDispach();
+
+  const navigate = useNavigate();
 
   const [show, setShow] = useState(false);
 
@@ -103,7 +108,10 @@ color: isActive ? "#a8ff37" : "white",
 </Top>
 
 <Bottom>
-<Home>
+<Home
+                onClick={() => {
+                  dispatch(logout());
+                  navigate("/");}}>
 <Icon>
 <AiOutlineLogout />
 </Icon>

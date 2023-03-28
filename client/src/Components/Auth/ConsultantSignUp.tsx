@@ -8,10 +8,10 @@ import { useNavigate } from "react-router-dom";
 import accidentSignup from "../Assets/accidentSignup.png";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
-import { UserData } from "../interface/interface";
+import { consultData } from "../interface/interface";
 import { UseAppDispach } from "../Global/Store";
-import { User } from "../Global/ReduxState";
-import { signup } from "../Api/Api";
+import { Consultant } from "../Global/ReduxState";
+import { createSpecialist, signup } from "../Api/Api";
 import { Link } from "react-router-dom";
 
 import { AnyMxRecord } from 'dns';
@@ -22,22 +22,26 @@ import pic from "../Images/sign-up.svg";
 const ConsultantSignUp = () => {
   const dispatch = UseAppDispach();
   const navigate = useNavigate();
+  
   const schema = yup
     .object({
       name: yup.string().required(),
       email: yup.string().required(),
       password: yup.string().min(9).required(),
+      profession: yup.string().required(),
+      lience: yup.string().required(),
     })
     .required();
 
   type formData = yup.InferType<typeof schema>;
 
   const posting = useMutation({
-    mutationKey: ["lifecareUser"],
-    mutationFn: signup,
+    mutationKey: ["lifecareconsult"],
+    mutationFn: createSpecialist,
 
-    onSuccess: (myData:any) => {
-      dispatch(User(myData.data));
+    onSuccess: (Data:any) => {
+      dispatch(Consultant(Data.data));
+      // console.log(Data.data)
     },
   });
 
@@ -53,7 +57,7 @@ const ConsultantSignUp = () => {
   const Submit = handleSubmit(async (data) => {
     posting.mutate(data);
     reset();
-    navigate("/dashboardhome");
+    navigate("/consulthome");
   });
 
   return (
@@ -84,11 +88,33 @@ const ConsultantSignUp = () => {
               <p>{errors?.email && errors?.email?.message}</p>
 
               <Input
+                type="text"
+                placeholder="Specialty"
+                {...register("profession")}
+              />
+              <p>{errors?.profession && errors?.profession?.message}</p>
+
+              <Input
+                type="text"
+                placeholder="License Num"
+                {...register("lience")}
+              />
+              <p>{errors?.lience && errors?.lience?.message}</p>
+
+              {/* <Input
+                type="number"
+                placeholder="Phone Number"
+                {...register("phoneNumber")}
+              />
+              <p>{errors?.phoneNumber && errors?.phoneNumber?.message}</p> */}
+
+              <Input
                 type="password"
                 placeholder="Password"
                 {...register("password")}
               />
               <p>{errors?.password && errors?.password?.message}</p>
+
 
               <Button type="submit">Sign Up</Button>
 
@@ -153,7 +179,7 @@ const Input = styled.input`
   height: 40px;
   border: none;
   box-shadow: 0 0 2px #a7fd37;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   border-radius: 7px;
   padding-left: 10px;
   @media screen and (max-width: 425px) {
@@ -167,7 +193,7 @@ const Input = styled.input`
 
 const Form = styled.form`
   width: 270px;
-  height: 400px;
+  height: 500px;
   box-shadow: 0 0 3px #567e22;
   border-radius: 10px 0 10px 0;
   padding: 30px;

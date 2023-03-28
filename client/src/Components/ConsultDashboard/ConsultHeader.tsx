@@ -3,20 +3,27 @@ import styled from "styled-components";
 import pics from "../Assets/Medical-logo.png";
 import { AiOutlineMail } from "react-icons/ai";
 import { FiMenu } from "react-icons/fi";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FaHome, FaCloudUploadAlt }  from "react-icons/fa";
 import { MdPointOfSale  } from "react-icons/md";
 import { AiFillMessage, AiOutlineLogout, AiOutlineFund } from "react-icons/ai";
 import { GoPerson } from "react-icons/go";
 import { FiUsers } from "react-icons/fi";
+import { UseAppDispach, useAppSelector } from "../Global/Store";
+import { logout } from "../Global/ReduxState";
 
 const ConsultHeader = () => {
+  const dispatch = UseAppDispach();
+
+  const navigate = useNavigate();
 
   const [show, setShow] = useState(false);
 
   const menu = () => {
     setShow(!show)
   }
+
+  const getConsult = useAppSelector((state) => state?.consultUser)
 
   return (
     <div>
@@ -90,7 +97,11 @@ const ConsultHeader = () => {
               </Top>
 
               <Bottom>
-                  <Home>
+                  <Home
+                onClick={() => {
+                  dispatch(logout());
+                  navigate("/");
+                }}>
                       <Icon>
                           <AiOutlineLogout />
                       </Icon>
@@ -113,9 +124,17 @@ const ConsultHeader = () => {
             <AiOutlineMail />
           </Icon>
 
-          <UserLetter>F</UserLetter>
+          <UserLetter>
+              {
+                getConsult?.name.charAt(0).toUpperCase()
+              }
+          </UserLetter>
 
-          <Username>Favour Yusuf</Username>
+          <Username>
+              {
+                getConsult?.name
+              }
+          </Username>
           
           <Iconn style={{color:"#000000"}} onClick={menu}>
             <FiMenu />

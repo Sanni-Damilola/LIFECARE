@@ -4,9 +4,24 @@ import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
+// import { useAppSelector } from "../Global/Store";
+import { useQuery } from "@tanstack/react-query";
+import { bookAppointment } from "../Api/Api";
+import { UseAppDispach } from "../Global/Store";
 
 const DashAppointment = () => {
+
   const [quick, setQuick] = React.useState(false);
+
+  // const getUserAppoint = useAppSelector((state) => state?.currentUser);
+
+  // const getSpecialistAppoint = useAppSelector((state) => state?.consultUser);
+
+  const {data} = useQuery({
+    queryKey: ["appoint"],
+    queryFn: bookAppointment,
+  })
+  console.log(data)
 
   const toggle2 = () => {
     setQuick(!quick);

@@ -1,9 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { useAppSelector } from "../../Global/Store";
+import { useQuery } from "@tanstack/react-query";
+import { GetOneUser } from "../../Api/Api";
 
 
 const DashHomeTrans = () => {
+  const getUser = useAppSelector((state: any) => state?.currentUser);
+
+  const {data} = useQuery({
+    queryKey: ["post"],
+    queryFn: () => GetOneUser(getUser?._id),
+  })
+  console.log(data)
+
 
     return(
         <>
@@ -15,41 +26,102 @@ const DashHomeTrans = () => {
                     <div style={{fontSize:"18px", fontWeight:"700", marginTop:"20px", marginLeft:"20px"}}>History</div>
 
                     <Top>
-                        <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000", width:"5%"}}>S/N</Names>
+                        {/* <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000", width:"5%"}}>S/N</Names> */}
                         <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Amount</Names>
                         <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Trans ID</Names>
-                        {/* <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Email</Names>
-                        <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Scenario</Names> */}
+                        <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Trans Type</Names>
                         <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Time</Names>
                         <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Date</Names>
                     </Top>
 
                     <Top>
-                        <Names style={{width:"3%"}}>1</Names>
-                        <Names>20,000.00</Names>
-                        <Names>234rg567yhfxx1235</Names>
-                        <Names>12:30am</Names>
-                        <Names>Mar. 10, 2023</Names>
+                        <Names>
+                          {
+                            // data?.data?.history[0].
+                          }
+                          20,000
+                        </Names>
+                        <Names>
+                          {
+                            data?.data?.history[0].transactionRefrence
+                          }
+                        </Names>
+                        <Names>
+                          {
+                            data?.data?.history[0].transactionType
+                          }
+                        </Names>
+                        {/* <Names>Emergency</Names> */}
+                        <Names>
+                          {
+                            data?.data?.history[0].time
+                          }
+                        </Names>
+                        <Names>
+                          {
+                            data?.data?.history[0].date
+                          }
+                        </Names>
                     </Top>
 
                     <Top>
-                        <Names style={{width:"3%"}}>2</Names>
-                        <Names>20,000.00</Names>
-                        <Names>234rg567yhfxx1235</Names>
-                        {/* <Names>jamesdayo@test.com</Names>
-                        <Names>Emergency</Names> */}
-                        <Names>12:30am</Names>
-                        <Names>Mar. 10, 2023</Names>
+                        <Names>
+                          {
+                            // data?.data?.history[0].
+                          }
+                          20,000
+                        </Names>
+                        <Names>
+                          {
+                            data?.data?.history[1].transactionRefrence
+                          }
+                        </Names>
+                        <Names>
+                          {
+                            data?.data?.history[1].transactionType
+                          }
+                        </Names>
+                        {/* <Names>Emergency</Names> */}
+                        <Names>
+                          {
+                            data?.data?.history[1].time
+                          }
+                        </Names>
+                        <Names>
+                          {
+                            data?.data?.history[1].date
+                          }
+                        </Names>
                     </Top>
 
                     <Top>
-                        <Names style={{width:"3%"}}>3</Names>
-                        <Names>20,000.00</Names>
-                        <Names>234rg567yhfxx1235</Names>
-                        {/* <Names>jamesdayo@test.com</Names>
-                        <Names>Emergency</Names> */}
-                        <Names>12:30am</Names>
-                        <Names>Mar. 10, 2023</Names>
+                        <Names>
+                          {
+                            // data?.data?.history[0].
+                          }
+                          20,000
+                        </Names>
+                        <Names>
+                          {
+                            data?.data?.history[2].transactionRefrence
+                          }
+                        </Names>
+                        <Names>
+                          {
+                            data?.data?.history[2].transactionType
+                          }
+                        </Names>
+                        {/* <Names>Emergency</Names> */}
+                        <Names>
+                          {
+                            data?.data?.history[2].time
+                          }
+                        </Names>
+                        <Names>
+                          {
+                            data?.data?.history[2].date
+                          }
+                        </Names>
                     </Top>
 
                     <MobTop 
