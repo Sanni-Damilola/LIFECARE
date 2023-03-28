@@ -28,6 +28,8 @@ const Signin = () => {
 
     onSuccess: (myData:any) => {
       dispatch(User(myData.data));
+      // console.log("here",myData.data);
+      
     },
   });
 
@@ -53,7 +55,7 @@ const Signin = () => {
 
         <Hold>
           <Right>
-            <RightImg src="/images/accidentSignin.svg" />
+            <RightImg src="/images/health.svg" />
           </Right>
 
           <Left>
@@ -61,7 +63,7 @@ const Signin = () => {
               <div
                 style={{
                   fontSize: "20px",
-                  color: "#039EE6",
+                  color: "#518f00",
                   fontWeight: "700",
                   marginBottom: "20px",
                   textAlign: "center",
@@ -92,6 +94,7 @@ export default Signin;
 
 const RightImg = styled.img`
   width: 500px;
+  color: #518f00;
 `;
 
 const Right = styled.div`
@@ -115,14 +118,14 @@ const Already = styled.div`
 const Button = styled.button`
   width: 105%;
   height: 40px;
-  background: #6c63ff;
+  background: #518f00;
   color: white;
   border: none;
   border-radius: 7px;
   cursor: pointer;
   transition: all 350ms;
   :hover {
-    background-color: #039ee6c7;
+    background-color: #6abc00;
   }
 `;
 
@@ -146,7 +149,7 @@ const Input = styled.input`
 const Form = styled.form`
   width: 270px;
   height: 300px;
-  box-shadow: 0 0 3px #6c63ff;
+  box-shadow: 0 0 3px #518f00;
   border-radius: 10px 0 10px 0;
   padding: 30px;
   padding-right: 40px;

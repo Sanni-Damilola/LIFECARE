@@ -18,6 +18,7 @@ import pic from "../Images/sign-up.svg";
 const SignUp = () => {
   const dispatch = UseAppDispach();
   const navigate = useNavigate();
+  
   const schema = yup
     .object({
       name: yup.string().required(),
@@ -36,7 +37,7 @@ const SignUp = () => {
 
     onSuccess: (myData: any) => {
       dispatch(User(myData.data));
-      // console.log(myData.data)
+      console.log(myData.data)
     },
   });
 

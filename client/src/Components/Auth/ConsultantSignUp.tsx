@@ -41,7 +41,7 @@ const ConsultantSignUp = () => {
 
     onSuccess: (Data:any) => {
       dispatch(Consultant(Data.data));
-      // console.log(Data.data)
+      console.log(Data.data)
     },
   });
 

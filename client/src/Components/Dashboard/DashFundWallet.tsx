@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const DashFundWallet = () => {
@@ -14,7 +15,11 @@ const DashFundWallet = () => {
                 <Here type="" placeholder='Tap here and enter .. (e.g 5000)'/>
             </Tap>
 
-            <Proceed>Quick Save</Proceed>
+            <NavLink
+              to=""
+              style={{textDecoration:"none", width:"85%"}}>
+                <Proceed>Quick Save</Proceed>
+              </NavLink>
 
         </Side>
 
@@ -105,8 +110,8 @@ padding: 30px;
 
 const Proceed = styled.button`
 cursor: pointer;
-width: 85%;
-height: 40px;
+width: 100%;
+height: 45px;
 // color: white;
 color: #000000;
 background-color: #a8ff37;

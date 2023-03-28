@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { useAppSelector } from "../../Global/Store";
 import { useQuery } from "@tanstack/react-query";
 import { GetOneUser } from "../../Api/Api";
+import { TbCurrencyNaira } from "react-icons/tb"
 
 
 const DashHomeTrans = () => {
@@ -34,109 +35,46 @@ const DashHomeTrans = () => {
                         <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Date</Names>
                     </Top>
 
-                    <Top>
-                        <Names>
+                    {
+                      data?.data.history.map((el: any) => (
+                        <Top>
+                        <Names><TbCurrencyNaira />
                           {
-                            // data?.data?.history[0].
+                            el.amount
                           }
-                          20,000
+                          
                         </Names>
                         <Names>
                           {
-                            data?.data?.history[0].transactionRefrence
+                            // data?.data?.history[0].transactionRefrence
+                            el.transactionRefrence
+
                           }
                         </Names>
                         <Names>
                           {
-                            data?.data?.history[0].transactionType
+                            // data?.data?.history[0].transactionType
+                            el.transactionType
                           }
                         </Names>
                         {/* <Names>Emergency</Names> */}
                         <Names>
                           {
-                            data?.data?.history[0].time
+                            el.time
+                            // data?.data?.history[0].time
                           }
                         </Names>
                         <Names>
                           {
-                            data?.data?.history[0].date
+                            el.date
+                            // data?.data?.history[0].date
                           }
                         </Names>
                     </Top>
+                      ))
+                    }
 
-                    <Top>
-                        <Names>
-                          {
-                            // data?.data?.history[0].
-                          }
-                          20,000
-                        </Names>
-                        <Names>
-                          {
-                            data?.data?.history[1].transactionRefrence
-                          }
-                        </Names>
-                        <Names>
-                          {
-                            data?.data?.history[1].transactionType
-                          }
-                        </Names>
-                        {/* <Names>Emergency</Names> */}
-                        <Names>
-                          {
-                            data?.data?.history[1].time
-                          }
-                        </Names>
-                        <Names>
-                          {
-                            data?.data?.history[1].date
-                          }
-                        </Names>
-                    </Top>
 
-                    <Top>
-                        <Names>
-                          {
-                            // data?.data?.history[0].
-                          }
-                          20,000
-                        </Names>
-                        <Names>
-                          {
-                            data?.data?.history[2].transactionRefrence
-                          }
-                        </Names>
-                        <Names>
-                          {
-                            data?.data?.history[2].transactionType
-                          }
-                        </Names>
-                        {/* <Names>Emergency</Names> */}
-                        <Names>
-                          {
-                            data?.data?.history[2].time
-                          }
-                        </Names>
-                        <Names>
-                          {
-                            data?.data?.history[2].date
-                          }
-                        </Names>
-                    </Top>
-
-                    <MobTop 
-                    // style={{backgroundColor:"#a8ff37"}}
-                    >
-                        <Amount>
-                            <Trans>N20,000</Trans>
-                            <Trans>shdg212jc89u8</Trans>
-                        </Amount>
-
-                        <Amount>
-                            <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}>01:13pm</Trans>
-                            <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}>Mar. 03, 2023</Trans>
-                        </Amount>
-                    </MobTop>
 
                     <MobTop 
                     // style={{backgroundColor:"#a8ff37"}}

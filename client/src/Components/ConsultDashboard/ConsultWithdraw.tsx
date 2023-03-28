@@ -2,9 +2,69 @@ import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
+import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
+import { UserData } from "../interface/interface";
+import { UseAppDispach, useAppSelector } from "../Global/Store";
+import { payTobank } from "../Api/Api";
 
+
+interface iCon {
+    amount: number
+}
 
 const ConsultWithdraw = () => {
+    const consult = useAppSelector((state) => state?.consultUser);
+
+    const dispatch = UseAppDispach();
+
+    const schema = yup
+      .object({
+        amount: yup.number().required(),
+      })
+      .required();
+  
+    type formData = yup.InferType<typeof schema>;
+  
+    const posting = useMutation({
+      mutationKey: ["consultwithdraw"],
+      mutationFn: (data: iCon) => payTobank(data, consult?._id),
+  
+      onSuccess: (myData: any) => {
+        // dispatch(Consultant(myData.data));
+        // console.log(myData.data);
+      },
+    });
+  
+    const {
+      handleSubmit,
+      formState: { errors },
+      reset,
+      register,
+    } = useForm<formData>({
+      resolver: yupResolver(schema),
+    });
+  
+    const withdraw = handleSubmit(async (data) => {
+      posting.mutate(data);
+      console.log(data);
+        Swal.fire({
+          title: "successful",
+          icon: "success"
+      })
+      .catch((err) => {
+          Swal.fire({
+              title: "an error occured",
+              icon: "error",
+              text: `${err.response?.data?.message}`,
+          })
+      })
+      reset();
+    });
 
     const [quick, setQuick] = React.useState(false)
 
@@ -25,7 +85,7 @@ const ConsultWithdraw = () => {
 
     <div></div>
 
-    <Quickk>
+    <Quickk onSubmit={withdraw}>
 
         <div style={{zIndex:"500", fontSize:"25px", position:"absolute", top:"20px", right:"20px", cursor:"pointer"}} onClick={toggle2}>
 
@@ -46,12 +106,14 @@ const ConsultWithdraw = () => {
             <Tap>
                 <Label>Enter Amount</Label>
 
-                <Here type="" placeholder='Tap here and enter .. (e.g 5000)'/>
+                <Here type=""
+                    {...register("amount")}
+                 placeholder='Tap here and enter .. (e.g 5000)'/>
             </Tap>
 
         </Topp>
 
-        <Proceed>Withdraw Now</Proceed>
+        <Proceed type="submit">Withdraw Now</Proceed>
 
     </Quickk>
 
@@ -263,7 +325,7 @@ margin-top: 60px;
 width: 100%;
 `;
 
-const Quickk = styled.div`
+const Quickk = styled.form`
 width: 300px;
 height: 100%;
 padding-left: 20px;

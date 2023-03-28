@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
@@ -14,22 +14,25 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
 import { GetOneUser } from "../Api/Api";
+import { TbCurrencyNaira } from "react-icons/tb"
 
 
 const lifeUrl = "https://codecrusaderslifecare.onrender.com/api";
 
 
 const DashTransPage = () => {
-    // const getUser = useAppSelector((state: any) => state?.currentUser);
 
+    const [showWallet, setShowWallet] = useState(false);
 
-    // const dispatch = UseAppDispach();
-    const user = useAppSelector((state) => state.currentUser);
-    // const navigate = useNavigate();
+    const walletShow = () => {
+        setShowWallet(!showWallet)
+    }
+
+    const userOne = useAppSelector((state) => state?.currentUser);
   
     const {data} = useQuery({
         queryKey: ["post"],
-        queryFn: () => GetOneUser(user?._id),
+        queryFn: () => GetOneUser(userOne?._id),
       })
       console.log(data)
 
@@ -50,16 +53,6 @@ const DashTransPage = () => {
     } = useForm<formData>({
         resolver: yupResolver(schema),
     });
-  
-    // const posting = useMutation({
-    //   mutationKey: ["lifecareUser"],
-    //   mutationFn: () => sendToSpecialist(user?._id),
-  
-    //   onSuccess: (myData: any) => {
-    //     useAppSelector(User(myData.data));
-    //     // console.log(myData.data)
-    //   },
-    // });
 
     const [quick, setQuick] = React.useState(false)
 
@@ -70,7 +63,7 @@ const DashTransPage = () => {
     const onSubmit = handleSubmit(async (data) => {
         await axios
             // .patch(`${lifeUrl}/sendtospecialist/${user?._id}/${user?._id}`, data)
-            .patch(`https://codecrusaderslifecare.onrender.com/api/sendtospecialist/642218002f7833ba305a05bb/642218002f7833ba305a05bb`, data)
+            .patch(`${lifeUrl}/sendtospecialist/${userOne?._id}/${userOne?._id}`, data)
             .then((res) => {
                     Swal.fire({
                     title: "successful",
@@ -85,6 +78,28 @@ const DashTransPage = () => {
                     text: `${err.response?.data?.message}`,
                 })
             })
+            reset();
+    })
+
+    const sendToFriend = handleSubmit(async (data) => {
+        await axios
+            // .patch(`${lifeUrl}/sendtospecialist/${user?._id}`, data)
+            .patch(`${lifeUrl}/api/transfer/${userOne?._id}`, data)
+            .then((res) => {
+                    Swal.fire({
+                    title: "successful",
+                    icon: "success"
+                });
+                // console.log(res.data)
+            })
+            .catch((err) => {
+                Swal.fire({
+                    title: "an error occured",
+                    icon: "error",
+                    text: `${err.response?.data?.message}`,
+                })
+            })
+            reset();
     })
 
 
@@ -155,8 +170,29 @@ const DashTransPage = () => {
                             <Pay onClick={toggle2}>Pay Hospital</Pay>
                             <Pay style={{marginLeft
                             :"15px", backgroundColor:"#000000", color:"white"}} onClick={toggle2}>Pay Consultant</Pay>
+                            <Pay style={{marginLeft
+                            :"15px"}} onClick={walletShow}>Send To Friend</Pay>
                         </Button>
                     </Fund>
+
+                    {
+                        showWallet ? 
+                        <Fund>
+                        <div></div>
+
+                        <Button>
+                            <Pay2 type="text"   
+                            {...register("accountNumber")}placeholder="Account Number" />
+
+                            <Pay2  type="number"   
+                            {...register("amount")}  
+                            placeholder="Amount" />
+                            <PayBut onClick={sendToFriend}>Send</PayBut>
+                        </Button>
+                    </Fund>
+                    :
+                    null
+                    }
 
                     <div style={{fontSize:"18px", fontWeight:"700", marginTop:"20px", marginLeft:"20px"}}>History</div>
 
@@ -174,7 +210,7 @@ const DashTransPage = () => {
                     data?.data?.history?.map((el: any) => (
                     <Top key={el._id} >
                     {/* <Names style={{width:"3%"}}>1</Names> */}
-                    <Names>N
+                    <Names><TbCurrencyNaira />
                         {/* {
                         data?.data?.history[0].
                         }  */}
@@ -207,21 +243,47 @@ const DashTransPage = () => {
                     ))
                     }
 
-                    <MobTop 
+                    
+
+{
+                    data?.data?.history?.map((el: any) => (
+
+                    <MobTop key={el._id} 
                     // style={{backgroundColor:"#a8ff37"}}
                     >
                         <Amount>
-                            <Trans>N20,000</Trans>
-                            <Trans>shdg212jc89u8</Trans>
+                            <Trans><TbCurrencyNaira />
+                                {/* {
+                                data?.data?.history[0].
+                                }  */}
+                                20,000
+                            </Trans>
+                            <Trans>
+                                {
+                                el.transactionRefrence
+                                }
+                            </Trans>
                         </Amount>
 
                         <Amount>
-                            <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}>01:13pm</Trans>
-                            <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}>Mar. 03, 2023</Trans>
+                            <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}>
+                                {
+                                el.transactionType
+                                }
+                            </Trans>
+                            <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}>
+                                {
+                                el.date
+                                }
+                            </Trans>
                         </Amount>
                     </MobTop>
+                    ))
+                    }
 
-                    <MobTop 
+                    
+
+                    {/* <MobTop 
                     // style={{backgroundColor:"#a8ff37"}}
                     >
                         <Amount>
@@ -233,7 +295,7 @@ const DashTransPage = () => {
                             <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}>01:13pm</Trans>
                             <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}>Mar. 02, 2023</Trans>
                         </Amount>
-                    </MobTop>
+                    </MobTop> */}
 
 
                 </Contain>
@@ -256,9 +318,22 @@ export default DashTransPage;
 
 // const Fund = styled.div``;
 
-// const Fund = styled.div``;
+const PayBut = styled.button`
+height: 40px;
+width: 100px;
+border-radius: 5px;
+border: none;
+background-color: #000000;
+color: white
+`;
 
-// const Fund = styled.div``;
+const Pay2 = styled.input`
+height: 40px;
+width: 160px;
+border-radius: 8px;
+margin-right: 7px;
+padding-left: 5px;
+`;
 
 const Trans = styled.h5`
 font-size: 13px;

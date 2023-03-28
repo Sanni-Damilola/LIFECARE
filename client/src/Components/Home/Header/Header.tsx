@@ -24,11 +24,8 @@ const Header = () => {
               <RiHomeSmileFill />
               <span>Home</span>
             </Navs>
-            <Navs to="/pricing">
-              <IoMdPricetags />
-              <span>Book a session</span>
-            </Navs>
-            <Navs to="/contact">
+            
+            <Navs to="/footer">
               <IoMdContact />
               <span>Contact us</span>
             </Navs>
@@ -54,12 +51,11 @@ const Header = () => {
             <DropDown>
               <Holder>
                 <SideNavs to="/">Home</SideNavs>
-                <SideNavs to="/services">Book a Session</SideNavs>
                 <SideNavs to="/about">About</SideNavs>
-                <SideNavs to="/contacts">Contact us</SideNavs>
+                <SideNavs to="footer">Contact us</SideNavs>
                 <SideNavs to="/donateblood">Donate Blood</SideNavs>
-                <SideNavs to="/signup">Sign Up</SideNavs>
-                <SideNavs to="/signIn">Sign In</SideNavs>
+                <SideNavs to="/signuser">Sign Up</SideNavs>
+                <SideNavs to="/signin">Sign In</SideNavs>
               </Holder>
             </DropDown>
           ) : null}

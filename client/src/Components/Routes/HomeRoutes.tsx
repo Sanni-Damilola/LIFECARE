@@ -6,6 +6,7 @@ import HospitalSignUp from "../Auth/HospitalSignUp";
 import Signin from "../Auth/Signin";
 import SignUp from "../Auth/SignUp";
 import ComingSoon from "../BloodDonation/ComingSoon";
+import Footer from "../Home/Footer/Folder";
 import LandingPage from "../Home/LandingPage";
 
 const HomeRoutes = () => {
@@ -44,6 +45,7 @@ const HomeRoutes = () => {
       path: "signhospital",
       element: <HospitalSignUp />,
     },
+    
   ]);
   return element;
 };
