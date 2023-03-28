@@ -47,9 +47,11 @@ const HospitalSignUp = () => {
   });
 
   const Submit = handleSubmit(async (data) => {
-    posting.mutate(data);
-    reset();
-    navigate("/dashboardhome");
+    // posting.mutate(data);
+
+    // reset();
+    // navigate("/dashboardhome");
+    console.log(data);
   });
 
   return (
