@@ -11,17 +11,7 @@ import { useParams } from "react-router-dom";
 
 
 const DashHome1 = () => {
-  const getUser = useAppSelector((state) => state?.currentUser);
-    // const fetchUser = useQuery({
-    //   queryKey: ["user"],
-    //   queryFn: () => GetOneUser(getUser?._id),
-    // });
-
-    // console.log(fetchUser);
-    // console.log(getUser)
-
-    const {id } = useParams();
-    // console.log("jguik", getUser?._id)
+  const getUser = useAppSelector((state: any) => state?.currentUser);
 
     const {data} = useQuery({
       queryKey: ["post"],
@@ -69,9 +59,9 @@ const DashHome1 = () => {
                       see ? (
 
                         <Acct1>N 
-                        {
-                          data?.data?.wallet[0]?.balance
-                        }.00
+                          {
+                            data?.data?.wallet[0]?.balance
+                          }
                         </Acct1>)
 
                          : 
@@ -168,7 +158,11 @@ const DashHome1 = () => {
                   </Ico>
                 </Blood>
 
-                <Blood2>AA+</Blood2>
+                <Blood2>
+                  {
+                    data?.data?.bloodGroup.toUpperCase()
+                  }
+                  </Blood2>
               </Wall2>
 
               <Wall3>
@@ -180,7 +174,11 @@ const DashHome1 = () => {
                   </Ico>
                 </Blood>
 
-                <Blood2>AA+</Blood2>
+                <Blood2>
+                  {
+                    data?.data?.genotype.toUpperCase()
+                  }
+                </Blood2>
               </Wall3>
             </Top>
           </Right>

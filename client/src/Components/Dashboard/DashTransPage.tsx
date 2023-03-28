@@ -2,15 +2,91 @@ import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
+import { UserData } from "../interface/interface";
+import { UseAppDispach, useAppSelector } from "../Global/Store";
+import { User } from "../Global/ReduxState";
+import { sendToSpecialist } from "../Api/Api";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
+import { GetOneUser } from "../Api/Api";
+
+
+const lifeUrl = "https://codecrusaderslifecare.onrender.com/api";
 
 
 const DashTransPage = () => {
+    // const getUser = useAppSelector((state: any) => state?.currentUser);
+
+
+    // const dispatch = UseAppDispach();
+    const user = useAppSelector((state) => state.currentUser);
+    // const navigate = useNavigate();
+  
+    const {data} = useQuery({
+        queryKey: ["post"],
+        queryFn: () => GetOneUser(user?._id),
+      })
+      console.log(data)
+
+    const schema = yup
+      .object({
+        accountNumber: yup.number().required(),
+        amount: yup.number().required()
+      })
+      .required();
+  
+    type formData = yup.InferType<typeof schema>;
+
+    const {
+        handleSubmit,
+        formState: { errors },
+        reset,
+        register,
+    } = useForm<formData>({
+        resolver: yupResolver(schema),
+    });
+  
+    // const posting = useMutation({
+    //   mutationKey: ["lifecareUser"],
+    //   mutationFn: () => sendToSpecialist(user?._id),
+  
+    //   onSuccess: (myData: any) => {
+    //     useAppSelector(User(myData.data));
+    //     // console.log(myData.data)
+    //   },
+    // });
 
     const [quick, setQuick] = React.useState(false)
 
     const toggle2 = () => {
         setQuick(!quick)
     }
+
+    const onSubmit = handleSubmit(async (data) => {
+        await axios
+            // .patch(`${lifeUrl}/sendtospecialist/${user?._id}/${user?._id}`, data)
+            .patch(`https://codecrusaderslifecare.onrender.com/api/sendtospecialist/642218002f7833ba305a05bb/642218002f7833ba305a05bb`, data)
+            .then((res) => {
+                    Swal.fire({
+                    title: "successful",
+                    icon: "success"
+                });
+                // console.log(res.data)
+            })
+            .catch((err) => {
+                Swal.fire({
+                    title: "an error occured",
+                    icon: "error",
+                    text: `${err.response?.data?.message}`,
+                })
+            })
+    })
+
 
     return(
         <div style={{position:"relative"}}>
@@ -40,18 +116,24 @@ const DashTransPage = () => {
             <Tap>
                 <Label>Enter Account Number</Label>
 
-                <Here type="" placeholder='Tap here and enter .. (e.g 0123456789)'/>
+                <Here type=""
+                {...register("accountNumber")}  
+                placeholder='Tap here and enter .. (e.g 0123456789)'/>
             </Tap>
 
             <Tap>
                 <Label>Enter Amount</Label>
 
-                <Here type="" placeholder='Tap here and enter .. (e.g 5000)'/>
+                <Here type=""
+                {...register("amount")} 
+                placeholder='Tap here and enter .. (e.g 5000)'/>
             </Tap>
 
         </Topp>
 
-        <Proceed>Make Payment</Proceed>
+        <Proceed onClick={() => {
+            onSubmit()
+        }}>Make Payment</Proceed>
 
     </Quickk>
 
@@ -79,44 +161,51 @@ const DashTransPage = () => {
                     <div style={{fontSize:"18px", fontWeight:"700", marginTop:"20px", marginLeft:"20px"}}>History</div>
 
                     <Top>
-                        <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>S/N</Names>
+                        {/* <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>S/N</Names> */}
                         <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Amount</Names>
                         <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Trans ID</Names>
-                        {/* <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Email</Names>
-                        <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Scenario</Names> */}
+                        <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Trans Type</Names>
+                        {/* <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Scenario</Names> */}
                         <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Time</Names>
                         <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Date</Names>
                     </Top>
 
-                    <Top>
-                        <Names>1</Names>
-                        <Names>20,000.00</Names>
-                        <Names>234rg567yhfxx1235</Names>
-                        {/* <Names>jamesdayo@test.com</Names>
-                        <Names>Emergency</Names> */}
-                        <Names>12:30am</Names>
-                        <Names>Mar. 10, 2023</Names>
+                    {
+                    data?.data?.history?.map((el: any) => (
+                    <Top key={el._id} >
+                    {/* <Names style={{width:"3%"}}>1</Names> */}
+                    <Names>N
+                        {/* {
+                        data?.data?.history[0].
+                        }  */}
+                        20,000
+                    </Names>
+                    <Names>
+                        {/* {
+                        data?.data?.history[0].transactionRefrence
+                        } */}
+                        {
+                        el.transactionRefrence
+                        }
+                    </Names>
+                    <Names>
+                        {
+                        el.transactionType
+                        }
+                    </Names>
+                    <Names>
+                        {
+                        el.time
+                        }
+                    </Names>
+                    <Names>
+                        {
+                        el.date
+                        }
+                    </Names>
                     </Top>
-
-                    <Top>
-                        <Names>2</Names>
-                        <Names>20,000.00</Names>
-                        <Names>234rg567yhfxx1235</Names>
-                        {/* <Names>jamesdayo@test.com</Names>
-                        <Names>Emergency</Names> */}
-                        <Names>12:30am</Names>
-                        <Names>Mar. 10, 2023</Names>
-                    </Top>
-
-                    <Top>
-                        <Names>3</Names>
-                        <Names>20,000.00</Names>
-                        <Names>234rg567yhfxx1235</Names>
-                        {/* <Names>jamesdayo@test.com</Names>
-                        <Names>Emergency</Names> */}
-                        <Names>12:30am</Names>
-                        <Names>Mar. 10, 2023</Names>
-                    </Top>
+                    ))
+                    }
 
                     <MobTop 
                     // style={{backgroundColor:"#a8ff37"}}
@@ -316,6 +405,7 @@ border: none;
 
 const Button = styled.div`
 gap: rem;
+margin-top: 10px;
 `;
 
 const Fund = styled.div`

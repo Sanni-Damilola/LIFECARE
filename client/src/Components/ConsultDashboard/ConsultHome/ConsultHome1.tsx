@@ -1,12 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { AiOutlineDollar, AiFillEyeInvisible, AiFillEye }  from "react-icons/ai";
+import { AiOutlineDollar, AiFillEyeInvisible, AiFillEye, AiFillStar }  from "react-icons/ai";
 import { MdBloodtype, MdOutlineBloodtype } from "react-icons/md";
 import {GrUserExpert } from "react-icons/gr";
 import { RiPsychotherapyLine } from "react-icons/ri";
+import { useAppSelector } from "../../Global/Store";
+import { useQuery } from "@tanstack/react-query";
+import { GetOneSpecialist } from "../../Api/Api";
 
 
 const ConsultHome1 = () =>{
+
+    const getConsult = useAppSelector((state: any) => state?.consultUser);
+  
+      const {data} = useQuery({
+        queryKey: ["post"],
+        queryFn: () => GetOneSpecialist(getConsult?._id),
+      })
+      console.log(data?.data?.wallet[0].balance)
+
+        const [see, setSee] = useState(false)
+        const [walletSee, setWalletSee] = useState(false)
+
+        const invisible = () => {
+            setSee(!see)
+        }
+
+        const seeWallet = () => {
+            setWalletSee(!walletSee)
+        }
 
     return (
         <>
@@ -20,17 +42,43 @@ const ConsultHome1 = () =>{
                         <Up>
                             <Bal>
                                 <Acct>Balance
-                                    {/* <Icn>
-                                        <AiFillEyeInvisible />
-                                    </Icn>
-
-                                    
-                                    <Icn>
-                                        <AiFillEye />
-                                    </Icn> */}
                                 </Acct>
 
-                                <Acct1>N300,000.00</Acct1>
+                                    { 
+                                    see ?  (
+                                    
+                                    <Icn onClick={invisible}>
+                                        <AiFillEyeInvisible />
+                                    </Icn>
+                                    ) : (
+                                    <Icn onClick={invisible}>
+                                        <AiFillEye />
+                                    </Icn>
+                                    )
+                                    } 
+
+                                    {
+                                        see ? (
+
+                                        <Acct1>N 
+                                            {
+                                                data?.data?.wallet[0].balance
+                                            }
+                                        </Acct1>)
+
+                                        : 
+
+                                        (
+                                            <Star>
+                                            <AiFillStar />
+                                            <AiFillStar />
+                                            <AiFillStar />
+                                            <AiFillStar />
+                                            <AiFillStar />
+                                        </Star>
+                                        )
+                                    }
+
                             </Bal>
 
                             <Icon>
@@ -54,7 +102,39 @@ const ConsultHome1 = () =>{
                                     </Ico>
                                 </Acct2>
 
-                                <Acct3>0123456789</Acct3>
+                                    { 
+                                    walletSee ?  (
+                                        
+                                    <Icnn onClick={seeWallet}>
+                                        <AiFillEyeInvisible />
+                                        </Icnn>
+                                    ) : (
+                                        <Icnn onClick={seeWallet}>
+                                        <AiFillEye />
+                                    </Icnn>
+                                    )
+                                    } 
+
+                                    {
+                                        walletSee ? (
+                                            <Acct3 style={{marginTop:"0", marginLeft:"20px"}}>
+                                            {
+                                                data?.data?.accountNumber
+                                            }
+                                            </Acct3>
+                                        )
+                                            : 
+
+                                            (
+                                            <Star style={{marginLeft:"20px"}}>
+                                                <AiFillStar />
+                                                <AiFillStar />
+                                                <AiFillStar />
+                                                <AiFillStar />
+                                                <AiFillStar />
+                                            </Star>
+                                            )
+                                        }
                             </Wall>
 
                             <Wall1>
@@ -79,19 +159,27 @@ const ConsultHome1 = () =>{
                                     </Ico>
                                 </Blood>
 
-                                <Blood2>Optician</Blood2>
+                                <Blood2>
+                                    {
+                                        data?.data?.profession
+                                    }
+                                </Blood2>
                             </Wall2>
 
                             <Wall3>
                                 <Blood>
-                                    <Blood1 style={{}}>Other Expertise</Blood1>
+                                    <Blood1 style={{}}>Licence ID</Blood1>
 
                                     <Ico style={{backgroundColor:"#a8ff37"}}>
                                         <RiPsychotherapyLine />
                                     </Ico>
                                 </Blood>
 
-                                <Blood2>Pharmacist</Blood2>
+                                <Blood2>
+                                    {
+                                        data?.data?.lience
+                                    }
+                                    </Blood2>
                             </Wall3>
                         </Top>
 
@@ -109,7 +197,25 @@ export default ConsultHome1;
 
 // const Body = styled.div``;
 
-const Icn = styled.div``;
+const Icnn = styled.div`
+font-size: 25px;
+color: white;
+margin-left: 20px;
+width: 25px;
+`;
+
+const Star = styled.div`
+font-size: 18px;
+`;
+
+const Icn = styled.div`
+font-size: 25px;
+color: #86ea03;
+margin-left: 10px;
+margin-top: 5px;
+cursor: pointer;
+margin-left: -1px;
+`;
 
 const DownImg = styled.img`
 width: 70%;
@@ -298,12 +404,12 @@ align-items: center;
 const Bal = styled.div``;
 
 const Acct1 = styled.div`
-font-size: 35px;
+font-size: 30px;
 font-weight: 700;
 color: rgb(0, 33, 37);
 
 @media screen and (max-width: 375px) {
-    font-size: 30px;
+    font-size: 20px;
 }
 `;
 

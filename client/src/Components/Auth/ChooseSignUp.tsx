@@ -4,6 +4,8 @@ import pic from "../Images/undraw_medical_care_movn.svg";
 import { NavLink } from "react-router-dom";
 
 const ChooseSignUp = () => {
+
+  
   return (
     <Container>
       <Head>LifeCare Is all you need for your health insurance</Head>
