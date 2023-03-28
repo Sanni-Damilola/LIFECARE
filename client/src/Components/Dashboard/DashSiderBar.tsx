@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { FaHome, FaCloudUploadAlt } from "react-icons/fa";
 import { MdPointOfSale } from "react-icons/md";
 import { AiFillMessage, AiOutlineLogout, AiOutlineFund } from "react-icons/ai";
+import { FaAmbulance } from "react-icons/fa";
 import { GoPerson } from "react-icons/go";
 import { FiUsers } from "react-icons/fi";
 import { MdHealthAndSafety } from "react-icons/md";
@@ -121,7 +122,7 @@ const SideBar = () => {
               }}>
               <Home>
                 <Icon>
-                  <AiOutlineFund />
+                  <FaAmbulance />
                 </Icon>
 
                 <HomeText>Ambulance Services <br /> <span style={{color:"#a8ff37", fontWeight:"700"}}>Coming Soon!</span></HomeText>

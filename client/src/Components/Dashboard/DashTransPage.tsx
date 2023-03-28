@@ -23,9 +23,14 @@ const lifeUrl = "https://codecrusaderslifecare.onrender.com/api";
 const DashTransPage = () => {
 
     const [showWallet, setShowWallet] = useState(false);
+    const [showWithdraw, setShowWithdraw] = useState(false);
 
     const walletShow = () => {
         setShowWallet(!showWallet)
+    }
+
+    const withdrawShow = () => {
+        setShowWithdraw(!showWithdraw)
     }
 
     const userOne = useAppSelector((state) => state?.currentUser);
@@ -84,7 +89,7 @@ const DashTransPage = () => {
     const sendToFriend = handleSubmit(async (data) => {
         await axios
             // .patch(`${lifeUrl}/sendtospecialist/${user?._id}`, data)
-            .patch(`${lifeUrl}/api/transfer/${userOne?._id}`, data)
+            .patch(`${lifeUrl}/transfer/${userOne?._id}`, data)
             .then((res) => {
                     Swal.fire({
                     title: "successful",
@@ -101,6 +106,29 @@ const DashTransPage = () => {
             })
             reset();
     })
+
+
+    const withdraw = handleSubmit(async (data) => {
+        await axios
+            // .patch(`${lifeUrl}/sendtospecialist/${user?._id}`, data)
+            .patch(`${lifeUrl}/payout/${userOne?._id}`, data)
+            .then((res) => {
+                    Swal.fire({
+                    title: "successful",
+                    icon: "success"
+                });
+                // console.log(res.data)
+            })
+            .catch((err) => {
+                Swal.fire({
+                    title: "an error occured",
+                    icon: "error",
+                    text: `${err.response?.data?.message}`,
+                })
+            })
+            reset();
+    })
+
 
 
     return(
@@ -172,8 +200,29 @@ const DashTransPage = () => {
                             :"15px", backgroundColor:"#000000", color:"white"}} onClick={toggle2}>Pay Consultant</Pay>
                             <Pay style={{marginLeft
                             :"15px"}} onClick={walletShow}>Send To Friend</Pay>
+                            <Pay style={{marginLeft
+                            :"15px", backgroundColor:"#000000", color:"white"}} onClick={withdrawShow}>Withdraw</Pay>
                         </Button>
                     </Fund>
+
+                    {
+                        showWithdraw ? 
+                        <Fund>
+                        <div></div>
+
+                        <Button>
+                            {/* <Pay2 type="text"   
+                            {...register("accountNumber")}placeholder="Account Number" /> */}
+
+                            <Pay2  type="number"   
+                            {...register("amount")}  
+                            placeholder="Amount" />
+                            <PayBut onClick={withdraw}>Send</PayBut>
+                        </Button>
+                    </Fund>
+                    :
+                    null
+                    }
 
                     {
                         showWallet ? 
@@ -324,7 +373,8 @@ width: 100px;
 border-radius: 5px;
 border: none;
 background-color: #000000;
-color: white
+color: white;
+cursor: pointer;
 `;
 
 const Pay2 = styled.input`
@@ -333,6 +383,7 @@ width: 160px;
 border-radius: 8px;
 margin-right: 7px;
 padding-left: 5px;
+cursor:pointer;
 `;
 
 const Trans = styled.h5`
@@ -489,6 +540,7 @@ margin-left: 20px;
 margin-top: 20px;
 display: flex;
 justify-content: space-between;
+flex-wrap: wrap;
 `;
 
 const See = styled.div`

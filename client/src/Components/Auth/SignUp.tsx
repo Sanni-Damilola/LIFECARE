@@ -198,7 +198,7 @@ const Form = styled.form`
   padding: 30px;
   padding-right: 40px;
   @media screen and (max-width: 425px) {
-    width: 310px;
+    width: 350px;
     padding: 20px;
     padding-right: 30px;
     display: flex;
@@ -207,7 +207,7 @@ const Form = styled.form`
     box-shadow: none;
   }
   @media screen and (max-width: 320px) {
-    width: 310px;
+    width: 390px;
     padding: 10px;
     padding-right: 20px;
     display: flex;

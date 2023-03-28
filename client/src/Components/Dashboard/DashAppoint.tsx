@@ -288,7 +288,7 @@ font-weight: 700;
 
 const Here1 = styled.textarea`
 width: 96%;
-height: 100px;
+height: 70px;
 border-radius: 7px 7px 7px 0;
 padding-left: 10px;
 

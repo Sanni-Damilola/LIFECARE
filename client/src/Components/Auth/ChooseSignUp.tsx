@@ -13,9 +13,13 @@ const ChooseSignUp = () => {
         <Right>
           <Box>
             <p>A platform for All</p>
+
             <Input to="/signuser">Sign Up as a User</Input>
+
             <Input to="/signconsultant">Sign up as a Consultant</Input>
+
             <Input to="/signhospital">Sign up as a Hospital</Input>
+
           </Box>
         </Right>
         <Left>
@@ -81,6 +85,10 @@ const Left = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+ 
+ @media screen and (max-width: 768px) {
+  display: none;
+ }
 `;
 const Wrapper = styled.div`
   width: 100%;
@@ -106,4 +114,8 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+
+  @media screen and (max-width: 768px) {
+    justify-content: center;
+  }
 `;

@@ -73,6 +73,7 @@ border: none;
 background-color: #a8ff37;
 // color: white;
 font-weight: 700;
+cursor: pointer
 `;
 
 const Save1 = styled.div`

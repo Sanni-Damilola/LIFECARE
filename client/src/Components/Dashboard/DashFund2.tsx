@@ -62,41 +62,43 @@ const DashFund = () => {
   // const pay = () => {
 
   // }
+  
+    const {
+      handleSubmit,
+      formState: { errors },
+      reset,
+      register,
+    } = useForm<formData>({
+      resolver: yupResolver(schema),
+    });
 
   const posting = useMutation({
     mutationKey: ["Userpay"],
     mutationFn: (data: iData) => fundFromBank(data, User._id),
 
     onSuccess: (myData: any) => {
-      dispatch(User(myData.data));
-      // console.log(myData.data);
+      
+      console.log("yo",myData.data);
+      
     },
   });
 
-  const {
-    handleSubmit,
-    formState: { errors },
-    reset,
-    register,
-  } = useForm<formData>({
-    resolver: yupResolver(schema),
-  });
-
-  const Submit = handleSubmit(async (data) => {
+  const Submit = handleSubmit( (data) => {
     posting.mutate(data);
-    // console.log(data);
-      Swal.fire({
-        title: "successful",
-        icon: "success"
-    })
-    .catch((err) => {
-        Swal.fire({
-            title: "an error occured",
-            icon: "error",
-            text: `${err.response?.data?.message}`,
-        })
-    })
-    reset();
+    console.log("here", data);
+    // console.log("nowm",data);
+    //   Swal.fire({
+    //     title: "successful",
+    //     icon: "success"
+    // })
+    // .catch((err) => {
+    //     Swal.fire({
+    //         title: "an error occured",
+    //         icon: "error",
+    //         text: `${err.response?.data?.message}`,
+    //     })
+    // })
+    // reset();
     // navigate("/dashboardhome");
   });
 
@@ -106,7 +108,7 @@ const DashFund = () => {
         <Side>
           <Pay>PAYMENT</Pay>
 
-          <Form onSubmit={Submit}>
+          <Form onSubmit={Submit} >
             <Icon>
               <BsFillCreditCardFill />
             </Icon>
@@ -115,7 +117,7 @@ const DashFund = () => {
 
             <Enter>Enter your card information to complete this payment</Enter>
 
-            <Info>
+            <Info >
               <Inp>
                 <Label>Card Number</Label>
                 <Master>
@@ -232,6 +234,7 @@ const But = styled.button`
   margin-top: 15px;
   border-radius: 7px;
   color: white;
+cursor: pointer
 `;
 
 const Iconn = styled.div`
@@ -290,7 +293,7 @@ const Inp = styled.div`
   margin-top: 20px;
 `;
 
-const Info = styled.div`
+const Info = styled.form`
   width: 85%;
   padding-bottom: 20px;
   padding-top: 20px;

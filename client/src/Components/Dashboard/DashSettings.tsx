@@ -29,6 +29,7 @@ const DashSettings: React.FC = () => {
           </Hold>
         </Identity>
         <Content>
+
           <Profile>
             <p>Profile</p>
             <Input>
@@ -37,6 +38,7 @@ const DashSettings: React.FC = () => {
               <input type="text" placeholder="Password" />
             </Input>
           </Profile>
+
           <Profile>
             <p>Health</p>
             <Input>
@@ -63,6 +65,7 @@ const DashSettings: React.FC = () => {
               </select>
             </Input>
           </Profile>
+
           <Profile>
             <p>Change Password</p>
             <Input>
@@ -71,6 +74,7 @@ const DashSettings: React.FC = () => {
               <input type="text" placeholder="Confirm-password" />
             </Input>
           </Profile>
+
         </Content>
       </Right>
     </Container>
@@ -89,7 +93,7 @@ const Input = styled.div`
   input {
     border: none;
     height: 40px;
-    width: 300px;
+    width: 285px;
     margin-bottom: 15px;
     background-color: #dbdbdb;
     outline: none;
@@ -101,7 +105,7 @@ const Input = styled.div`
   select {
     border: none;
     height: 42px;
-    width: 315px;
+    width: 300px;
     margin-bottom: 15px;
     background-color: #dbdbdb;
     outline: none;
@@ -167,6 +171,7 @@ const Right = styled.div`
 const Content = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  flex-wrap: wrap;
 `;
 
 const Head = styled.div`
