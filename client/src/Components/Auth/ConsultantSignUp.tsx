@@ -4,30 +4,44 @@ import React from "react";
 import styled from "styled-components";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-
-import accidentSignin from "../Assets/accidentSignin.svg";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import accidentSignup from "../Assets/accidentSignup.png";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
+import { consultData } from "../interface/interface";
 import { UseAppDispach } from "../Global/Store";
-import { User } from "../Global/ReduxState";
-import { signin } from "../Api/Api";
-import { AnyAction } from "@reduxjs/toolkit";
+import { Consultant } from "../Global/ReduxState";
+import { createSpecialist, signup } from "../Api/Api";
+import { Link } from "react-router-dom";
 
-const Signin = () => {
+import { AnyMxRecord } from 'dns';
+
+import pic from "../Images/sign-up.svg";
+
+
+const ConsultantSignUp = () => {
   const dispatch = UseAppDispach();
   const navigate = useNavigate();
-  const schema = yup.object({email: yup.string().required(),}).required();
+  
+  const schema = yup
+    .object({
+      name: yup.string().required(),
+      email: yup.string().required(),
+      password: yup.string().min(9).required(),
+      profession: yup.string().required(),
+      lience: yup.string().required(),
+    })
+    .required();
 
   type formData = yup.InferType<typeof schema>;
 
   const posting = useMutation({
-    mutationKey: ["lifecareUser"],
-    mutationFn: signin,
+    mutationKey: ["lifecareconsult"],
+    mutationFn: createSpecialist,
 
-    onSuccess: (myData:any) => {
-      dispatch(User(myData.data));
+    onSuccess: (Data:any) => {
+      dispatch(Consultant(Data.data));
+      // console.log(Data.data)
     },
   });
 
@@ -43,52 +57,83 @@ const Signin = () => {
   const Submit = handleSubmit(async (data) => {
     posting.mutate(data);
     reset();
-    navigate("/dashboardhome");
+    navigate("/consulthome");
   });
 
   return (
     <>
       <Body>
-        {/* <Black></Black> */}
-
         <Hold>
-          <Right>
-            <RightImg src="/images/accidentSignin.svg" />
-          </Right>
-
           <Left>
             <Form onSubmit={Submit}>
               <div
                 style={{
                   fontSize: "20px",
-                  color: "#039EE6",
+                  color: "#567e22",
                   fontWeight: "700",
                   marginBottom: "20px",
                   textAlign: "center",
                 }}>
-                User Sign in
+                Consultant Sign Up
               </div>
+
+              <Input
+                type="text"
+                placeholder="Full Name"
+                {...register("name")}
+              />
+              <p>{errors?.name && errors?.name?.message}</p>
 
               <Input type="text" placeholder="Email" {...register("email")} />
               <p>{errors?.email && errors?.email?.message}</p>
 
-              {/* <Input type="password" placeholder="Password" {...register("email")} /> */}
-              {/* <p>{errors?.password && errors?.password?.message}</p> */}
+              <Input
+                type="text"
+                placeholder="Specialty"
+                {...register("profession")}
+              />
+              <p>{errors?.profession && errors?.profession?.message}</p>
 
-              <Button type="submit">Sign in</Button>
+              <Input
+                type="text"
+                placeholder="License Num"
+                {...register("lience")}
+              />
+              <p>{errors?.lience && errors?.lience?.message}</p>
 
-              <Link style={{ textDecoration: "none" }} to={"/signup"}>
-                <Already>Already have an account? Sign up</Already>
+              {/* <Input
+                type="number"
+                placeholder="Phone Number"
+                {...register("phoneNumber")}
+              />
+              <p>{errors?.phoneNumber && errors?.phoneNumber?.message}</p> */}
+
+              <Input
+                type="password"
+                placeholder="Password"
+                {...register("password")}
+              />
+              <p>{errors?.password && errors?.password?.message}</p>
+
+
+              <Button type="submit">Sign Up</Button>
+
+              <Link style={{ textDecoration: "none" }} to={"/signin"}>
+                <Already>Already have an account? Sign in</Already>
               </Link>
             </Form>
           </Left>
+
+          <Right>
+            <RightImg src={pic} />
+          </Right>
         </Hold>
       </Body>
     </>
   );
 };
 
-export default Signin;
+export default ConsultantSignUp;
 
 const RightImg = styled.img`
   width: 500px;
@@ -101,10 +146,12 @@ const Right = styled.div`
   }
 `;
 
+// const Body = styled.div``;
+
 const Already = styled.div`
   font-size: 13px;
   cursor: pointer;
-  color: #6c63ff;
+  color: #567e22;
   margin-top: 15px;
   text-align: center;
   @media screen and (max-width: 425px) {
@@ -115,28 +162,29 @@ const Already = styled.div`
 const Button = styled.button`
   width: 105%;
   height: 40px;
-  background: #6c63ff;
+  background: #567e22;
   color: white;
   border: none;
   border-radius: 7px;
   cursor: pointer;
   transition: all 350ms;
   :hover {
-    background-color: #039ee6c7;
+    background-color: #567e22;
   }
 `;
 
 const Input = styled.input`
+  // <{ props: string }>
   width: 100%;
   height: 40px;
   border: none;
-  box-shadow: 0 0 2px #6c63ff;
-  margin-bottom: 20px;
+  box-shadow: 0 0 2px #a7fd37;
+  margin-bottom: 10px;
   border-radius: 7px;
   padding-left: 10px;
   @media screen and (max-width: 425px) {
     box-shadow: none;
-    border-bottom: 1px solid #6c63ff;
+    border-bottom: 1px solid #a7fd37;
   }
   @media screen and (max-width: 768px) {
     height: 35px;
@@ -145,8 +193,8 @@ const Input = styled.input`
 
 const Form = styled.form`
   width: 270px;
-  height: 300px;
-  box-shadow: 0 0 3px #6c63ff;
+  height: 500px;
+  box-shadow: 0 0 3px #567e22;
   border-radius: 10px 0 10px 0;
   padding: 30px;
   padding-right: 40px;
@@ -166,6 +214,9 @@ const Form = styled.form`
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+  @media screen and (max-width: 768px) {
+    height: 400px;
   }
 `;
 

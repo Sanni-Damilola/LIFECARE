@@ -13,6 +13,7 @@ import { UseAppDispach } from "../Global/Store";
 import { User } from "../Global/ReduxState";
 import { signup } from "../Api/Api";
 import { Link } from "react-router-dom";
+import pic from "../Images/sign-up.svg";
 
 const SignUp = () => {
   const dispatch = UseAppDispach();
@@ -22,8 +23,8 @@ const SignUp = () => {
       name: yup.string().required(),
       email: yup.string().required(),
       password: yup.string().min(9).required(),
-      genotype: yup.string().min(9).required(),
-      bloodGroup: yup.string().min(9).required(),
+      genotype: yup.string(),
+      bloodGroup: yup.string(),
     })
     .required();
 
@@ -33,9 +34,9 @@ const SignUp = () => {
     mutationKey: ["lifecareUser"],
     mutationFn: signup,
 
-    onSuccess: (myData) => {
-      // dispatch(User(myData.data));
-      console.log(myData.data);
+    onSuccess: (myData: any) => {
+      dispatch(User(myData.data));
+      // console.log(myData.data)
     },
   });
 
@@ -50,8 +51,8 @@ const SignUp = () => {
 
   const Submit = handleSubmit(async (data) => {
     posting.mutate(data);
-    // reset();
-    // navigate("/dashboardhome");
+    reset();
+    navigate("/dashboardhome");
   });
 
   //
@@ -64,7 +65,7 @@ const SignUp = () => {
               <div
                 style={{
                   fontSize: "20px",
-                  color: "#039EE6",
+                  color: "#567e22",
                   fontWeight: "700",
                   marginBottom: "20px",
                   textAlign: "center",
@@ -77,29 +78,36 @@ const SignUp = () => {
                 placeholder="Full Name"
                 {...register("name")}
               />
-              <p>{errors?.name && errors?.name?.message}</p>
+              <p style={{ fontSize: "10px" }}>
+                {errors?.name && errors?.name?.message}
+              </p>
 
               <Input type="text" placeholder="Email" {...register("email")} />
-              <p>{errors?.email && errors?.email?.message}</p>
+              <p style={{ fontSize: "10px" }}>
+                {errors?.email && errors?.email?.message}
+              </p>
+ 
+
+              <Input type="text" placeholder="Genotype" {...register("genotype")} />
+              <p style={{ fontSize: "10px" }}>
+                {errors?.genotype && errors?.genotype?.message}
+              </p>
+
+
+              <Input type="text" placeholder="Blood Group" {...register("bloodGroup")} />
+              <p style={{ fontSize: "10px" }}>
+                {errors?.bloodGroup && errors?.bloodGroup?.message}
+              </p>
 
               <Input
                 type="password"
                 placeholder="Password"
                 {...register("password")}
               />
-              <Input
-                type="text"
-                placeholder="Email"
-                {...register("genotype")}
-              />
-              <p>{errors?.email && errors?.email?.message}</p>
+              <p style={{ fontSize: "10px" }}>
+                {errors?.password && errors?.password?.message}
+              </p>
 
-              <Input
-                type="password"
-                placeholder="Password"
-                {...register("bloodGroup")}
-              />
-              <p>{errors?.password && errors?.password?.message}</p>
 
               <Button type="submit">Sign Up</Button>
 
@@ -110,7 +118,7 @@ const SignUp = () => {
           </Left>
 
           <Right>
-            <RightImg src="/images/accidentSignin.svg" />
+            <RightImg src={pic} />
           </Right>
         </Hold>
       </Body>
@@ -136,7 +144,7 @@ const Right = styled.div`
 const Already = styled.div`
   font-size: 13px;
   cursor: pointer;
-  color: #6c63ff;
+  color: #567e22;
   margin-top: 15px;
   text-align: center;
   @media screen and (max-width: 425px) {
@@ -147,14 +155,14 @@ const Already = styled.div`
 const Button = styled.button`
   width: 105%;
   height: 40px;
-  background: #6c63ff;
+  background: #567e22;
   color: white;
   border: none;
   border-radius: 7px;
   cursor: pointer;
   transition: all 350ms;
   :hover {
-    background-color: #039ee6c7;
+    background-color: #567e22;
   }
 `;
 
@@ -163,13 +171,18 @@ const Input = styled.input`
   width: 100%;
   height: 40px;
   border: none;
-  box-shadow: 0 0 2px #6c63ff;
+  box-shadow: 0 0 2px #567e22;
   margin-bottom: 20px;
   border-radius: 7px;
   padding-left: 10px;
+
+  p {
+    font-size: 10px;
+  }
+
   @media screen and (max-width: 425px) {
     box-shadow: none;
-    border-bottom: 1px solid #6c63ff;
+    border-bottom: 1px solid #567e22;
   }
   @media screen and (max-width: 768px) {
     height: 35px;
@@ -178,8 +191,8 @@ const Input = styled.input`
 
 const Form = styled.form`
   width: 270px;
-  height: 400px;
-  box-shadow: 0 0 3px #6c63ff;
+  height: 500px;
+  box-shadow: 0 0 3px #567e22;
   border-radius: 10px 0 10px 0;
   padding: 30px;
   padding-right: 40px;

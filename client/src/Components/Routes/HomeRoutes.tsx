@@ -1,7 +1,11 @@
 import React from "react";
 import { useRoutes } from "react-router-dom";
+import ChooseSignUp from "../Auth/ChooseSignUp";
+import ConsultantSignUp from "../Auth/ConsultantSignUp";
+import HospitalSignUp from "../Auth/HospitalSignUp";
 import Signin from "../Auth/Signin";
 import SignUp from "../Auth/SignUp";
+import ComingSoon from "../BloodDonation/ComingSoon";
 import LandingPage from "../Home/LandingPage";
 
 const HomeRoutes = () => {
@@ -12,7 +16,7 @@ const HomeRoutes = () => {
     },
     {
       path: "/signup",
-      element: <SignUp />,
+      element: <ChooseSignUp />,
     },
 
     {
@@ -23,6 +27,22 @@ const HomeRoutes = () => {
     {
       path: "/dashboard",
       element: <Signin />,
+    },
+    {
+      path: "/donateblood",
+      element: <ComingSoon />,
+    },
+    {
+      path: "/signuser",
+      element: <SignUp />,
+    },
+    {
+      path: "signconsultant",
+      element: <ConsultantSignUp />,
+    },
+    {
+      path: "signhospital",
+      element: <HospitalSignUp />,
     },
   ]);
   return element;

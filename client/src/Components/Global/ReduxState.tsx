@@ -2,10 +2,12 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit/dist/createAction";
-import { UserData } from "../interface/interface";
+import { consultData, hospitalData, UserData } from "../interface/interface";
 
 const initialState = {
   currentUser: {} as UserData | null,
+  consultUser: {} as consultData | null,
+  hospitalUser: {} as hospitalData | null,
 };
 
 const ReduxState = createSlice({
@@ -16,12 +18,20 @@ const ReduxState = createSlice({
       state.currentUser = payload;
     },
 
+    Consultant: (state, {payload}: PayloadAction<consultData>) => {
+      state.consultUser = payload;
+    },
+
+    Hospital: (state, {payload}: PayloadAction<hospitalData>) => {
+      state.hospitalUser = payload;
+    },
+
     logout: (state) => {
       state.currentUser = null;
     },
   },
 });
 
-export const { User, logout } = ReduxState.actions;
+export const { User, Consultant, Hospital, logout } = ReduxState.actions;
 
 export default ReduxState.reducer;

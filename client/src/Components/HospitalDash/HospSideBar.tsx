@@ -5,15 +5,10 @@ import { MdPointOfSale  } from "react-icons/md";
 import { AiFillMessage, AiOutlineLogout, AiOutlineFund } from "react-icons/ai";
 import { GoPerson } from "react-icons/go";
 import { FiUsers } from "react-icons/fi";
-import  { NavLink, useNavigate } from "react-router-dom";
-import { UseAppDispach } from "../Global/Store";
-import { logout } from "../Global/ReduxState";
+import  { NavLink } from "react-router-dom";
 
 
-const ConsultSideBar = () => {
-    const navigate = useNavigate();
-
-    const dispatch = UseAppDispach();
+const HospSideBar = () => {
 
     return (
 
@@ -25,9 +20,9 @@ const ConsultSideBar = () => {
 
                 <Top>
 
-                    <Admin>CONSULTANT</Admin>
+                    <Admin>Hospital</Admin>
 
-                    <NavLink to="/consulthome" style={({isActive}) => { return {
+                    <NavLink to="/Hosphome" style={({isActive}) => { return {
                         textDecoration: isActive ? "none" : "none",
                         color: isActive ? "#a8ff37" : "white",
                     }}}><Home>
@@ -38,7 +33,7 @@ const ConsultSideBar = () => {
                         <HomeText>Home</HomeText>
                     </Home></NavLink>
 
-                    <NavLink to="/consulttransactions" style={({isActive}) => { return {
+                    <NavLink to="/Hospitaltransactions" style={({isActive}) => { return {
                         textDecoration: isActive ? "none" : "none",
                         color: isActive ? "#a8ff37" : "white",
                     }}}><Home>
@@ -49,7 +44,7 @@ const ConsultSideBar = () => {
                         <HomeText>Transactions</HomeText>
                     </Home></NavLink>
 
-                    <NavLink to="/consultappointment" style={({isActive}) => { return {
+                    {/* <NavLink to="/consultappointment" style={({isActive}) => { return {
                         textDecoration: isActive ? "none" : "none",
                         color: isActive ? "#a8ff37" : "white",
                     }}}><Home>
@@ -58,9 +53,9 @@ const ConsultSideBar = () => {
                         </Icon>
 
                         <HomeText>Appointments</HomeText>
-                    </Home></NavLink>
+                    </Home></NavLink> */}
 
-                    <NavLink to="/consultwithdraw" style={({isActive}) => { return {
+                    <NavLink to="/Hospitalwithdraw" style={({isActive}) => { return {
                         textDecoration: isActive ? "none" : "none",
                         color: isActive ? "#a8ff37" : "white",
                     }}}><Home>
@@ -71,7 +66,7 @@ const ConsultSideBar = () => {
                         <HomeText>Withdraw</HomeText>
                     </Home></NavLink>
 
-                    <NavLink to="/" style={({isActive}) => { return {
+                    {/* <NavLink to="/" style={({isActive}) => { return {
                         textDecoration: isActive ? "none" : "none",
                         color: isActive ? "#a8ff37" : "white",
                     }}}><Home>
@@ -80,7 +75,7 @@ const ConsultSideBar = () => {
                         </Icon>
 
                         <HomeText>Settings</HomeText>
-                    </Home></NavLink>
+                    </Home></NavLink> */}
 
                 </Top>
 
@@ -90,11 +85,7 @@ const ConsultSideBar = () => {
                             <AiOutlineLogout />
                         </Icon>
 
-                        <HomeText
-                onClick={() => {
-                  dispatch(logout());
-                  navigate("/");
-                }}>Logout</HomeText>
+                        <HomeText>Logout</HomeText>
                     </Home>
                 </Bottom>
 
@@ -106,7 +97,7 @@ const ConsultSideBar = () => {
     )
 }
 
-export default ConsultSideBar;
+export default HospSideBar;
 
 // const DashHead = styled.div``;
 
@@ -161,7 +152,7 @@ const Body = styled.div`
 width: 250px;
 height: calc(100vh - 65px);
 display: flex;
-/* justify-content: ; */
+/* justify: content; */
 align-items: center;
 position: fixed;
 background-color: #1f1f1f;

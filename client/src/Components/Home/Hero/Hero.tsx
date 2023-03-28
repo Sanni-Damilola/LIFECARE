@@ -17,8 +17,9 @@ const Hero = () => {
 
             <Content>
               Save with us today to cater for advance payments in cases 
-              of health emergency.
+              of health emergency. <br />
             </Content>
+            <p style={{fontWeight: "bold"}}>LIFECARE... Giving lifeline to your deadline!!!</p>
             
             <ButtonHold>
               <NavLink

@@ -88,7 +88,7 @@ const ConsultHome3 = () => {
                     <div style={{fontSize:"18px", fontWeight:"700", marginTop:"30px", marginLeft:"20px"}}>Appointments</div>
 
                     <Top>
-                        <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>S/N</Names>
+                        <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000", width:"5%"}}>S/N</Names>
                         <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Patient</Names>
                         <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Patient's Name</Names>
                         <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Diagnosis</Names>
@@ -99,7 +99,7 @@ const ConsultHome3 = () => {
                     </Top>
 
                     <Top>
-                        <Names>1</Names>
+                        <Names style={{ width:"5%"}}>1</Names>
                         <Names>
                             <Name src="/images/avatar.png" />
                         </Names>
@@ -107,21 +107,21 @@ const ConsultHome3 = () => {
                         <Names>Eyes Issues</Names>
                         <Names>03-13/01:00am</Names>
 
-                        <NavLink style={{textDecoration:"none", width:"12%"}} to="/consultappointment"><Names>
+                        <NavLink style={{textDecoration:"none", width:"12%"}} to="/consultappointment"><Names style={{ width:"100%"}}>
                             <Namees >Accept</Namees>
                         </Names></NavLink>
 
-                        <NavLink style={{textDecoration:"none", width:"12%"}} to="/consultappointment"><Names>
-                            <Namees >Decline</Namees>
+                        <NavLink style={{textDecoration:"none", width:"12%"}} to="/consultappointment"><Names style={{ width:"100%"}}>
+                            <Namees style={{backgroundColor:"rgba(123, 126, 126, 0.992)"}}>Decline</Namees>
                         </Names></NavLink>
 
                          <NavLink style={{textDecoration:"none", width:"12%"}} to="/consultappointment"><Names style={{ width:"100%"}}>
-                            <Namees>Re-Schedule</Namees>
+                            <Namees style={{backgroundColor:"#000000"}}>Re-Schedule</Namees>
                         </Names></NavLink>
                     </Top>
 
                     <Top>
-                        <Names>2</Names>
+                        <Names style={{ width:"5%"}}>2</Names>
                         <Names>
                             <Name src="/images/avatar.png" />
                         </Names>
@@ -129,18 +129,82 @@ const ConsultHome3 = () => {
                         <Names>Lens Request</Names>
                         <Names>03-10/11:00am</Names>
 
-                        <NavLink style={{textDecoration:"none", width:"12%"}} to="/consultappointment"><Names>
+                        <NavLink style={{textDecoration:"none", width:"12%"}} to="/consultappointment"><Names style={{ width:"100%"}}>
                             <Namees >Accept</Namees>
                         </Names></NavLink>
 
-                         <NavLink style={{textDecoration:"none", width:"12%"}} to="/consultappointment"><Names>
-                            <Namees >Decline</Namees>
+                         <NavLink style={{textDecoration:"none", width:"12%"}} to="/consultappointment"><Names style={{ width:"100%"}}>
+                            <Namees style={{backgroundColor:"rgba(123, 126, 126, 0.992)"}}>Decline</Namees>
                         </Names></NavLink>
 
                         <NavLink style={{textDecoration:"none", width:"12%"}} to="/consultappointment"><Names style={{ width:"100%"}}>
-                            <Namees >Re-Schedule</Namees>
+                            <Namees style={{backgroundColor:"#000000"}}>Re-Schedule</Namees>
                         </Names></NavLink>
                     </Top>
+                    
+                    <MobTop 
+                    // style={{backgroundColor:"#a8ff37"}}
+                    >
+                        <Amount>
+                            <Trans>
+                                <Name src="/images/avatar.png" />
+                            </Trans>
+                            <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}>Eyes Issues</Trans>
+                        </Amount>
+
+                        <Amount>
+                            <Trans>Dr. Allison Jordan</Trans>
+                            <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}>03-13/01:00am</Trans>
+                        </Amount>
+
+                        <Amount style={{marginTop:"6px"}}>
+
+                            <NavLink style={{textDecoration:"none"}} to="/consultappointment"><Names style={{ width:"100%"}}>
+                                <Namees style={{padding:"10px"}}>Accept</Namees>
+                            </Names></NavLink>
+
+                            <NavLink style={{textDecoration:"none"}} to="/consultappointment"><Names style={{ width:"100%"}}>
+                                <Namees style={{backgroundColor:"rgba(123, 126, 126, 0.992)", width:"100%", padding:"10px"}}>Decline</Namees>
+                            </Names></NavLink>
+
+                            <NavLink style={{textDecoration:"none", width:"33%"}} to="/consultappointment"><Names style={{ width:"100%"}}>
+                                <Namees style={{backgroundColor:"#000000"}}>Re-Schedule</Namees>
+                            </Names></NavLink>
+
+                        </Amount>
+                    </MobTop>
+                    
+                    <MobTop 
+                    // style={{backgroundColor:"#a8ff37"}}
+                    >
+                        <Amount>
+                            <Trans>
+                                <Name src="/images/avatar.png" />
+                            </Trans>
+                            <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}>Lens Request</Trans>
+                        </Amount>
+
+                        <Amount>
+                            <Trans>Dr. Obi Shola</Trans>
+                            <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}>03-10/11:00am</Trans>
+                        </Amount>
+
+                        <Amount style={{marginTop:"6px"}}>
+
+                            <NavLink style={{textDecoration:"none", }} to="/consultappointment"><Names style={{ width:"100%"}}>
+                                <Namees style={{ padding:"10px"}}>Accept</Namees>
+                            </Names></NavLink>
+
+                            <NavLink style={{textDecoration:"none", }} to="/consultappointment"><Names style={{ width:"100%"}}>
+                                <Namees style={{backgroundColor:"rgba(123, 126, 126, 0.992)", padding:"10px"}}>Decline</Namees>
+                            </Names></NavLink>
+
+                            <NavLink style={{textDecoration:"none", width:"33%"}} to="/consultappointment"><Names style={{ width:"100%"}}>
+                                <Namees style={{backgroundColor:"#000000"}}>Re-Schedule</Namees>
+                            </Names></NavLink>
+
+                        </Amount>
+                    </MobTop>
 
                     
                     <NavLink style={{textDecoration:"none", color:""}} to="/consultappointment"><See>See All Appointments</See></NavLink>
@@ -166,11 +230,49 @@ export default ConsultHome3;
 
 // const Fund = styled.div``;
 
+const Trans = styled.h5`
+font-size: 13px;
+font-weight: 700;
+`;
+
+const Amount = styled.div`
+width: 90%;
+display: flex;
+height: 35px;
+justify-content: space-between;
+align-items: center;
+margin-left: 20px;
+
+@media screen and (max-width: 320px) {
+    margin-left: 15px;
+}
+`;
+
+const MobTop = styled.div`
+display: none;
+
+@media screen and (max-width: 425px) {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    // border-radius: 12px;
+    // border-bottom: 2px solid #a8ff37;
+    border-bottom: 1px solid rgba(123, 126, 126, 0.992);
+    // border-top: 1px solid #000000;
+    margin-top: 20px;
+    padding-bottom: 15px;
+}
+`;
+
 const Namees = styled.button`
-padding: 10px 10px;
+// padding: 10px 10px;
+padding-top: 10px;
+padding-bottom: 10px;
 border: none;
+width: 100%;
 // background-color: #000000;
-background-color: rgba(123, 126, 126, 0.992);
+background-color: #F4511E;
+// background-color: rgba(123, 126, 126, 0.992);
 color: white;
 border-radius: 6px;
 cursor: pointer;
@@ -180,6 +282,18 @@ font-weight: 700;
     // border: 1px solid #000000;
     background-color: #000000;
     // color: #000000;
+}
+
+@media screen and (max-width: 768px) {
+    font-size: 12px;
+}
+
+@media screen and (max-width: 375px) {
+    font-size: 11px;
+}
+
+@media screen and (max-width: 320px) {
+    font-size: 10px;
 }
 `;
 
@@ -324,19 +438,30 @@ font-size: 12px;
 font-weight: 700;
 color: rgba(123, 126, 126, 0.992);
 width: 12%;
-height 40px;
+height: 40px;
 display: flex;
 // justify-content: center;
 align-items: center;
+
+@media screen and (max-width: 425px) {
+    width: 30%;
+}
 `;
 
 const Top = styled.div`
 width: 95%;
-margin-top: 15px;
+margin-top: 10px;
 margin-left: 20px;
 display: flex;
 justify-content: space-around;
 align-items: flex-start;
+background-color: #eaeaea;
+padding-top: 10px;
+padding-bottom: 10px;
+ 
+@media screen and (max-width: 425px) {
+    display: none;
+}
 `;
 
 const Contain = styled.div`
@@ -350,6 +475,10 @@ flex-direction: column;
 // justify-content: center;
 margin-top: 20px;
 padding-bottom: 30px; 
+ 
+@media screen and (max-width: 425px) {
+    width: 85%;
+}
 `;
 
 const Body = styled.div`
