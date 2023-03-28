@@ -20,7 +20,7 @@ const HospSideBar = () => {
 
                 <Top>
 
-                    <Admin>TOLU HOSPITAL</Admin>
+                    <Admin>Hospital</Admin>
 
                     <NavLink to="/Hosphome" style={({isActive}) => { return {
                         textDecoration: isActive ? "none" : "none",

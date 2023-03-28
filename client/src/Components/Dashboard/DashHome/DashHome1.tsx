@@ -5,17 +5,19 @@ import styled from "styled-components";
 import { AiOutlineDollar, AiFillEyeInvisible, AiFillEye, AiFillStar } from "react-icons/ai";
 import { MdBloodtype, MdOutlineBloodtype } from "react-icons/md";
 import { useAppSelector } from "../../Global/Store";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { GetOneUser } from "../../Api/Api";
+import { useParams } from "react-router-dom";
+
 
 const DashHome1 = () => {
-  const getUser = useAppSelector((state) => state?.currentUser);
-  //   const fetchUser = useQuery({
-  //     queryKey: ["user"],
-  //     queryFn: () => GetOneUser(getUser?._id),
-  //   });
+  const getUser = useAppSelector((state: any) => state?.currentUser);
 
-  //   console.log(fetchUser);
+    const {data} = useQuery({
+      queryKey: ["post"],
+      queryFn: () => GetOneUser(getUser?._id),
+    })
+    console.log(data)
 
   const [see, setSee] = useState(false)
   const [walletSee, setWalletSee] = useState(false)
@@ -56,7 +58,10 @@ const DashHome1 = () => {
                 {
                       see ? (
 
-                        <Acct1>30,000.00
+                        <Acct1>N 
+                          {
+                            data?.data?.wallet[0]?.balance
+                          }
                         </Acct1>)
 
                          : 
@@ -109,7 +114,11 @@ const DashHome1 = () => {
 
                 {
                       walletSee ? (
-                        <Acct3 style={{marginTop:"0", marginLeft:"20px"}}>0123456789</Acct3>
+                        <Acct3 style={{marginTop:"0", marginLeft:"20px"}}>
+                          {
+                          data?.data?.accountNumber
+                        }
+                        </Acct3>
                       )
                          : 
 
@@ -149,7 +158,11 @@ const DashHome1 = () => {
                   </Ico>
                 </Blood>
 
-                <Blood2>AA+</Blood2>
+                <Blood2>
+                  {
+                    data?.data?.bloodGroup.toUpperCase()
+                  }
+                  </Blood2>
               </Wall2>
 
               <Wall3>
@@ -161,7 +174,11 @@ const DashHome1 = () => {
                   </Ico>
                 </Blood>
 
-                <Blood2>AA+</Blood2>
+                <Blood2>
+                  {
+                    data?.data?.genotype.toUpperCase()
+                  }
+                </Blood2>
               </Wall3>
             </Top>
           </Right>

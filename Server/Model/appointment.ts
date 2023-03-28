@@ -1,13 +1,13 @@
 /** @format */
 
 import mongoose from "mongoose";
-import { bookAppointment} from "../interface/interface";
+import { Iappointment } from "../Interface/interface";
 
-// creating History Model
+// creating appointment Model
 //  👇👇
-interface MainData extends bookAppointment, mongoose.Document {}
+interface MainData extends Iappointment, mongoose.Document {}
 
-const appointment = new mongoose.Schema<bookAppointment>(
+const appointment = new mongoose.Schema<Iappointment>(
   {
     email: {
       type: String,

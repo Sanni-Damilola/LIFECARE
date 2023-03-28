@@ -1,8 +1,8 @@
 /** @format */
 
 import mongoose from "mongoose";
-import { Iuser } from "../interface/interface";
 import isEmail from "validator/lib/isEmail";
+import { Iuser } from "../Interface/interface";
 
 // creating User Model
 //  👇👇
@@ -28,11 +28,9 @@ const userModel = new mongoose.Schema<Iuser>(
     },
     bloodGroup: {
       type: String,
-      required: true,
     },
     genotype: {
       type: String,
-      required: true,
     },
     accountNumber: {
       type: Number,

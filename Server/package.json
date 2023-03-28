@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node-dev src/index.ts"
+    "dev": "ts-node-dev ./index.ts",
+    "start": "node ./src/dist/index.js",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +28,8 @@
     "joi": "^17.7.0",
     "mongoose": "^6.8.4",
     "morgan": "^1.10.0",
+    "uuid": "^9.0.0",
+    "uuidv4": "^6.2.13",
     "validator": "^13.7.0"
   }
 }

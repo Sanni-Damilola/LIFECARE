@@ -16,50 +16,50 @@ import { Link } from "react-router-dom";
 import pic from "../Images/sign-up.svg";
 
 const HospitalSignUp = () => {
-  const dispatch = UseAppDispach();
-  const navigate = useNavigate();
-  const schema = yup
-    .object({
-      name: yup.string().required(),
-      email: yup.string().required(),
-      password: yup.string().min(9).required(),
-    })
-    .required();
+  
+  // const dispatch = UseAppDispach();
+  // const navigate = useNavigate();
+  // const schema = yup
+  //   .object({
+  //     name: yup.string().required(),
+  //     email: yup.string().required(),
+  //     password: yup.string().min(9).required(),
+  //   })
+  //   .required();
 
-  type formData = yup.InferType<typeof schema>;
+  // type formData = yup.InferType<typeof schema>;
 
-  const posting = useMutation({
-    mutationKey: ["lifecareUser"],
-    mutationFn: signup,
+  // const posting = useMutation({
+  //   mutationKey: ["lifecareUser"],
+  //   mutationFn: signup,
 
-    onSuccess: (myData) => {
-      dispatch(User(myData.data));
-    },
-  });
+  //   onSuccess: (myData) => {
+  //     dispatch(User(myData.data));
+  //   },
+  // });
 
-  const {
-    handleSubmit,
-    formState: { errors },
-    reset,
-    register,
-  } = useForm<formData>({
-    resolver: yupResolver(schema),
-  });
+  // const {
+  //   handleSubmit,
+  //   formState: { errors },
+  //   reset,
+  //   register,
+  // } = useForm<formData>({
+  //   resolver: yupResolver(schema),
+  // });
 
-  const Submit = handleSubmit(async (data) => {
-    // posting.mutate(data);
+  // const Submit = handleSubmit(async (data) => {
+  //   posting.mutate(data);
+  //   reset();
+  //   navigate("/dashboardhome");
+  // });
 
-    // reset();
-    // navigate("/dashboardhome");
-    console.log(data);
-  });
 
   return (
     <>
       <Body>
         <Hold>
           <Left>
-            <Form onSubmit={Submit}>
+            <Form>
               <div
                 style={{
                   fontSize: "20px",
@@ -74,24 +74,26 @@ const HospitalSignUp = () => {
               <Input
                 type="text"
                 placeholder="Full Name"
-                {...register("name")}
+                // {...register("name")}
               />
               <p style={{ fontSize: "10px" }}>
-                {errors?.name && errors?.name?.message}
+                {/* {errors?.name && errors?.name?.message} */}
               </p>
 
-              <Input type="text" placeholder="Email" {...register("email")} />
+              <Input type="text" placeholder="Email"
+              //  {...register("email")} 
+               />
               <p style={{ fontSize: "10px" }}>
-                {errors?.email && errors?.email?.message}
+                {/* {errors?.email && errors?.email?.message} */}
               </p>
 
               <Input
                 type="password"
                 placeholder="Password"
-                {...register("password")}
+                // {...register("password")}
               />
               <p style={{ fontSize: "10px" }}>
-                {errors?.password && errors?.password?.message}
+                {/* {errors?.password && errors?.password?.message} */}
               </p>
 
               <Button type="submit">Sign Up</Button>

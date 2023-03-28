@@ -5,10 +5,15 @@ import { MdPointOfSale  } from "react-icons/md";
 import { AiFillMessage, AiOutlineLogout, AiOutlineFund } from "react-icons/ai";
 import { GoPerson } from "react-icons/go";
 import { FiUsers } from "react-icons/fi";
-import  { NavLink } from "react-router-dom";
+import  { NavLink, useNavigate } from "react-router-dom";
+import { UseAppDispach } from "../Global/Store";
+import { logout } from "../Global/ReduxState";
 
 
 const ConsultSideBar = () => {
+    const navigate = useNavigate();
+
+    const dispatch = UseAppDispach();
 
     return (
 
@@ -85,7 +90,11 @@ const ConsultSideBar = () => {
                             <AiOutlineLogout />
                         </Icon>
 
-                        <HomeText>Logout</HomeText>
+                        <HomeText
+                onClick={() => {
+                  dispatch(logout());
+                  navigate("/");
+                }}>Logout</HomeText>
                     </Home>
                 </Bottom>
 
@@ -152,7 +161,7 @@ const Body = styled.div`
 width: 250px;
 height: calc(100vh - 65px);
 display: flex;
-justify: content;
+/* justify-content: ; */
 align-items: center;
 position: fixed;
 background-color: #1f1f1f;

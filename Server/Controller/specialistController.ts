@@ -5,17 +5,16 @@ import mongoose from "mongoose";
 import specialistModel from "../Model/specialistModel";
 import bcrypt from "bcrypt";
 import walletModel from "../Model/walletModel";
-import { asyncHandler } from "../src/error/asyncHander";
-import { AppError, HttpCode } from "../src/error/errorSpellOut";
+import { asyncHandler } from "../error/asyncHander";
+import { AppError, HttpCode } from "../error/errorSpellOut";
 import appointment from "../Model/appointment";
 
 export const createSpecialist = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { name, email, password, phoneNumber, profession, lience } = req.body;
+    const { name, email, password, profession, lience } = req.body;
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
-    const getDate = Date.now();
-    const generateNumber = Math.floor(Math.random() * 7000) * getDate; // generating random numbers
+    const generateNumber = `${Math.floor(Math.random() * 10000000000)}`; // generating random numbers
     const num = 234; // country code
 
     const register = await specialistModel.create({
@@ -24,9 +23,7 @@ export const createSpecialist = asyncHandler(
       password: hash,
       profession,
       lience,
-      phoneNumber: num + phoneNumber,
       verified: true,
-      accountNumber: generateNumber,
     }); //
 
     const createWallet = await walletModel.create({
@@ -48,7 +45,7 @@ export const createSpecialist = asyncHandler(
       );
     }
 
-    return res.status(201).json({
+    return res.status(HttpCode.OK).json({
       message: "created",
       data: register,
     });
@@ -69,7 +66,7 @@ export const SignInSpecialist = asyncHandler(
       );
     }
 
-    return res.status(200).json({
+    return res.status(HttpCode.OK).json({
       message: "Successfully Login",
       data: login,
     }); // signin
@@ -87,21 +84,46 @@ export const getOneSpecialist = asyncHandler(
     if (!getSpecialist) {
       next(
         new AppError({
-          message: "user not found",
+          message: "Specialist not found",
           httpCode: HttpCode.NOT_FOUND,
         }),
       );
     }
 
-    return res.status(200).json({
-      message: "successfully one Specialist",
+    return res.status(HttpCode.OK).json({
+      message: "successfully gotten one Specialist",
       data: getSpecialist,
     });
   }, // get one User
 );
 
-// const acceptOrDeclineAppointment = asyncHandler(
-//   async(req: Request, res: Response, next: NextFunction) => {
-//     const updateAppointment = await appointmen
-//   }
-// )
+export const acceptOrDeclineAppointment = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { confirm } = req.body;
+
+    const getSpecialList = await specialistModel.findById(
+      req.params.specialistId,
+    );
+    const accepted = await appointment.findByIdAndUpdate(
+      req.params.appointmentId,
+      {
+        confirm: true,
+      },
+      { new: true },
+    );
+
+    if (!getSpecialList) {
+      next(
+        new AppError({
+          message: "Specialist Not Found",
+          httpCode: HttpCode.NOT_FOUND,
+        }),
+      );
+    }
+
+    return res.status(HttpCode.OK).json({
+      message: "Accepted",
+      data: accepted,
+    });
+  },
+);

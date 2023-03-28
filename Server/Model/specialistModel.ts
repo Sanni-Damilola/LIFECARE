@@ -1,10 +1,10 @@
 /** @format */
 
 import mongoose from "mongoose";
-import { ISpecialist } from "../interface/interface";
 import isEmail from "validator/lib/isEmail";
+import { ISpecialist } from "../Interface/interface";
 
-// creating User Model
+// creating User specialist
 //  👇👇
 interface user extends ISpecialist, mongoose.Document {}
 
@@ -27,8 +27,7 @@ const specialistModel = new mongoose.Schema<ISpecialist>(
       required: true,
     },
     lience: {
-      type: Boolean,
-      required: [true, "lience is Required"],
+      type: String,
     },
     profession: {
       type: String,

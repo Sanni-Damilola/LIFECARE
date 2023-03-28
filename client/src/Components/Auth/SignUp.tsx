@@ -23,6 +23,8 @@ const SignUp = () => {
       name: yup.string().required(),
       email: yup.string().required(),
       password: yup.string().min(9).required(),
+      genotype: yup.string(),
+      bloodGroup: yup.string(),
     })
     .required();
 
@@ -32,8 +34,9 @@ const SignUp = () => {
     mutationKey: ["lifecareUser"],
     mutationFn: signup,
 
-    onSuccess: (myData) => {
+    onSuccess: (myData: any) => {
       dispatch(User(myData.data));
+      // console.log(myData.data)
     },
   });
 
@@ -83,6 +86,18 @@ const SignUp = () => {
               <p style={{ fontSize: "10px" }}>
                 {errors?.email && errors?.email?.message}
               </p>
+ 
+
+              <Input type="text" placeholder="Genotype" {...register("genotype")} />
+              <p style={{ fontSize: "10px" }}>
+                {errors?.genotype && errors?.genotype?.message}
+              </p>
+
+
+              <Input type="text" placeholder="Blood Group" {...register("bloodGroup")} />
+              <p style={{ fontSize: "10px" }}>
+                {errors?.bloodGroup && errors?.bloodGroup?.message}
+              </p>
 
               <Input
                 type="password"
@@ -92,6 +107,7 @@ const SignUp = () => {
               <p style={{ fontSize: "10px" }}>
                 {errors?.password && errors?.password?.message}
               </p>
+
 
               <Button type="submit">Sign Up</Button>
 
@@ -175,7 +191,7 @@ const Input = styled.input`
 
 const Form = styled.form`
   width: 270px;
-  height: 400px;
+  height: 500px;
   box-shadow: 0 0 3px #567e22;
   border-radius: 10px 0 10px 0;
   padding: 30px;
