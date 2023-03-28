@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 import pic from "../Images/sign-up.svg";
 
 const HospitalSignUp = () => {
+  
   // const dispatch = UseAppDispach();
   // const navigate = useNavigate();
   // const schema = yup
@@ -51,6 +52,7 @@ const HospitalSignUp = () => {
   //   reset();
   //   navigate("/dashboardhome");
   // });
+
 
   return (
     <>
