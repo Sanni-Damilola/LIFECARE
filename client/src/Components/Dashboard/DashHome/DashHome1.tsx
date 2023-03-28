@@ -8,6 +8,7 @@ import { useAppSelector } from "../../Global/Store";
 import { useQuery } from "@tanstack/react-query";
 import { GetOneUser } from "../../Api/Api";
 import { useParams } from "react-router-dom";
+import { TbCurrencyNaira } from "react-icons/tb"
 
 
 const DashHome1 = () => {
@@ -58,7 +59,7 @@ const DashHome1 = () => {
                 {
                       see ? (
 
-                        <Acct1>N 
+                        <Acct1><TbCurrencyNaira />
                           {
                             data?.data?.wallet[0]?.balance
                           }

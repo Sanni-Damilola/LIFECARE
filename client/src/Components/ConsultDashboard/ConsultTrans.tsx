@@ -1,9 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { GetOneSpecialist } from "../Api/Api";
+import { useAppSelector } from "../Global/Store"; 
+import { useQuery } from "@tanstack/react-query";
+import { TbCurrencyNaira } from "react-icons/tb";
 
 
 const ConsultTransactions = () => {
+    const getConsult = useAppSelector((state: any) => state?.consultUser);
+  
+    const {data} = useQuery({
+      queryKey: ["post"],
+      queryFn: () => GetOneSpecialist(getConsult?._id),
+    })
+    console.log(data)
 
     return(
         <>
@@ -15,47 +26,107 @@ const ConsultTransactions = () => {
                 <div style={{fontSize:"18px", fontWeight:"700", marginTop:"30px", marginLeft:"20px"}}>History</div>
 
                 <Top>
-                    <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000", width:"5%"}}>S/N</Names>
+                    {/* <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000", width:"5%"}}>S/N</Names> */}
                     <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Amount</Names>
                     <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Patient</Names>
-                    <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Scenario</Names>
+                    <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Trans Type</Names>
                     <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Time</Names>
                     <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Date</Names>
                     <Names style={{fontSize:"14px", fontWeight:"700", color:"#000000"}}>Trans ID</Names>
                 </Top>
 
-                <Top>
-                    <Names style={{ width:"5%"}}>1</Names>
-                    <Names>20,000.00</Names>
-                    <Names>James Dayo</Names>
-                    <Names>Emergency</Names>
-                    <Names>12:30am</Names>
-                    <Names>Mar. 10, 2023</Names>
-                    <Names>234rg567yhfxx1235</Names>
+                {
+                data?.data?.history?.map((el: any) => (
+                <Top key={el._id} >
+                {/* <Names style={{width:"3%"}}>1</Names> */}
+                <Names><TbCurrencyNaira />
+                    {
+                        el.amount
+                    } 
+                </Names>
+                <Names>
+                    {/* {
+                        el.transactionRefrence
+                    } */}
+                    Sender
+                </Names>
+                <Names>
+                    {
+                        el.transactionRefrence
+                    }
+                </Names>
+                <Names>
+                    {
+                        el.transactionType
+                    }
+                </Names>
+                <Names>
+                    {
+                        el.time
+                    }
+                </Names>
+                <Names>
+                    {
+                        el.date
+                    }
+                </Names>
                 </Top>
+                ))
+                }
 
-                <Top>
-                    <Names style={{ width:"5%"}}>2</Names>
-                    <Names>20,000.00</Names>
-                    <Names>Bimbo Ada</Names>
-                    <Names>Emergency</Names>
-                    <Names>12:30am</Names>
-                    <Names>Mar. 10, 2023</Names>
-                    <Names>234rg567yhfxx1235</Names>
-                </Top>
 
-                <Top>
-                    <Names style={{ width:"5%"}}>3</Names>
-                    <Names>20,000.00</Names>
-                    <Names>Musa Ali</Names>
-                    <Names>Emergency</Names>
-                    <Names>12:30am</Names>
-                    <Names>Mar. 10, 2023</Names>
-                    <Names>234rg567yhfxx1235</Names>
-                </Top>
+
+            {
+                data?.data?.history?.map((el: any) => (
+                
+                <MobTop key={el._id}
+                // style={{backgroundColor:"#a8ff37"}}
+                >
+                    <Amount>
+                        <Trans style={{color:"white", padding:"5px", backgroundColor:"black", borderRadius:"5px"}}><span style={{color:"#a8ff37"}}>Amount:</span><TbCurrencyNaira />
+                            {
+                                el.amount
+                            } 
+                    </Trans>
+                            <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}>
+                                {
+                                    el.transactionType
+                                }
+                    </Trans>
+                    </Amount>
+
+                    <Amount>
+                        <Trans><span style={{color:"rgba(123, 126, 126, 0.992"}}>Name:</span>
+                            {/* {
+                                el.transactionRefrence
+                            } */}
+                            Sender
+                        </Trans>
+                        <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}>
+                            {
+                                el.date
+                            }
+                        </Trans>
+                    </Amount>
+
+                    <Amount>
+                        <Trans><span style={{color:"rgba(123, 126, 126, 0.992"}}>Trans ID:</span>
+                            {
+                                el.transactionRefrence
+                            }
+                        </Trans>
+                        <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}>
+                            {
+                                el.time
+                            }
+                        </Trans>
+                    </Amount>
+                </MobTop>
+                ))
+                }
 
                 
-                <MobTop 
+                {/* <MobTop 
                 // style={{backgroundColor:"#a8ff37"}}
                 >
                     <Amount>
@@ -72,9 +143,9 @@ const ConsultTransactions = () => {
                         <Trans><span style={{color:"rgba(123, 126, 126, 0.992"}}>Trans ID:</span> 234rg567yhfxx1235</Trans>
                         <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}>12:30am</Trans>
                     </Amount>
-                </MobTop>
+                </MobTop> */}
                 
-                <MobTop 
+                {/* <MobTop 
                 // style={{backgroundColor:"#a8ff37"}}
                 >
                     <Amount>
@@ -91,9 +162,9 @@ const ConsultTransactions = () => {
                         <Trans style={{}}><span style={{}}>Trans ID:</span> 234rg567yhfxx1235</Trans>
                         <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}>12:30am</Trans>
                     </Amount>
-                </MobTop>
+                </MobTop> */}
                 
-                <MobTop 
+                {/* <MobTop 
                 // style={{backgroundColor:"#a8ff37"}}
                 >
                     <Amount>
@@ -101,16 +172,16 @@ const ConsultTransactions = () => {
                         <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}>Emergency</Trans>
                     </Amount>
 
-                    <Amount>
+                    {/* <Amount>
                         <Trans style={{}}><span style={{}}>Name:</span> Musa Adebayo</Trans>
                         <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}>Mar. 10, 2023</Trans>
                     </Amount>
 
                     <Amount>
                         <Trans style={{}}><span style={{}}>Trans ID:</span> 234rg567yhfxx1235</Trans>
-                        <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}>12:30am</Trans>
-                    </Amount>
-                </MobTop>
+                        <Trans style={{color:"rgba(123, 126, 126, 0.992)"}}>12:30am</Trans> */}
+                    {/* </Amount>
+                // </MobTop> */} 
 
 
             </Contain>

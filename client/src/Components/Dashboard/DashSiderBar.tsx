@@ -93,7 +93,7 @@ const SideBar = () => {
             </NavLink>
 
             <NavLink
-              to="/fundwallet"
+              to="/fund"
               style={({ isActive }) => {
                 return {
                   textDecoration: isActive ? "none" : "none",
@@ -106,6 +106,25 @@ const SideBar = () => {
                 </Icon>
 
                 <HomeText>Fund Wallet</HomeText>
+              </Home>
+            </NavLink>
+
+            
+
+            <NavLink
+              to="/dashboardhome"
+              style={({ isActive }) => {
+                return {
+                  textDecoration: isActive ? "none" : "none",
+                  color: isActive ? "#a8ff37" : "white",
+                };
+              }}>
+              <Home>
+                <Icon>
+                  <AiOutlineFund />
+                </Icon>
+
+                <HomeText>Ambulance Services <br /> <span style={{color:"#a8ff37", fontWeight:"700"}}>Coming Soon!</span></HomeText>
               </Home>
             </NavLink>
 

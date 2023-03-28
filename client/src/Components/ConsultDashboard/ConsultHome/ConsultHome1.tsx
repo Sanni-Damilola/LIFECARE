@@ -7,6 +7,7 @@ import { RiPsychotherapyLine } from "react-icons/ri";
 import { useAppSelector } from "../../Global/Store";
 import { useQuery } from "@tanstack/react-query";
 import { GetOneSpecialist } from "../../Api/Api";
+import { TbCurrencyNaira } from "react-icons/tb"
 
 
 const ConsultHome1 = () =>{
@@ -60,7 +61,7 @@ const ConsultHome1 = () =>{
                                     {
                                         see ? (
 
-                                        <Acct1>N 
+                                        <Acct1><TbCurrencyNaira /> 
                                             {
                                                 data?.data?.wallet[0].balance
                                             }

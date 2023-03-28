@@ -13,15 +13,19 @@ import HomeRoutes from "./Components/Routes/HomeRoutes";
 function App() {
   const myclient = new QueryClient()
   const getUser = useAppSelector((state) => state?.currentUser);
-  
+
   const consultant = useAppSelector((state) => state?.consultUser);
 
   return (  
   <>  
-      <div>{getUser?.name ? <DashBoardRoute /> : <HomeRoutes />}</div>
+        <HomeRoutes />
 
       <div>
-        {consultant ? <ConsultRoutes /> : <HomeRoutes />}
+        {getUser?.name ? <DashBoardRoute /> : null }
+      </div>
+
+      <div>
+        {consultant?.name ? <ConsultRoutes /> : null }
       </div>
   </>)
    // route 
