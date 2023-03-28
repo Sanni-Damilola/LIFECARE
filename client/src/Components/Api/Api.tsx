@@ -4,12 +4,14 @@ import axios from "axios";
 
 const lifeUrl = "https://hackathonconsumingkoraapi.onrender.com/api";
 
-export const signup = async ({ name, email, password, userName }: any) => {
+export const signup = async ({ name, email, password, genotype, bloodGroup }: any) => {
   return await axios
-    .post(`${lifeUrl}/postUser`, {
+    .post(`https://codecrusaderslifecare.onrender.com/api/postUser`, {
       name,
       email,
       password,
+      genotype,
+      bloodGroup,
     })
     .then((res) => {
       return res.data;

@@ -22,6 +22,8 @@ const SignUp = () => {
       name: yup.string().required(),
       email: yup.string().required(),
       password: yup.string().min(9).required(),
+      genotype: yup.string().min(9).required(),
+      bloodGroup: yup.string().min(9).required(),
     })
     .required();
 
@@ -32,7 +34,8 @@ const SignUp = () => {
     mutationFn: signup,
 
     onSuccess: (myData) => {
-      dispatch(User(myData.data));
+      // dispatch(User(myData.data));
+      console.log(myData.data);
     },
   });
 
@@ -47,8 +50,8 @@ const SignUp = () => {
 
   const Submit = handleSubmit(async (data) => {
     posting.mutate(data);
-    reset();
-    navigate("/dashboardhome");
+    // reset();
+    // navigate("/dashboardhome");
   });
 
   //
@@ -83,6 +86,18 @@ const SignUp = () => {
                 type="password"
                 placeholder="Password"
                 {...register("password")}
+              />
+              <Input
+                type="text"
+                placeholder="Email"
+                {...register("genotype")}
+              />
+              <p>{errors?.email && errors?.email?.message}</p>
+
+              <Input
+                type="password"
+                placeholder="Password"
+                {...register("bloodGroup")}
               />
               <p>{errors?.password && errors?.password?.message}</p>
 
@@ -143,7 +158,8 @@ const Button = styled.button`
   }
 `;
 
-const Input = styled.input` // <{ props: string }>
+const Input = styled.input`
+  // <{ props: string }>
   width: 100%;
   height: 40px;
   border: none;

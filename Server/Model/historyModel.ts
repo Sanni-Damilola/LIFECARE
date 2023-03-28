@@ -1,7 +1,7 @@
 /** @format */
 
 import mongoose from "mongoose";
-import { IHistory } from "../interface/interface";
+import { IHistory } from "../Interface/interface";
 
 // creating History Model
 //  👇👇
@@ -23,6 +23,9 @@ const historySchema = new mongoose.Schema<IHistory>(
     },
     time: {
       type: String,
+    },
+    amount: {
+      type: Number,
     },
   },
   { timestamps: true },

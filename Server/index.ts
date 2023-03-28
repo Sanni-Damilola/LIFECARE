@@ -9,7 +9,6 @@ let port: number = 2001; // port number
 ApplicationCofig(app);
 dbConfig();
 
-
 process.on("uncaughtException", (error: Error) => {
   console.log("stop here: uncaughtException");
   console.log(error);

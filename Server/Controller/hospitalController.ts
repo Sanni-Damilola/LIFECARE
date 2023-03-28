@@ -1,29 +1,29 @@
 /** @format */
-
 import { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
-import specialistModel from "../Model/specialistModel";
 import bcrypt from "bcrypt";
 import walletModel from "../Model/walletModel";
 import { asyncHandler } from "../error/asyncHander";
 import { AppError, HttpCode } from "../error/errorSpellOut";
-import appointment from "../Model/appointment";
+import hospitalModel from "../Model/hospitalModel";
+import userModel from "../Model/userModel";
 
-export const createSpecialist = asyncHandler(
+export const createHospital = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { name, email, password, profession, lience } = req.body;
+    const { name, email, password, phoneNumber, profession, lience } = req.body;
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
+
     const generateNumber = `${Math.floor(Math.random() * 10000000000)}`; // generating random numbers
     const num = 234; // country code
 
-    const register = await specialistModel.create({
+    const register = await hospitalModel.create({
       name,
       email,
       password: hash,
-      profession,
-      lience,
+      phoneNumber: num + phoneNumber,
       verified: true,
+      accountNumber: generateNumber,
     }); //
 
     const createWallet = await walletModel.create({
@@ -40,22 +40,22 @@ export const createSpecialist = asyncHandler(
       next(
         new AppError({
           message: "User Not Created",
-          httpCode: HttpCode.CREATED,
+          httpCode: HttpCode.BAD_REQUEST,
         }),
       );
     }
 
-    return res.status(HttpCode.OK).json({
+    return res.status(HttpCode.CREATED).json({
       message: "created",
       data: register,
     });
   },
 );
 
-export const SignInSpecialist = asyncHandler(
+export const SignInHospital = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { email } = req.body;
-    const login = await specialistModel.findOne({ email });
+    const login = await hospitalModel.findOne({ email });
 
     if (!login) {
       next(
@@ -73,57 +73,46 @@ export const SignInSpecialist = asyncHandler(
   },
 );
 
-export const getOneSpecialist = asyncHandler(
+export const getOneHospital = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const getSpecialist = await specialistModel
-      .findById(req.params.idspecialist)
+    const getHospital = await hospitalModel
+      .findById(req.params.hospitalId)
       .populate("wallet")
-      .populate("history")
-      .populate("appointment");
+      .populate("history");
 
-    if (!getSpecialist) {
+    if (!getHospital) {
       next(
         new AppError({
-          message: "Specialist not found",
+          message: "hospital not found",
           httpCode: HttpCode.NOT_FOUND,
         }),
       );
     }
 
     return res.status(HttpCode.OK).json({
-      message: "successfully gotten one Specialist",
-      data: getSpecialist,
+      message: "successfully gotten one hospital",
+      data: getHospital,
     });
   }, // get one User
 );
 
-export const acceptOrDeclineAppointment = asyncHandler(
+export const findUsers = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { confirm } = req.body;
+    const query = req.query;
+    const getUser = await userModel.find(query);
 
-    const getSpecialList = await specialistModel.findById(
-      req.params.specialistId,
-    );
-    const accepted = await appointment.findByIdAndUpdate(
-      req.params.appointmentId,
-      {
-        confirm: true,
-      },
-      { new: true },
-    );
-
-    if (!getSpecialList) {
+    if (!getUser) {
       next(
         new AppError({
-          message: "Specialist Not Found",
+          message: "user not found",
           httpCode: HttpCode.NOT_FOUND,
         }),
       );
     }
 
     return res.status(HttpCode.OK).json({
-      message: "Accepted",
-      data: accepted,
+      message: "successfully gotten user",
+      data: getUser,
     });
-  },
+  }, // get one User
 );

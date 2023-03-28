@@ -1,14 +1,14 @@
 /** @format */
 
 import mongoose from "mongoose";
+import { IHospital } from "../Interface/interface";
 import isEmail from "validator/lib/isEmail";
-import { ISpecialist } from "../Interface/interface";
 
-// creating User specialist
+// creating User Model
 //  👇👇
-interface user extends ISpecialist, mongoose.Document {}
+interface user extends IHospital, mongoose.Document {}
 
-const specialistModel = new mongoose.Schema<ISpecialist>(
+const hospitalModel = new mongoose.Schema<IHospital>(
   {
     name: {
       type: String,
@@ -26,13 +26,6 @@ const specialistModel = new mongoose.Schema<ISpecialist>(
       type: String,
       required: true,
     },
-    lience: {
-      type: String,
-    },
-    profession: {
-      type: String,
-      required: [true, "profession is Required"],
-    },
     accountNumber: {
       type: Number,
       min: 10,
@@ -49,14 +42,8 @@ const specialistModel = new mongoose.Schema<ISpecialist>(
         ref: "wallets",
       },
     ],
-    appointment: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "appointment",
-      },
-    ],
   },
   { timestamps: true },
 );
 
-export default mongoose.model<user>("specialist", specialistModel);
+export default mongoose.model<user>("hospital", hospitalModel);
