@@ -1,6 +1,11 @@
 /** @format */
 
 import axios from "axios";
+import { useAppSelector } from "../Global/Store";
+
+import { UserData } from "../interface/interface";
+
+// const userOne = useAppSelector((state) => state?.currentUser);
 
 interface iData {
   name:string, amount:number, cardNumber:string, cvv:string, expiry_month:string, expiry_year:string
@@ -95,10 +100,10 @@ export const sendToOtherWallet = async (id: any) => {
   // .patch(`http://localhost:2001/api/transfer/${id}`).then((res) => res.data)
 }
 
-export const fundFromBank = async ({name, amount, cardNumber, cvv, expiry_month, expiry_year} : iData , id:string) => {
+export const fundFromBank = async ({ amount, cardNumber, cvv, expiry_month, expiry_year} : iData , id:string) => {
   return await axios
   .post (`${lifeUrl}/fundwallet/${id}`,
-  // .post (`http://localhost:2001/fundwallet/${id}`, 
+  // .post (`http://localhost:2001/api/fundwallet/${id}`, 
   {
     cvv,
     amount, 
@@ -106,7 +111,6 @@ export const fundFromBank = async ({name, amount, cardNumber, cvv, expiry_month,
     expiry_month,
     expiry_year,
     id,
-    name
   })
   .then((res) => res.data)
 }
@@ -114,7 +118,7 @@ export const fundFromBank = async ({name, amount, cardNumber, cvv, expiry_month,
 export const payTobank = async ({amount}: any, id: any) => {
   return await axios
   
-  // .post (`http://localhost:2001/payout`,
+  // .post (`http://localhost:2001/payout/`,
   .post(`${lifeUrl}/payout/${id}`,
   {
     amount

@@ -137,6 +137,9 @@ const Input = styled.input`
   margin-bottom: 20px;
   border-radius: 7px;
   padding-left: 10px;
+  outline: none;
+  background-color: transparent;
+
   @media screen and (max-width: 425px) {
     box-shadow: none;
     border-bottom: 1px solid #6c63ff;
