@@ -89,7 +89,7 @@ const SideBar = () => {
                   <MdHealthAndSafety />
                 </Icon>
 
-                <HomeText>HMO</HomeText>
+                <HomeText>HMO <br /> <span style={{color:"#a8ff37", fontWeight:"700", fontSize:"12px"}}>coming soon!</span></HomeText>
               </Home>
             </NavLink>
 
@@ -125,7 +125,7 @@ const SideBar = () => {
                   <FaAmbulance />
                 </Icon>
 
-                <HomeText>Ambulance Services <br /> <span style={{color:"#a8ff37", fontWeight:"700"}}>Coming Soon!</span></HomeText>
+                <HomeText>Ambulance Services <br /> <span style={{color:"#a8ff37", fontWeight:"700", fontSize:"12px"}}>Coming Soon!</span></HomeText>
               </Home>
             </NavLink>
 

@@ -18,14 +18,14 @@ function App() {
 
   return (  
   <>  
-        <HomeRoutes />
 
       <div>
-        {getUser?.name ? <DashBoardRoute /> : null }
+        {getUser?.name ? <DashBoardRoute /> :         <HomeRoutes />
+ }
       </div>
 
       <div>
-        {consultant?.name ? <ConsultRoutes /> : null }
+        {consultant?.name ? <ConsultRoutes /> :  <HomeRoutes /> }
       </div>
   </>)
    // route 

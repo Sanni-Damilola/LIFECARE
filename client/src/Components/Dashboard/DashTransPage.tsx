@@ -9,12 +9,13 @@ import { useMutation } from "@tanstack/react-query";
 import { UserData } from "../interface/interface";
 import { UseAppDispach, useAppSelector } from "../Global/Store";
 import { User } from "../Global/ReduxState";
-import { sendToSpecialist } from "../Api/Api";
+import { payTobank, sendToSpecialist } from "../Api/Api";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
 import { GetOneUser } from "../Api/Api";
 import { TbCurrencyNaira } from "react-icons/tb"
+import { useQueryClient } from "@tanstack/react-query";
 
 
 const lifeUrl = "https://codecrusaderslifecare.onrender.com/api";
@@ -39,7 +40,7 @@ const DashTransPage = () => {
         queryKey: ["post"],
         queryFn: () => GetOneUser(userOne?._id),
       })
-      console.log(data)
+    //   console.log(data)
 
     const schema = yup
       .object({
@@ -108,27 +109,49 @@ const DashTransPage = () => {
     })
 
 
-    const withdraw = handleSubmit(async (data) => {
-        await axios
-            // .patch(`${lifeUrl}/sendtospecialist/${user?._id}`, data)
-            .patch(`${lifeUrl}/payout/${userOne?._id}`, data)
-            .then((res) => {
-                    Swal.fire({
-                    title: "successful",
-                    icon: "success"
-                });
-                // console.log(res.data)
-            })
-            .catch((err) => {
-                Swal.fire({
-                    title: "an error occured",
-                    icon: "error",
-                    text: `${err.response?.data?.message}`,
-                })
-            })
-            reset();
-    })
+    interface iData {
+        amount: number;
+    
+      }
 
+  const User = useAppSelector((state: any) => state?.currentUser);
+
+      const queryClient = useQueryClient();
+   
+    const posting = useMutation({
+      mutationFn: (data: iData) => {
+        return payTobank(data, User._id)
+      },
+  
+      onSuccess: (myData: any) => {
+        // console.log("yo",myData)
+        queryClient.invalidateQueries(["post"]);
+        ;
+        
+      },
+    });
+
+    const [amount, setAmount] = React.useState(0)
+    const handleSubit2 = () => {
+        posting.mutate(
+            {
+                amount
+            }
+        );
+        Swal.fire({
+        title: "withdrawal successful",
+        icon: "success"
+    })
+    .catch((err) => {
+        Swal.fire({
+            title: "an error occured",
+            icon: "error",
+            text: `${err.response?.data?.message}`,
+        })
+    });
+    reset();
+
+    }
 
 
     return(
@@ -191,7 +214,7 @@ const DashTransPage = () => {
 
                 <Contain>
 
-                    <Fund>
+                    <Fundd>
                         <div></div>
 
                         <Button>
@@ -203,30 +226,37 @@ const DashTransPage = () => {
                             <Pay style={{marginLeft
                             :"15px", backgroundColor:"#000000", color:"white"}} onClick={withdrawShow}>Withdraw</Pay>
                         </Button>
-                    </Fund>
+                    </Fundd>
 
                     {
                         showWithdraw ? 
-                        <Fund>
+
+                        <Fundy >
                         <div></div>
 
                         <Button>
                             {/* <Pay2 type="text"   
                             {...register("accountNumber")}placeholder="Account Number" /> */}
 
-                            <Pay2  type="number"   
-                            {...register("amount")}  
+                            <Pay2 onChange={(e) => {
+                                setAmount(parseInt(e.target.value))
+                                // console.log(parseInt(e.target.value));
+                                
+                            }} type="number"   
+            
                             placeholder="Amount" />
-                            <PayBut onClick={withdraw}>Send</PayBut>
+
+                            <PayBut onClick={handleSubit2} style={{background: 'green'}} >Send</PayBut>
                         </Button>
-                    </Fund>
+                    </Fundy>
                     :
                     null
                     }
 
                     {
                         showWallet ? 
-                        <Fund>
+
+                        <Fund onSubmit={sendToFriend}>
                         <div></div>
 
                         <Button>
@@ -236,7 +266,7 @@ const DashTransPage = () => {
                             <Pay2  type="number"   
                             {...register("amount")}  
                             placeholder="Amount" />
-                            <PayBut onClick={sendToFriend}>Send</PayBut>
+                            <PayBut type="submit">Send</PayBut>
                         </Button>
                     </Fund>
                     :
@@ -380,6 +410,7 @@ cursor: pointer;
 const Pay2 = styled.input`
 height: 40px;
 width: 160px;
+margin-bottom: 6px;
 border-radius: 8px;
 margin-right: 7px;
 padding-left: 5px;
@@ -534,7 +565,25 @@ gap: rem;
 margin-top: 10px;
 `;
 
-const Fund = styled.div`
+const Fundd = styled.div`
+width: 90%;
+margin-left: 20px;
+margin-top: 20px;
+display: flex;
+justify-content: space-between;
+flex-wrap: wrap;
+`;
+
+const Fundy = styled.div`
+width: 90%;
+margin-left: 20px;
+margin-top: 20px;
+display: flex;
+justify-content: space-between;
+flex-wrap: wrap;
+`;
+
+const Fund = styled.form`
 width: 90%;
 margin-left: 20px;
 margin-top: 20px;
