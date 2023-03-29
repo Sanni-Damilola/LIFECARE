@@ -8,11 +8,11 @@ import { UserData } from "../interface/interface";
 // const userOne = useAppSelector((state) => state?.currentUser);
 
 interface iData {
-  name:string, amount:number, cardNumber:string, cvv:string, expiry_month:string, expiry_year:string
+  name:string, amount:number, number:string, cvv:string, expiry_month:string, expiry_year:string
 }
 
 
-const lifeUrl = "https://codecrusaderslifecare.onrender.com/api/";
+const lifeUrl = "https://codecrusaderslifecare.onrender.com/api";
 
 const localHost = ""
 
@@ -100,19 +100,21 @@ export const sendToOtherWallet = async (id: any) => {
   // .patch(`http://localhost:2001/api/transfer/${id}`).then((res) => res.data)
 }
 
-export const fundFromBank = async ({ amount, cardNumber, cvv, expiry_month, expiry_year} : iData , id:string) => {
+export const fundFromBank = async ({ amount, number, cvv, expiry_month, expiry_year} : iData , id:string) => {
   return await axios
-  .post (`${lifeUrl}/fundwallet/${id}`,
+  .post (`${lifeUrl}/fundWallet/${id}`,
   // .post (`http://localhost:2001/api/fundwallet/${id}`, 
   {
     cvv,
     amount, 
-    cardNumber,
+    number,
     expiry_month,
     expiry_year,
     id,
   })
-  .then((res) => res.data)
+  .then((res) => {
+    return res.data
+  })
 }
 
 export const payTobank = async ({amount}: any, id: any) => {

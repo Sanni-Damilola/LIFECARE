@@ -13,24 +13,27 @@ import { useNavigate } from "react-router-dom";
 import { fundFromBank } from "../Api/Api";
 import { useDispatch } from "react-redux";
 import  Swal  from "sweetalert2";
+import axios from "axios";
 
 interface iData {
   name: string;
   amount: number;
-  cardNumber: string;
+  number: string;
   cvv: string;
   expiry_month: string;
   expiry_year: string;
 }
 
+const lifeUrl = "https://codecrusaderslifecare.onrender.com/api";
+
 const DashFund = () => {
-  const User = useAppSelector((state: any) => state?.currentUser);
   const dispatch = UseAppDispach();
+  const User = useAppSelector((state: any) => state?.currentUser);
 
   const schema = yup
     .object({
       amount: yup.number().required(),
-      cardNumber: yup.string().required(),
+      number: yup.string().required(),
       cvv: yup.string().required(),
       expiry_month: yup.string(),
       expiry_year: yup.string(),
@@ -73,35 +76,39 @@ const DashFund = () => {
     });
 
   const posting = useMutation({
-    mutationKey: ["Userpay"],
-    mutationFn: (data: iData) => fundFromBank(data, User._id),
+    mutationFn: (data: iData) => {
+      return fundFromBank(data, User._id)
+    },
 
     onSuccess: (myData: any) => {
-      
-      console.log("yo",myData.data);
+      console.log("yo",myData);
       
     },
   });
 
-  const Submit = handleSubmit( (data) => {
+  const Submit = handleSubmit((data) => {
+    
     posting.mutate(data);
-    console.log("here", data);
+
     // console.log("nowm",data);
-    //   Swal.fire({
-    //     title: "successful",
-    //     icon: "success"
-    // })
-    // .catch((err) => {
-    //     Swal.fire({
-    //         title: "an error occured",
-    //         icon: "error",
-    //         text: `${err.response?.data?.message}`,
-    //     })
-    // })
-    // reset();
+      Swal.fire({
+        title: "successful",
+        icon: "success"
+    })
+    .catch((err) => {
+        Swal.fire({
+            title: "an error occured",
+            icon: "error",
+            text: `${err.response?.data?.message}`,
+        })
+    })
+    reset();
     // navigate("/dashboardhome");
   });
 
+
+
+ 
   return (
     <div>
       <Head>
@@ -121,12 +128,13 @@ const DashFund = () => {
               <Inp>
                 <Label>Card Number</Label>
                 <Master>
-                  <Input type="number" {...register("cardNumber")} />
+                  <Input value = "5188513618552975" type="number" {...register("number")} />
                   <MasterCard src="/images/master.png" />
                 </Master>
               </Inp>
 
               <Inp
+              
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
@@ -137,6 +145,8 @@ const DashFund = () => {
                   <Label>Expiry Date</Label>
                   <Hold>
                     <Input
+                    value = "09"
+                    maxLength={2}
                       placeholder="Month"
                       {...register("expiry_month")}
                       style={{
@@ -150,6 +160,8 @@ const DashFund = () => {
                     />
 
                     <Input
+                    value = "30"
+                              maxLength={2}
                       placeholder="year"
                       {...register("expiry_year")}
                       style={{
@@ -167,6 +179,7 @@ const DashFund = () => {
                   <Label>CVV</Label>
                   <Ques>
                     <Input
+                    value = "123"
                       {...register("cvv")}
                       style={{ width: "70%", outline: "none", border: "none" }}
                     />
@@ -181,6 +194,7 @@ const DashFund = () => {
                 <Label>Amount</Label>
                 <Master>
                   <Input
+
                     {...register("amount")}
                     type="number"
                     placeholder="i.e. 50000"
