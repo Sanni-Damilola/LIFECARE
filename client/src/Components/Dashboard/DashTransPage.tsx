@@ -124,7 +124,7 @@ const DashTransPage = () => {
       },
   
       onSuccess: (myData: any) => {
-        // console.log("yo",myData)
+        
         queryClient.invalidateQueries(["post"]);
         ;
         
